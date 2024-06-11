@@ -5,30 +5,31 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <iomanip>
 
 namespace seneca {
 
 	typedef std::string string;
+
+	struct Task {
+		string taskName;
+		string unitOfTime;
+		std::chrono::steady_clock::duration duration;
+	};
 
 	class TimedTask {
 	private:
 		int numRecords;
 		std::chrono::steady_clock::time_point startPoint;
 		std::chrono::steady_clock::time_point endPoint;
-		Task task[10];
+		Task tasks[10];
 
 	public:
 		TimedTask();
 		void startClock();
 		void stopClock();
-		void addTask(const char* src);
+		void addTask(const char* taskName);
 		friend std::ostream& operator << (std::ostream& out, TimedTask src);
-	};
-
-	struct Task {
-		string taskName;
-		string unitOfTime;
-		std::chrono::steady_clock::duration duration;
 	};
 
 
