@@ -10,12 +10,15 @@ namespace seneca {
 	private:
 		string* proteins;
 		size_t numProteins;
-		
+		void deallocMem();
+
 	public:
 		ProteinDatabase();
 		ProteinDatabase(string fileName);
+		ProteinDatabase(const ProteinDatabase& src);
 		~ProteinDatabase();
-		size_t size();
+		ProteinDatabase& operator= (const ProteinDatabase& src);
+		size_t size() const;
 		string operator[](size_t index) const;
 	};
 }

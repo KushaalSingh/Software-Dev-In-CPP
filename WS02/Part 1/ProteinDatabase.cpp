@@ -39,17 +39,40 @@ namespace seneca {
 		}
 	}
 
-	ProteinDatabase::~ProteinDatabase() {
-		delete[] proteins;
-		proteins = nullptr;
+	ProteinDatabase::ProteinDatabase(const ProteinDatabase& src) : proteins(nullptr), numProteins(0) {
+		if (this != &src) {
+			numProteins = src.size();
+			proteins = new string[numProteins];
+			for (int i = 0; i < (int)numProteins; i++) proteins[i] = src.proteins[i];
+		}
 	}
 
-	size_t ProteinDatabase::size() {
+	ProteinDatabase& ProteinDatabase::operator= (const ProteinDatabase& src) {
+		if (this != &src) {
+			deallocMem();
+
+			numProteins = src.size();
+			proteins = new string[numProteins];
+			for (int i = 0; i < (int)numProteins; i++) proteins[i] = src.proteins[i];
+		}
+		return *this;
+	}
+
+	ProteinDatabase::~ProteinDatabase() {
+		deallocMem();
+	}
+
+	size_t ProteinDatabase::size() const {
 		return numProteins;
 	}
 
 	string ProteinDatabase::operator[] (size_t index) const {
 		if (index < numProteins) return proteins[index];
 		else return "";
+	}
+
+	void ProteinDatabase::deallocMem() {
+		delete[] proteins;
+		proteins = nullptr;
 	}
 }
