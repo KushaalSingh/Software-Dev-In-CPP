@@ -29,7 +29,7 @@ namespace seneca {
 		void startClock();
 		void stopClock();
 		void addTask(const char* taskName);
-		friend std::ostream& operator << (std::ostream& out, TimedTask src);
+		friend std::ostream& operator << (std::ostream& out, const TimedTask& src);
 	};
 
 

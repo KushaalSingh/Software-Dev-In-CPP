@@ -21,12 +21,13 @@ namespace seneca {
 		}
 	}
 
-	std::ostream& operator << (std::ostream& out, TimedTask src) {
+	std::ostream& operator << (std::ostream& out, const TimedTask& src) {
+		out << "Execution Times:" << std::endl << "--------------------------" << std::endl;
 		for (int i = 0; i < src.numRecords; i++) {
-			out << "Execution Times:" << std::endl << "--------------------------" << std::endl;
 			out << std::left << std::setw(21) << src.tasks[i].taskName << std::right 
 				<< std::setw(13) << src.tasks[i].duration.count() << " " << src.tasks[i].unitOfTime << std::endl;
-			out << "--------------------------" << std::endl;
 		}
+		out << "--------------------------" << std::endl;
+		return out;
 	}
 }

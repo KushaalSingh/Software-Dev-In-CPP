@@ -27,9 +27,9 @@ namespace seneca {
 						proteins[count++] = currProtein;
 						currProtein.clear();
 					}
-					else {
-						currProtein += ln;
-					}
+				}
+				else {
+					currProtein += ln;
 				}
 			}
 
@@ -49,6 +49,7 @@ namespace seneca {
 	}
 
 	string ProteinDatabase::operator[] (size_t index) const {
-		return proteins[index];
+		if (index < numProteins) return proteins[index];
+		else return "";
 	}
 }
