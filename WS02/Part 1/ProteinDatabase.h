@@ -2,22 +2,22 @@
 #define SENECA_PROTEIN_DATABASE
 
 #include "TimedTask.h"
+#include <fstream>
 
 namespace seneca {
 
 	class ProteinDatabase {
 	private:
-		string* strings;
-		size_t numStrings;
+		string* proteins;
+		size_t numProteins;
 		
 	public:
 		ProteinDatabase();
 		ProteinDatabase(string fileName);
+		~ProteinDatabase();
 		size_t size();
 		string operator[](size_t index) const;
 	};
-
-
 }
 
 
