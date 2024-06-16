@@ -19,6 +19,7 @@ namespace seneca {
 		ProteinDatabase(ProteinDatabase&& src) noexcept;
 		~ProteinDatabase();
 		ProteinDatabase& operator= (const ProteinDatabase& src);
+		ProteinDatabase& operator= (ProteinDatabase&& src) noexcept;
 		size_t size() const;
 		string operator[](size_t index) const;
 	};

@@ -48,8 +48,6 @@ namespace seneca {
 	}
 
 	ProteinDatabase::ProteinDatabase(ProteinDatabase&& src) noexcept : proteins(src.proteins), numProteins(src.numProteins) {
-		std::cout << "MOVE CONSTRUCTOR CALLED" << std::endl;
-
 		src.numProteins = 0;
 		src.proteins = nullptr;
 	}
@@ -61,6 +59,17 @@ namespace seneca {
 			numProteins = src.size();
 			proteins = new string[numProteins];
 			for (int i = 0; i < (int)numProteins; i++) proteins[i] = src.proteins[i];
+		}
+		return *this;
+	}
+
+	ProteinDatabase& ProteinDatabase::operator= (ProteinDatabase&& src) noexcept {
+		if (this != &src) {
+			delete[] proteins;
+			proteins = src.proteins;
+			numProteins = src.numProteins;
+			src.numProteins = 0;
+			src.proteins = nullptr;
 		}
 		return *this;
 	}
