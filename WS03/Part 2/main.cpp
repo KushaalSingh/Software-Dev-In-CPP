@@ -1,10 +1,13 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include <string>
 #include "Book.h"
 #include "Book.h" // intentional
 #include "Collection.h"
 #include "Collection.h" // intentional
+#include "OrderedCollection.h"
+#include "OrderedCollection.h" // intentional
 
 int cout = 0; // won't compile if headers don't follow convention regarding namespaces
 
@@ -75,8 +78,75 @@ int main(int argc, char** argv)
         std::cout << "Book with largest pages-to-chapters ratio (initial-deault-state): " << std::endl;
         bcol.getLargestItem().print(std::cout) << " |" << std::endl;
         std::cout << "size/capacity: " << bcol.size() << "/" << bcol.capacity() << std::endl;
+        std::cout << std::endl;
+
+        // Part 2 tester follows from here 
+
+        std::cout << "[After adding Six books to the collection]" << std::endl;
+        for (const auto& b : books)
+            bcol += b;
+        std::cout << "Book with smallest pages-to-chapters ratio: " << std::endl;
+        bcol.getSmallestItem().print(std::cout) << std::endl;
+        std::cout << "Book with largest pages-to-chapters ratio: " << std::endl;
+        bcol.getLargestItem().print(std::cout) << std::endl;
+        std::cout << "size/capacity: " << bcol.size() << "/" << bcol.capacity() << std::endl;
+        std::cout << std::endl;
+        std::cout << "Collection content:\n";
+        bcol.print(std::cout);
     }
     std::cout << "======================================== <<< Collection tester for Book and 10" << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "5. OrderedCollection tester for int >>> ===========================================" << std::endl;
+    {        // Collection tester for int-type
+        seneca::OrderedCollection<int> oicol;
+        for (const auto& i : ints)
+            oicol += i;
+        std::cout << "(smallest,largest) items: (" << oicol.getSmallestItem() << "," << oicol.getLargestItem() << ")" << std::endl;
+        std::cout << "size/capacity: " << oicol.size() << "/" << oicol.capacity() << std::endl;
+        std::cout << "Contents: ";
+        oicol.print(std::cout);
+    }
+    std::cout << "============================================= <<< OrderedCollection tester for int " << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "6. OrderedCollection tester for double >>> ========================================" << std::endl;
+    {// Collection tester for double-type
+        seneca::OrderedCollection<double> odcol;
+        for (const auto& d : doubles)
+            odcol += d;
+        std::cout << "(smallest,largest) items: (" << odcol.getSmallestItem() << "," << odcol.getLargestItem() << ")" << std::endl;
+        std::cout << "size/capacity: " << odcol.size() << "/" << odcol.capacity() << std::endl;
+        std::cout << "Contents: ";
+        odcol.print(std::cout);
+    }
+    std::cout << "========================================== <<< OrderedCollection tester for double " << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "7. OrderedCollection tester for Book >>> ==========================================" << std::endl;
+    {// OrderedCollection tester for Book-type
+        std::cout << "[After creating collection in empty state]" << std::endl;
+        seneca::OrderedCollection<seneca::Book> obcol;
+        std::cout << "Book with smallest pages-to-chapters ratio (initial-default state): " << std::endl;
+        obcol.getSmallestItem().print(std::cout) << std::endl;
+        std::cout << "Book with largest pages-to-chapters ratio (initial-deault-state): " << std::endl;
+        obcol.getLargestItem().print(std::cout) << std::endl;
+        std::cout << "size/capacity: " << obcol.size() << "/" << obcol.capacity() << std::endl;
+        std::cout << std::endl;
+
+        std::cout << "[After adding six books to the collection]" << std::endl;
+        for (const auto& b : books)
+            obcol += b;
+        std::cout << "Book with smallest pages-to-chapters ratio: " << std::endl;
+        obcol.getSmallestItem().print(std::cout) << std::endl;
+        std::cout << "Book with largest pages-to-chapters ratio: " << std::endl;
+        obcol.getLargestItem().print(std::cout) << std::endl;
+        std::cout << "size/capacity: " << obcol.size() << "/" << obcol.capacity() << std::endl;
+        std::cout << std::endl;
+        std::cout << "List of OrderedCollection Books: " << std::endl;
+        obcol.print(std::cout);
+    }
+    std::cout << "============================================ <<< OrderedCollection tester for Book " << std::endl;
     std::cout << std::endl;
 
     return cout;

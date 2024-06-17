@@ -23,15 +23,18 @@ namespace seneca {
     public:
         Collection();
 
-        // Public member functions
+       
         unsigned size() const;
         unsigned capacity() const;
         bool operator+=(const T& item);
         void print(std::ostream& os) const;
 
-        // Static member functions
+        
         static T getSmallestItem();
         static T getLargestItem();
+
+        T operator[](unsigned index) const;
+        void incrSize();
     };
 
     // Constructor
@@ -94,6 +97,16 @@ namespace seneca {
     template <typename T, unsigned C>
     T Collection<T, C>::getLargestItem() {
         return m_largestItem;
+    }
+
+    template <typename T, unsigned C>
+    T Collection<T, C>::operator[](unsigned index) const {
+        return m_data[index];
+    }
+
+    template <typename T, unsigned C>
+    void Collection<T, C>::incrSize() {
+        ++m_size;
     }
 
     template <>
