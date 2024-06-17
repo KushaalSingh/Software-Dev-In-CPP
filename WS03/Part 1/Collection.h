@@ -21,7 +21,7 @@ namespace seneca {
 		uint32_t size() const;
 		uint32_t capacity() const;
 		bool operator+= (const T& src);
-		std::ostream& print(const std::ostream& out) const;
+		std::ostream& print(std::ostream& out) const;
 
 		static T getSmallestItem();
 		static T getLargestItem();

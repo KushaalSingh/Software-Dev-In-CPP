@@ -40,7 +40,7 @@ namespace seneca {
 	}
 
 	template <typename T, uint32_t C>
-	std::ostream& Collection<T, C>::print(const std::ostream& out) const {
+	std::ostream& Collection<T, C>::print(std::ostream& out) const {
 		std::cout << " <<<>>> THIS IS WORKING <<<>>>";
 		return out;
 	}
