@@ -6,7 +6,7 @@
 namespace seneca {
 
 	template <typename T, uint32_t C> 
-	class Collectoin {
+	class Collection {
 	private:
 		T m_data[C];
 		static T m_smallestItem;
