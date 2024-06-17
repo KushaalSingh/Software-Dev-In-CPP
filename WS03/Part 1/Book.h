@@ -21,9 +21,11 @@ namespace seneca {
 		Book(const std::string& title, unsigned nChapters, unsigned nPages);
 		std::ostream& print(std::ostream& out) const;
 		bool valid() const;
+		double calcAveragePages() const;
 		Book& operator= (const Book& src);
 	};
 	std::ostream& operator<< (std::ostream& os, const Book& bk);
+
 
 
 }
