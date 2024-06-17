@@ -7,7 +7,7 @@ namespace seneca {
 	Book::Book(const std::string& title, uint32_t nChapters, uint32_t nPages) : m_title(title), m_numChapters(nChapters), m_numPages(nPages) {}
 
 	bool Book::valid() const {
-		return (m_title.length() > 0) && (m_numChapters > 0) && (m_numPages > 0);
+		return (!m_title.empty()) && (m_numChapters > 0) && (m_numPages > 0);
 	}
 
 	std::ostream& Book::print(std::ostream& out) const {

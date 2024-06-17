@@ -25,7 +25,7 @@ namespace seneca {
 
 	template <typename T, uint32_t C>
 	uint32_t Collection<T, C>::capacity() const {
-		return m_capacity;
+		return C;
 	}
 
 	template <typename T, uint32_t C>
@@ -40,7 +40,7 @@ namespace seneca {
 	}
 
 	template <typename T, uint32_t C>
-	std::ostream& Collection<T, C>::print(const std::ostream& out) {
+	std::ostream& Collection<T, C>::print(const std::ostream& out) const {
 		std::cout << " <<<>>> THIS IS WORKING <<<>>>";
 		return out;
 	}

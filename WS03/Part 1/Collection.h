@@ -11,7 +11,6 @@ namespace seneca {
 		T m_data[C];
 		static T m_smallestItem;
 		static T m_largestItem;
-		uint32_t m_capacity;
 		uint32_t m_size;
 
 	protected:
@@ -22,7 +21,7 @@ namespace seneca {
 		uint32_t size() const;
 		uint32_t capacity() const;
 		bool operator+= (const T& src);
-		std::ostream& print(const std::ostream& out);
+		std::ostream& print(const std::ostream& out) const;
 
 		static T getSmallestItem();
 		static T getLargestItem();
