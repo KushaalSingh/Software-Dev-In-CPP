@@ -5,21 +5,21 @@
 
 namespace seneca {
 
-	template <typename T, uint32_t C> 
+	template <typename T, unsigned C> 
 	class Collection {
 	private:
 		T m_data[C];
 		static T m_smallestItem;
 		static T m_largestItem;
-		uint32_t m_size;
+		unsigned m_size;
 
 	protected:
 		void setSmallestItem(const T& src);
 		void setLargestItem(const T& src);
 
 	public:
-		uint32_t size() const;
-		uint32_t capacity() const;
+		unsigned size() const;
+		unsigned capacity() const;
 		bool operator+= (const T& src);
 		std::ostream& print(std::ostream& out) const;
 
