@@ -13,16 +13,17 @@ namespace seneca {
 	class Book {
 	private:
 		string m_title{};
-		unsigned m_numChapters{};
-		unsigned m_numPages{};
+		uint32_t m_numChapters{};
+		uint32_t m_numPages{};
 
 	public:
 		Book();
-		Book(const std::string& title, unsigned nChapters, unsigned nPages);
+		Book(const std::string& title, uint32_t nChapters, uint32_t nPages);
 		std::ostream& print(std::ostream& out) const;
 		bool valid() const;
+		Book& operator= (const Book& src);
 	};
-	std::ostream& operator<<(std::ostream& os, const Book& bk);
+	std::ostream& operator<< (std::ostream& os, const Book& bk);
 
 
 }
