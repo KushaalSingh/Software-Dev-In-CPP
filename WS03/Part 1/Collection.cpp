@@ -45,6 +45,16 @@ namespace seneca {
 		return out;
 	}
 
+	template <typename T, uint32_t C>
+	T Collection<T, C>::getSmallestItem() {
+		return m_smallestItem;
+	}
+
+	template <typename T, uint32_t C>
+	T Collection<T, C>::getLargestItem() {
+		return m_largestItem;
+	}
+
 	template <>
 	Book Collection<Book, 10>::m_smallestItem = Book("", 1, 10000);
 
