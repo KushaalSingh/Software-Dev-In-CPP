@@ -23,7 +23,6 @@ namespace seneca {
     public:
         Collection();
 
-       
         unsigned size() const;
         unsigned capacity() const;
         bool operator+=(const T& item);
@@ -114,6 +113,22 @@ namespace seneca {
 
     template <>
     Book Collection<Book, 10>::m_largestItem = Book("", 10000, 1);
+
+    template<>
+    Book Collection<Book, 72>::m_smallestItem = Book("", 1, 10000);
+
+    template<>
+    Book Collection<Book, 72>::m_smallestItem = Book("", 10000, 1);
+
+    template <>
+    void Collection<Book, 10>::print(std::ostream& os) const {
+        os << "[";
+        for (unsigned i = 0; i < m_size; i++) {
+            if ((i != m_size) && (i != 0)) os << ",";
+            os << m_items[i];
+        }
+        os << "]" << std::endl;
+    }
 
     template <typename T, unsigned C>
     T Collection<T, C>::m_smallestItem = 9999;
