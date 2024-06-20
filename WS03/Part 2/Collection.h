@@ -118,7 +118,7 @@ namespace seneca {
     Book Collection<Book, 72>::m_smallestItem = Book("", 1, 10000);
 
     template<>
-    Book Collection<Book, 72>::m_smallestItem = Book("", 10000, 1);
+    Book Collection<Book, 72>::m_largestItem = Book("", 10000, 1);
 
     template <>
     void Collection<Book, 10>::print(std::ostream& os) const {
