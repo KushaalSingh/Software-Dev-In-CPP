@@ -100,7 +100,7 @@ namespace seneca {
 
     template <typename T, unsigned C>
     T Collection<T, C>::operator[](unsigned index) const {
-        return m_data[index];
+        return m_items[index];
     }
 
     template <typename T, unsigned C>
