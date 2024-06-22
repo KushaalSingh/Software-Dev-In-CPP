@@ -1,0 +1,7 @@
+#ifndef SENECA_ORDERED_COLLECTION
+#define SENECA_ORDERED_COLLECTION
+
+
+
+
+#endif
