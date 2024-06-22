@@ -2,7 +2,6 @@
 #define COLLECTION_H
 
 #include <iostream>
-#include <algorithm>
 #include <string>
 #include "Book.h"
 
@@ -22,40 +21,35 @@ namespace seneca {
 
     public:
         Collection();
-
         unsigned size() const;
         unsigned capacity() const;
-        bool operator+=(const T& item);
-        void print(std::ostream& os) const;
-
-        
         static T getSmallestItem();
         static T getLargestItem();
-
+        bool operator+=(const T& item);
         T operator[](unsigned index) const;
         void incrSize();
+        void print(std::ostream& os) const;
     };
 
-    // Constructor
     template <typename T, unsigned C>
-    Collection<T, C>::Collection() : m_size(0) {}
+    T Collection<T, C>::m_smallestItem = 9999;
 
-    // Protected member functions
+    template <typename T, unsigned C>
+    T Collection<T, C>::m_largestItem = -9999;
+
     template <typename T, unsigned C>
     void Collection<T, C>::setSmallestItem(const T& item) {
-        if (item < m_smallestItem) {
-            m_smallestItem = item;
-        }
+        if (item < m_smallestItem) m_smallestItem = item;
     }
 
     template <typename T, unsigned C>
     void Collection<T, C>::setLargestItem(const T& item) {
-        if (item > m_largestItem) {
-            m_largestItem = item;
-        }
+        if (item > m_largestItem) m_largestItem = item;
     }
 
-    // Public member functions
+    template <typename T, unsigned C>
+    Collection<T, C>::Collection() : m_size(0) {}
+
     template <typename T, unsigned C>
     unsigned Collection<T, C>::size() const {
         return m_size;
@@ -64,6 +58,16 @@ namespace seneca {
     template <typename T, unsigned C>
     unsigned Collection<T, C>::capacity() const {
         return C;
+    }
+
+    template <typename T, unsigned C>
+    T Collection<T, C>::getSmallestItem() {
+        return m_smallestItem;
+    }
+
+    template <typename T, unsigned C>
+    T Collection<T, C>::getLargestItem() {
+        return m_largestItem;
     }
 
     template <typename T, unsigned C>
@@ -78,6 +82,16 @@ namespace seneca {
     }
 
     template <typename T, unsigned C>
+    T Collection<T, C>::operator[](unsigned index) const {
+        return m_items[index];
+    }
+
+    template <typename T, unsigned C>
+    void Collection<T, C>::incrSize() {
+        ++m_size;
+    }
+
+    template <typename T, unsigned C>
     void Collection<T, C>::print(std::ostream& os) const {
         os << "[";
         for (unsigned i = 0; i < m_size; i++) {
@@ -87,25 +101,14 @@ namespace seneca {
         os << "]" << std::endl;
     }
 
-    
-    template <typename T, unsigned C>
-    T Collection<T, C>::getSmallestItem() {
-        return m_smallestItem;
-    }
-
-    template <typename T, unsigned C>
-    T Collection<T, C>::getLargestItem() {
-        return m_largestItem;
-    }
-
-    template <typename T, unsigned C>
-    T Collection<T, C>::operator[](unsigned index) const {
-        return m_items[index];
-    }
-
-    template <typename T, unsigned C>
-    void Collection<T, C>::incrSize() {
-        ++m_size;
+    template <>
+    void Collection<Book, 10>::print(std::ostream& os) const {
+        std::cout << "| ---------------------------------------------------------------------------|" << std::endl;
+        for (uint32_t i = 0; i < m_size; i++) {
+            std::cout << "| ";
+            m_items[i].print(os) << " |" << std::endl;
+        }
+        std::cout << "| ---------------------------------------------------------------------------|" << std::endl;
     }
 
     template <>
@@ -119,22 +122,6 @@ namespace seneca {
 
     template<>
     Book Collection<Book, 72>::m_largestItem = Book("", 10000, 1);
-
-    template <>
-    void Collection<Book, 10>::print(std::ostream& os) const {
-        os << "[";
-        for (unsigned i = 0; i < m_size; i++) {
-            if ((i != m_size) && (i != 0)) os << ",";
-            os << m_items[i];
-        }
-        os << "]" << std::endl;
-    }
-
-    template <typename T, unsigned C>
-    T Collection<T, C>::m_smallestItem = 9999;
-
-    template <typename T, unsigned C>
-    T Collection<T, C>::m_largestItem = -9999;
 
     template <>
     double Collection<double, 10>::getLargestItem() {

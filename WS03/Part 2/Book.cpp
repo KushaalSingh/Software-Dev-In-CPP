@@ -17,7 +17,7 @@ namespace seneca {
 	std::ostream& Book::print(std::ostream& out) const {
 		if (valid()) {
 			out << std::setw(56) << std::right << (m_title + "," + std::to_string(m_numChapters) + "," + std::to_string(m_numPages)) << " | ";
-			out << std::left << std::setw(14) << std::fixed << std::setprecision(6) << "(" + std::to_string(calcAveragePages()) + ")";
+			out << std::left << std::setw(15) << std::fixed << std::setprecision(6) << "(" + std::to_string(calcAveragePages()) + ")";
 		}
 		else std::cout << "| Invalid book data";
 		return out;
@@ -28,6 +28,14 @@ namespace seneca {
 		m_numChapters = src.m_numChapters;
 		m_numPages = src.m_numPages;
 		return *this;
+	}
+
+	bool Book::operator < (const Book& src) const {
+		return ((m_numPages/m_numChapters) < (src.m_numPages/src.m_numChapters));
+	}
+
+	bool Book::operator > (const Book& src) const {
+		return ((m_numPages/m_numChapters) > (src.m_numPages/src.m_numChapters));
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Book& bk) {

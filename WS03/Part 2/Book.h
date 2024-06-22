@@ -22,7 +22,9 @@ namespace seneca {
 		std::ostream& print(std::ostream& out) const;
 		bool valid() const;
 		double calcAveragePages() const;
-		Book& operator= (const Book& src);
+		Book& operator = (const Book& src);
+		bool operator < (const Book& src) const;
+		bool operator > (const Book& src) const;
 	};
 	std::ostream& operator<< (std::ostream& os, const Book& bk);
 
