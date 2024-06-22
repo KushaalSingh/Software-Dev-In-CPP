@@ -7,11 +7,11 @@
 
 namespace seneca {
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     class Collection {
     private:
         T m_items[C];
-        unsigned m_size{};
+        uint32_t m_size{};
         static T m_smallestItem;
         static T m_largestItem;
 
@@ -21,56 +21,56 @@ namespace seneca {
 
     public:
         Collection();
-        unsigned size() const;
-        unsigned capacity() const;
+        uint32_t size() const;
+        uint32_t capacity() const;
         static T getSmallestItem();
         static T getLargestItem();
         bool operator+=(const T& item);
-        T operator[](unsigned index) const;
+        T operator[](uint32_t index) const;
         void incrSize();
         void print(std::ostream& os) const;
     };
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     T Collection<T, C>::m_smallestItem = 9999;
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     T Collection<T, C>::m_largestItem = -9999;
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     void Collection<T, C>::setSmallestItem(const T& item) {
         if (item < m_smallestItem) m_smallestItem = item;
     }
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     void Collection<T, C>::setLargestItem(const T& item) {
         if (item > m_largestItem) m_largestItem = item;
     }
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     Collection<T, C>::Collection() : m_size(0) {}
 
-    template <typename T, unsigned C>
-    unsigned Collection<T, C>::size() const {
+    template <typename T, uint32_t C>
+    uint32_t Collection<T, C>::size() const {
         return m_size;
     }
 
-    template <typename T, unsigned C>
-    unsigned Collection<T, C>::capacity() const {
+    template <typename T, uint32_t C>
+    uint32_t Collection<T, C>::capacity() const {
         return C;
     }
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     T Collection<T, C>::getSmallestItem() {
         return m_smallestItem;
     }
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     T Collection<T, C>::getLargestItem() {
         return m_largestItem;
     }
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     bool Collection<T, C>::operator+=(const T& item) {
         if (m_size >= C) {
             return false;
@@ -81,20 +81,20 @@ namespace seneca {
         return true;
     }
 
-    template <typename T, unsigned C>
-    T Collection<T, C>::operator[](unsigned index) const {
+    template <typename T, uint32_t C>
+    T Collection<T, C>::operator[](uint32_t index) const {
         return m_items[index];
     }
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     void Collection<T, C>::incrSize() {
         ++m_size;
     }
 
-    template <typename T, unsigned C>
+    template <typename T, uint32_t C>
     void Collection<T, C>::print(std::ostream& os) const {
         os << "[";
-        for (unsigned i = 0; i < m_size; i++) {
+        for (uint32_t i = 0; i < m_size; i++) {
             if ((i != m_size) && (i != 0)) os << ",";
             os << m_items[i];
         }
