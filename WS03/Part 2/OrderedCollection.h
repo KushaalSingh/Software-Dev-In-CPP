@@ -5,12 +5,22 @@
 
 namespace seneca {
 
-	template <typename T, unsigned C>
-	class OrderedCollection : public Collection {
-
+	template <typename T>
+	class OrderedCollection : public Collection<T, 72> {
+	public:
+		bool operator+=(const T& item);
 	};
 
+	template <typename T>
+	bool OrderedCollection<T>::operator+=(const T& item) {
+		if (Collection<T, 72>::size() >= 72) return false;
 
+		for (uint32_t i = 0; i < Collection<T, 72>::size(); i++) {
+			if (Collection<T, 72>::[i])
+		}
+
+		return true;
+	}
 }
 
 

@@ -18,6 +18,8 @@ namespace seneca {
     protected:
         void setSmallestItem(const T& item);
         void setLargestItem(const T& item);
+        T operator[](uint32_t index) const;
+        void incrSize();
 
     public:
         Collection();
@@ -26,8 +28,6 @@ namespace seneca {
         static T getSmallestItem();
         static T getLargestItem();
         bool operator+=(const T& item);
-        T operator[](uint32_t index) const;
-        void incrSize();
         void print(std::ostream& os) const;
     };
 
