@@ -13,11 +13,21 @@ namespace seneca {
 
 	template <typename T>
 	bool OrderedCollection<T>::operator+=(const T& item) {
-		if (Collection<T, 72>::size() >= 72) return false;
+		uint32_t size = Collection<T, 72>::size();
+		if (size >= Collection<T, 72>::capacity()) return false;
 
-		for (uint32_t i = 0; i < Collection<T, 72>::size(); i++) {
-			if (Collection<T, 72>::[i])
+		uint32_t index = 0;
+		while (index < size && Collection<T, 72>::operator[](index) < item) ++index;
+
+		for (uint32_t i = size; i > size; i--) {
+			Collection<T, 72>::operator[](i) = Collection<T, 72>::operator[](i - 1);
 		}
+
+		Collection<T, 72>::operator[](index) = item;
+		Collection<T, 72>::incrSize();
+
+		Collection<T, 72>::setSmallestItem(item);
+		Collection<T, 72>::setLargestItem(item);
 
 		return true;
 	}
