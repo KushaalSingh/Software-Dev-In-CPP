@@ -5,6 +5,25 @@
 
 namespace seneca {
 
+	typedef std::string string;
+	typedef uint32_t uint;
+
+	class Reservation {
+	private:
+		string resID;
+		string resName;
+		string email;
+		uint numPeople;
+		uint arrivalDay;
+		uint arrivalHour;
+		
+	public:
+		Reservation();
+		Reservation(const string& res);
+		void update(int day, int time);
+	};
+
+
 
 }
 
