@@ -1,8 +1,6 @@
 #ifndef COLLECTION_H
 #define COLLECTION_H
 
-#include <iostream>
-#include <string>
 #include "Book.h"
 
 namespace seneca {
@@ -19,6 +17,8 @@ namespace seneca {
         void setSmallestItem(const T& item);
         void setLargestItem(const T& item);
         T operator[](uint32_t index) const;
+        void setElement(uint32_t index, uint32_t indexOf);
+        void setElement(uint32_t index, const T& item);
         void incrSize();
 
     public:
@@ -87,18 +87,39 @@ namespace seneca {
     }
 
     template <typename T, uint32_t C>
+    void Collection<T, C>::setElement(uint32_t index, uint32_t indexOf) {
+        m_items[index] = m_items[indexOf];
+    }
+
+    template <typename T, uint32_t C>
+    void Collection<T, C>::setElement(uint32_t index, const T& item) {
+        m_items[index] = item;
+    }
+
+    template <typename T, uint32_t C>
     void Collection<T, C>::incrSize() {
         ++m_size;
     }
 
     template <typename T, uint32_t C>
     void Collection<T, C>::print(std::ostream& os) const {
+        std::cout << std::fixed << std::setprecision(1);
         os << "[";
         for (uint32_t i = 0; i < m_size; i++) {
             if ((i != m_size) && (i != 0)) os << ",";
             os << m_items[i];
         }
         os << "]" << std::endl;
+    }
+
+    template <>
+    void Collection<Book, 72>::print(std::ostream& os) const {
+        std::cout << "| ---------------------------------------------------------------------------|" << std::endl;
+        for (uint32_t i = 0; i < m_size; i++) {
+            std::cout << "| ";
+            m_items[i].print(os) << " |" << std::endl;
+        }
+        std::cout << "| ---------------------------------------------------------------------------|" << std::endl;
     }
 
     template <>

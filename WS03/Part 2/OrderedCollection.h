@@ -9,29 +9,38 @@ namespace seneca {
 	class OrderedCollection : public Collection<T, 72> {
 	public:
 		bool operator+=(const T& item);
+		void print(std::ostream& out) const;
 	};
 
 	template <typename T>
 	bool OrderedCollection<T>::operator+=(const T& item) {
-		uint32_t size = Collection<T, 72>::size();
+		auto size = Collection<T, 72>::size();
 		if (size >= Collection<T, 72>::capacity()) return false;
 
 		uint32_t index = 0;
 		while (index < size && Collection<T, 72>::operator[](index) < item) ++index;
 
-		for (uint32_t i = size; i > size; i--) {
-			Collection<T, 72>::operator[](i) = Collection<T, 72>::operator[](i - 1);
-		}
-
-		Collection<T, 72>::operator[](index) = item;
+		if (size) for (uint32_t i = size; i > index; i--) Collection<T, 72>::setElement(i, i - 1);
+		
+		Collection<T, 72>::setElement(index, item);
 		Collection<T, 72>::incrSize();
-
 		Collection<T, 72>::setSmallestItem(item);
 		Collection<T, 72>::setLargestItem(item);
 
 		return true;
 	}
-}
 
+	template <typename T>
+	void OrderedCollection<T>::print(std::ostream& out) const {
+		std::cout << std::fixed << std::setprecision(1);
+		Collection<T, 72>::print(out);
+	}
+
+	template<>
+	void OrderedCollection<Book>::print(std::ostream& out) const {
+		std::cout << std::fixed << std::setprecision(1);
+		Collection<Book, 72>::print(out);
+	}
+}
 
 #endif

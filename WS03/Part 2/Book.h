@@ -27,10 +27,6 @@ namespace seneca {
 		bool operator > (const Book& src) const;
 	};
 	std::ostream& operator<< (std::ostream& os, const Book& bk);
-
-
-
 }
-
 
 #endif
