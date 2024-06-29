@@ -98,16 +98,4 @@ namespace seneca {
 		string str = _str.substr(com1 + 1, com1 - _str.length());
 		return std::stoi(str);
 	}
-
-	string subString(const string& str, uint pos1, uint pos2) {
-		uint com1 = 0, com2 = 0, x = 0, i;
-		for (i = 0; i < str.length(); i++) {
-			if (str[i] == ',') {
-				++x;
-				if (x == pos1) com1 = i;
-				else if (x == pos2) com2 = i;
-			}
-		}
-		return str.substr(com1 + 1, com2 - com1 - 1);
-	}
 }
