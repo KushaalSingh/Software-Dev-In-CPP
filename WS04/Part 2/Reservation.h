@@ -22,6 +22,8 @@ namespace seneca {
 	public:
 		Reservation();
 		Reservation(const string& res);
+		Reservation(const Reservation& src);
+		Reservation& operator = (const Reservation& src);
 		void update(int day, int time);
 		string returnReservationID(const string& _str);
 		string returnReservatoinName(const string& _str);

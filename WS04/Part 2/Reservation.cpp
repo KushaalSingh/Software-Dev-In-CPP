@@ -13,6 +13,22 @@ namespace seneca {
 		arrivalHour = returnArrivalHour(res);
 	}
 
+	Reservation::Reservation(const Reservation& src) : resID(""), resName(""), email(""), numPeople(0), arrivalDay(0), arrivalHour(0) {
+		if (&src != this) *this = src;
+	}
+
+	Reservation& Reservation::operator = (const Reservation& src) {
+		if (&src != this) {
+			resID = src.resID;
+			resName = src.resName;
+			email = src.email;
+			numPeople = src.numPeople;
+			arrivalDay = src.arrivalDay;
+			arrivalHour = src.arrivalHour;
+		}
+		return *this;
+	}
+
 	void Reservation::update(int day, int time) {
 		arrivalDay = day;
 		arrivalHour = time;
