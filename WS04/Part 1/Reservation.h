@@ -26,6 +26,8 @@ namespace seneca {
 		string returnReservatoinName(const string& _str);
 		string returnEmail(const string& _str);
 		uint returnNumberOfPeople(const string& _str);
+		uint returnArrivalDay(const string& _str);
+		uint returnArrivalHour(const string& _str);
 	};
 }
 

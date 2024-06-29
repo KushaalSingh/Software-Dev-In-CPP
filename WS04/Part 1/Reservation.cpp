@@ -11,7 +11,7 @@ namespace seneca {
 		resName = returnReservatoinName(res);
 		email = returnEmail(res);
 		numPeople = returnNumberOfPeople(res);
-
+		arrivalDay = returnArrivalDay(res);
 	}
 
 	void Reservation::update(int day, int time) {
@@ -51,7 +51,7 @@ namespace seneca {
 	}
 
 	uint Reservation::returnNumberOfPeople(const string& _str) {
-		uint firstChar = 0, lastChar = 0, com1 = 0, com2 = 0, x = 0, i;
+		uint com1 = 0, com2 = 0, x = 0, i;
 		for (i = 0; i < _str.length(); i++) {
 			if (_str[i] == ',') {
 				++x;
@@ -61,5 +61,22 @@ namespace seneca {
 		}
 		string str = _str.substr(com1 + 1, com2 - com1 - 1);
 		return std::stoi(str);
+	}
+
+	uint Reservation::returnArrivalDay(const string& _str) {
+		uint com1 = 0, com2 = 0, x = 0, i;
+		for (i = 0; i < _str.length(); i++) {
+			if (_str[i] == ',') {
+				++x;
+				if (x == 3) com1 = i;
+				else if (x == 4) com2 = i;
+			}
+		}
+		string str = _str.substr(com1 + 1, com2 - com1 - 1);
+		return std::stoi(str);
+	}
+
+	uint Reservation::returnArrivalHour(const string& _str) {
+
 	}
 }
