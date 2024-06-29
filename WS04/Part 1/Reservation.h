@@ -28,6 +28,8 @@ namespace seneca {
 		uint returnNumberOfPeople(const string& _str);
 		uint returnArrivalDay(const string& _str);
 		uint returnArrivalHour(const string& _str);
+		
+		friend std::ostream& operator << (std::ostream& out, const Reservation& res);
 	};
 }
 

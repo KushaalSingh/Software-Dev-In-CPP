@@ -5,18 +5,21 @@ namespace seneca {
 	Reservation::Reservation() : resID(""), resName(""), email(""), numPeople(0), arrivalDay(0), arrivalHour(0) {}
 
 	Reservation::Reservation(const string& res) : resID(""), resName(""), email(""), numPeople(0), arrivalDay(0), arrivalHour(0) {
-		string id, name, _email, num, day, hour;
-		uint col = res.find(':');
 		resID = returnReservationID(res);
 		resName = returnReservatoinName(res);
 		email = returnEmail(res);
 		numPeople = returnNumberOfPeople(res);
 		arrivalDay = returnArrivalDay(res);
+		arrivalHour = returnArrivalHour(res);
 	}
 
 	void Reservation::update(int day, int time) {
 		arrivalDay = day;
 		arrivalHour = time;
+	}
+
+	std::ostream& operator << (std::ostream& out, const Reservation& res) {
+		std::cout << res.resID << " | " << res.resName << " | " << res.email << " | " << res.numPeople << " | " << res.arrivalDay << " | " << res.arrivalDay << std::endl;
 	}
 
 	string Reservation::returnReservationID(const string& _str) {
@@ -77,6 +80,15 @@ namespace seneca {
 	}
 
 	uint Reservation::returnArrivalHour(const string& _str) {
-
+		uint com1 = 0, ndl = 0, x = 0, i;
+		for (i = 0; i < _str.length(); i++) {
+			if (_str[i] == ',') {
+				++x;
+				if (x == 4) com1 = i;
+			}
+		}
+		ndl = _str.find('\n');
+		string str = _str.substr(com1 + 1, ndl - com1 - 1);
+		return std::stoi(str);
 	}
 }
