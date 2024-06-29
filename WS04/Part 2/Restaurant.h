@@ -13,6 +13,7 @@ namespace seneca {
 	public:
 		Restaurant(const Reservation* reservations[], size_t cnt);
 		~Restaurant();
+		size_t size();
 	};
 
 }
