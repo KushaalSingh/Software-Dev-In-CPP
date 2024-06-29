@@ -19,8 +19,17 @@ namespace seneca {
 	}
 
 	std::ostream& operator << (std::ostream& out, const Reservation& res) {
-		out << res.resID << " | " << res.resName << " | " << res.email << " | " << res.numPeople << " | " << res.arrivalDay << " | " << res.arrivalHour << std::endl;
+		out << "Reservation";
 		return out;
+	}
+
+	std::ostream& hourBetween6and9(std::ostream& out, const Reservation& res) {
+		out << std::right << std::setw(10) << res.resID << ": ";
+		out << std::right << std::setw(20) << res.resName << " ";
+		out << std::left << std::setw(20) << "<" << res.email << ">" << " ";
+		out << "Breakfast on day " << res.arrivalDay << " @ " << res.arrivalHour << ":00 for " << res.numPeople;
+		if (res.numPeople > 1) out << " people" << std::endl;
+		else out << " person" << std::endl;
 	}
 
 	string Reservation::returnReservationID(const string& _str) {

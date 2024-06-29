@@ -31,6 +31,7 @@ namespace seneca {
 		uint returnArrivalHour(const string& _str);
 
 		friend std::ostream& operator << (std::ostream& out, const Reservation& res);
+		friend std::ostream& hourBetween6and9(std::ostream& out, const Reservation& res);
 	};
 }
 
