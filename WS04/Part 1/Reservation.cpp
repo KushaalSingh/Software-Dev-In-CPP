@@ -19,7 +19,8 @@ namespace seneca {
 	}
 
 	std::ostream& operator << (std::ostream& out, const Reservation& res) {
-		std::cout << res.resID << " | " << res.resName << " | " << res.email << " | " << res.numPeople << " | " << res.arrivalDay << " | " << res.arrivalDay << std::endl;
+		out << res.resID << " | " << res.resName << " | " << res.email << " | " << res.numPeople << " | " << res.arrivalDay << " | " << res.arrivalHour << std::endl;
+		return out;
 	}
 
 	string Reservation::returnReservationID(const string& _str) {
@@ -39,14 +40,9 @@ namespace seneca {
 	}
 
 	string Reservation::returnEmail(const string& _str) {
-		uint firstChar = 0, lastChar = 0, com1 = 0, com2 = 0, x = 0, i;
-		for (i = 0; i < _str.length(); i++) {
-			if (_str[i] == ',') {
-				++x;
-				if (x == 1) com1 = i;
-				else if (x == 2) com2 = i;
-			}
-		}
+		uint firstChar = 0, lastChar = 0, com1 = 0, com2 = 0;
+		com1 = _str.find(',');
+		com2 = _str.find(',', com1 + 1);
 		string str = _str.substr(com1 + 1, com2 - com1 - 1);
 		for (firstChar = 0; firstChar < str.length() && str[firstChar] == ' '; ++firstChar);
 		for (lastChar = str.length(); str[lastChar - 1] == ' '; --lastChar);
@@ -80,15 +76,26 @@ namespace seneca {
 	}
 
 	uint Reservation::returnArrivalHour(const string& _str) {
-		uint com1 = 0, ndl = 0, x = 0, i;
+		uint com1 = 0, x = 0, i;
 		for (i = 0; i < _str.length(); i++) {
 			if (_str[i] == ',') {
 				++x;
 				if (x == 4) com1 = i;
 			}
 		}
-		ndl = _str.find('\n');
-		string str = _str.substr(com1 + 1, ndl - com1 - 1);
+		string str = _str.substr(com1 + 1, com1 - _str.length());
 		return std::stoi(str);
+	}
+
+	string subString(const string& str, uint pos1, uint pos2) {
+		uint com1 = 0, com2 = 0, x = 0, i;
+		for (i = 0; i < str.length(); i++) {
+			if (str[i] == ',') {
+				++x;
+				if (x == pos1) com1 = i;
+				else if (x == pos2) com2 = i;
+			}
+		}
+		return str.substr(com1 + 1, com2 - com1 - 1);
 	}
 }
