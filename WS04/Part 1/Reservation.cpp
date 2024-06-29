@@ -9,6 +9,7 @@ namespace seneca {
 		uint col = res.find(':');
 		resID = returnReservationID(res);
 		resName = returnReservatoinName(res);
+		email = returnEmail(res);
 	}
 
 	void Reservation::update(int day, int time) {
