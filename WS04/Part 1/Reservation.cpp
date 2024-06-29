@@ -19,24 +19,17 @@ namespace seneca {
 	}
 
 	std::ostream& operator << (std::ostream& out, const Reservation& res) {
-		out << "Reservation";
+		out << "Reservation ";
 		out << std::right << std::setw(10) << res.resID << ": ";
 		out << std::right << std::setw(20) << res.resName << " ";
-		out << std::left << std::setw(20) << "<" << res.email << ">" << " ";
+		out << std::left << std::setw(20) << ("<" + res.email + ">") << " ";
 
 		if (res.arrivalHour >= 6 && res.arrivalHour <= 9) out << "Breakfast ";
-		else if (res.arrivalHour >= 3 && res.arrivalHour <= 11) out << "Lunch ";
-		else if (res.arrivalHour >= 5 && res.arrivalHour <= 9) out << "Dinner ";
-		else out << "Driinks ";
+		else if (res.arrivalHour >= 11 && res.arrivalHour <= 15) out << "Lunch ";
+		else if (res.arrivalHour >= 17 && res.arrivalHour <= 19) out << "Dinner ";
+		else out << "Drinks ";
 
 		out << "on day " << res.arrivalDay << " @ " << res.arrivalHour << ":00 for " << res.numPeople;
-		if (res.numPeople > 1) out << " people" << std::endl;
-		else out << " person" << std::endl;
-		
-	}
-
-	std::ostream& hourBetween6and9(std::ostream& out, const Reservation& res) {
-		out << "Breakfast on day " << res.arrivalDay << " @ " << res.arrivalHour << ":00 for " << res.numPeople;
 		if (res.numPeople > 1) out << " people" << std::endl;
 		else out << " person" << std::endl;
 		return out;
