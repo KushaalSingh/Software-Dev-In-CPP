@@ -16,4 +16,20 @@ namespace seneca {
 	size_t Restaurant::size() {
 		return m_size;
 	}
+
+	std::ostream& operator << (std::ostream& out, const Restaurant& src) {
+		static size_t callCount = 0;
+		++callCount;
+
+		out << "--------------------------" << std::endl;
+		out << "Fancy Restaurant (" << callCount << ")" << std::endl;
+		out << "--------------------------" << std::endl;
+
+		if (!src.m_size) out << "This restaurant is empty!" << std::endl;
+		else for (size_t i = 0; i < src.m_size; i++) out << *src.m_reservations[i];
+		
+		out << "--------------------------" << std::endl;
+		
+		return out;
+	}
 }

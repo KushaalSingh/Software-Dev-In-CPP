@@ -14,6 +14,8 @@ namespace seneca {
 		Restaurant(const Reservation* reservations[], size_t cnt);
 		~Restaurant();
 		size_t size();
+
+		friend std::ostream& operator << (std::ostream& out, const Restaurant& src);
 	};
 
 }
