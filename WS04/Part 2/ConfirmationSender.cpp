@@ -12,7 +12,7 @@ namespace seneca {
 		for (size_t i = 0; i < m_size; i++) if (&res == m_reservations[i]) return *this;
 
 		++m_size;
-		const Reservation** temp = new Reservation*[m_size];
+		const Reservation** temp = new const Reservation*[m_size];
 		for (size_t i = 0; i < m_size; i++) temp[i] = m_reservations[i];
 		temp[m_size] = &res;
 		delete[] m_reservations;
@@ -26,7 +26,7 @@ namespace seneca {
 			if (&res == m_reservations[i]) {
 				for (size_t k = i; k < m_size; k++) m_reservations[k] = m_reservations[k + 1];
 				--m_size;
-				const Reservation** temp = new Reservation*[m_size];
+				const Reservation** temp = new const Reservation*[m_size];
 				for (size_t x = 0; x < m_size; x++) temp[x] = m_reservations[i];
 				delete[] m_reservations;
 				m_reservations = temp;

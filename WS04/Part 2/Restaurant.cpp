@@ -8,6 +8,27 @@ namespace seneca {
 		for (size_t i = 0; i < m_size; i++) m_reservations[i] = new Reservation(*reservations[i]);
 	}
 
+	Restaurant::Restaurant(Restaurant&& src) noexcept : m_reservations(nullptr), m_size(0) {
+		m_reservations = src.m_reservations;
+		m_size = src.m_size;
+
+		src.m_reservations = nullptr;
+		src.m_size = 0;
+	}
+
+	Restaurant& Restaurant::operator = (Restaurant&& src) noexcept {
+		if (&src != this) {
+			for (size_t i = 0; i < src.m_size; i++) delete m_reservations[i];
+			delete[] m_reservations;
+			m_reservations = src.m_reservations;
+			m_size = src.m_size;
+
+			src.m_reservations = nullptr;
+			src.m_size = 0;
+		}
+		return *this;
+	}
+
 	Restaurant::~Restaurant() {
 		for (size_t i = 0; i < m_size; i++) delete m_reservations[i];
 		delete[] m_reservations;
