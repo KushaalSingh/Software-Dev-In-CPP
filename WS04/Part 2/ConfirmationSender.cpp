@@ -6,6 +6,21 @@ namespace seneca {
 
 	ConfirmationSender::~ConfirmationSender() {
 		delete[] m_reservations;
+		m_reservations = nullptr;
+	}
+
+	ConfirmationSender::ConfirmationSender(const ConfirmationSender& src) : m_reservations(nullptr), m_size(0) {
+		*this = src;
+	}
+
+	ConfirmationSender& ConfirmationSender::operator = (const ConfirmationSender& res) {
+		if (&res != this) {
+			m_size = res.m_size;
+			delete[] m_reservations;
+			m_reservations = new Reservation * [m_size];
+			for (size_t i = 0; i < m_size; i++) m_reservations[i] = res.m_reservations[i];
+		}
+		return *this;
 	}
 
 	ConfirmationSender& ConfirmationSender::operator+= (const Reservation& res) {

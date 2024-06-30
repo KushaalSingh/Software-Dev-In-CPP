@@ -13,8 +13,8 @@ namespace seneca {
 	public:
 		ConfirmationSender();
 		~ConfirmationSender();
-
-		ConfirmationSender& operator = (const Reservation& res);
+		ConfirmationSender(const ConfirmationSender& src);
+		ConfirmationSender& operator = (const ConfirmationSender& res);
 		ConfirmationSender& operator += (const Reservation& res);
 		ConfirmationSender& operator -= (const Reservation& res);
 
