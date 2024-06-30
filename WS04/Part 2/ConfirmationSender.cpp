@@ -13,14 +13,30 @@ namespace seneca {
 		*this = src;
 	}
 
-	ConfirmationSender& ConfirmationSender::operator = (const ConfirmationSender& res) {
-		if (&res != this) {
-			m_size = res.m_size;
+	ConfirmationSender::ConfirmationSender(ConfirmationSender&& src) : m_reservations(src.m_reservations), m_size(src.m_size) {
+		src.m_reservations = nullptr;
+		src.m_size = 0;
+	}
+
+	ConfirmationSender& ConfirmationSender::operator = (const ConfirmationSender& src) {
+		if (&src != this) {
+			m_size = src.m_size;
 			delete[] m_reservations;
 			m_reservations = new Reservation * [m_size];
-			for (size_t i = 0; i < m_size; i++) m_reservations[i] = res.m_reservations[i];
+			for (size_t i = 0; i < m_size; i++) m_reservations[i] = src.m_reservations[i];
 		}
 		return *this;
+	}
+
+	ConfirmationSender& ConfirmationSender::operator = (ConfirmationSender&& src) {
+		if (&src != this) {
+			delete[] m_reservations;
+			m_reservations = src.m_reservations;
+			m_size = src.m_size;
+
+			src.m_reservations = nullptr;
+			src.m_size = 0;
+		}
 	}
 
 	ConfirmationSender& ConfirmationSender::operator+= (const Reservation& res) {

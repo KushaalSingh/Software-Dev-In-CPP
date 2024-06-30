@@ -24,9 +24,7 @@ namespace seneca {
 		return *this;
 	}
 
-	Restaurant::Restaurant(Restaurant&& src) noexcept : m_reservations(nullptr), m_size(0) {
-		m_reservations = src.m_reservations;
-		m_size = src.m_size;
+	Restaurant::Restaurant(Restaurant&& src) noexcept : m_reservations(src.m_reservations), m_size(src.m_size) {
 		src.m_reservations = nullptr;
 		src.m_size = 0;
 	}

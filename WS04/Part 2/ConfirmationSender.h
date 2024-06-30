@@ -14,7 +14,9 @@ namespace seneca {
 		ConfirmationSender();
 		~ConfirmationSender();
 		ConfirmationSender(const ConfirmationSender& src);
-		ConfirmationSender& operator = (const ConfirmationSender& res);
+		ConfirmationSender(ConfirmationSender&& src);
+		ConfirmationSender& operator = (const ConfirmationSender& src);
+		ConfirmationSender& operator = (ConfirmationSender&& src);
 		ConfirmationSender& operator += (const Reservation& res);
 		ConfirmationSender& operator -= (const Reservation& res);
 
