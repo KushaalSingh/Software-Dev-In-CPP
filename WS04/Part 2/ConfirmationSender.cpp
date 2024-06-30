@@ -10,24 +10,22 @@ namespace seneca {
 
 	ConfirmationSender& ConfirmationSender::operator+= (const Reservation& res) {
 		for (size_t i = 0; i < m_size; i++) if (&res == m_reservations[i]) return *this;
-
-		++m_size;
-		const Reservation** temp = new const Reservation*[m_size];
+		const Reservation** temp = new const Reservation*[m_size + 1];
 		for (size_t i = 0; i < m_size; i++) temp[i] = m_reservations[i];
 		temp[m_size] = &res;
 		delete[] m_reservations;
 		m_reservations = temp;
-
+		++m_size;
 		return *this;
 	}
 
 	ConfirmationSender& ConfirmationSender::operator -= (const Reservation& res) {
 		for (size_t i = 0; i < m_size; i++) {
 			if (&res == m_reservations[i]) {
-				for (size_t k = i; k < m_size; k++) m_reservations[k] = m_reservations[k + 1];
+				for (size_t k = i; k < m_size - 1; k++) m_reservations[k] = m_reservations[k + 1];
 				--m_size;
-				const Reservation** temp = new const Reservation*[m_size];
-				for (size_t x = 0; x < m_size; x++) temp[x] = m_reservations[i];
+				const Reservation** temp = new const Reservation * [m_size];
+				for (size_t x = 0; x < m_size; x++) temp[x] = m_reservations[x];
 				delete[] m_reservations;
 				m_reservations = temp;
 				break;
