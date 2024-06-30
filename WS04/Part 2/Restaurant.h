@@ -21,6 +21,5 @@ namespace seneca {
 
 		friend std::ostream& operator << (std::ostream& out, const Restaurant& src);
 	};
-
 }
 #endif

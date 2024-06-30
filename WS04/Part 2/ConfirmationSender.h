@@ -14,14 +14,13 @@ namespace seneca {
 		ConfirmationSender();
 		~ConfirmationSender();
 		ConfirmationSender(const ConfirmationSender& src);
-		ConfirmationSender(ConfirmationSender&& src);
+		ConfirmationSender(ConfirmationSender&& src) noexcept;
 		ConfirmationSender& operator = (const ConfirmationSender& src);
-		ConfirmationSender& operator = (ConfirmationSender&& src);
+		ConfirmationSender& operator = (ConfirmationSender&& src) noexcept;
 		ConfirmationSender& operator += (const Reservation& res);
 		ConfirmationSender& operator -= (const Reservation& res);
 
 		friend std::ostream& operator << (std::ostream& out, const ConfirmationSender& src);
 	};
-
 }
 #endif
