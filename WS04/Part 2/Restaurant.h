@@ -12,6 +12,8 @@ namespace seneca {
 
 	public:
 		Restaurant(const Reservation* reservations[], size_t cnt);
+		Restaurant(const Restaurant& src);
+		Restaurant& operator = (const Restaurant& src);
 		Restaurant(Restaurant&& src) noexcept;
 		Restaurant& operator = (Restaurant&& src) noexcept;
 		~Restaurant();
