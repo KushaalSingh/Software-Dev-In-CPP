@@ -30,6 +30,12 @@ namespace seneca {
 		return m_price;
 	}
 
+	std::ostream& operator << (std::ostream& os, const Book& src) {
+		os << std::setw(20) << src.m_author << std::setw(22) << src.m_title << 
+			std::setw(5) << src.m_countryOfPub << std::setw(4) << src.m_yearOfPub << 
+			std::setw(6) << std::fixed << std::setprecision(2) << src.m_price << std::endl;
+	}
+
 	string subString(string _str, int column) {
 		string str;
 		int firstChar, lastChar, count = 0, c1 = 0, c2 = 0;
