@@ -2,6 +2,9 @@
 #define SENECA_BOOK_H
 
 #include <iostream>
+#include <string>
+#include <iomanip>
+#include <cstdlib>
 
 namespace seneca {
 
@@ -23,9 +26,11 @@ namespace seneca {
 		const string& country() const;
 		const size_t& year() const;
 		double& price();
+
+		friend std::ostream& operator << (std::ostream& os, const Book& src);
 	};
 
-
+	string subString(string _str, int column);
 }
 
 #endif
