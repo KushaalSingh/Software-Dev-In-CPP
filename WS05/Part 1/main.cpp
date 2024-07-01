@@ -54,6 +54,10 @@ int main(int argc, char** argv)
 	double usdToCadRate = 1.3;
 	double gbpToCadRate = 1.5;
 
+	auto fixPrice = [usdToCadRate, gbpToCadRate](seneca::Book& src) {
+		if (src.country() == "US") src.price() *= usdToCadRate;
+		else if (src.country() == "UK" && src.year() >= 1990 && src.year() <= 1999) src.price() *= gbpToCadRate;
+ 	};
 	// TODO: create a lambda expression that fixes the price of a book accoding to the rules
 	//       - the expression should receive a single parameter of type "Book&"
 	//       - if the book was published in US, multiply the price with "usdToCadRate"
@@ -67,21 +71,22 @@ int main(int argc, char** argv)
 	std::cout << "The library content\n";
 	std::cout << "-----------------------------------------\n";
 	// TODO: iterate over the library and print each book to the screen
-
+	for (const auto& book : library) std::cout << book;
+	
 
 
 	std::cout << "-----------------------------------------\n\n";
 
 	// TODO: iterate over the library and update the price of each book
 	//         using the lambda defined above.
-
+	for (auto& book : library) fixPrice(book);
 
 
 	std::cout << "-----------------------------------------\n";
 	std::cout << "The library content (updated prices)\n";
 	std::cout << "-----------------------------------------\n";
 	// TODO: iterate over the library and print each book to the screen
-
+	for (const auto& book : library) std::cout << book;
 
 
 	std::cout << "-----------------------------------------\n";
