@@ -29,8 +29,7 @@ namespace seneca {
 
 		friend std::ostream& operator << (std::ostream& os, const Book& src);
 	};
-
-	string subString(string _str, int column);
+	string subString(string _str, size_t column);
 }
 
 #endif
