@@ -28,6 +28,11 @@ namespace seneca {
 		double& price();
 
 		friend std::ostream& operator << (std::ostream& os, const Book& src);
+
+		template<typename T>
+		void fixSpelling(T& spellChecker) {
+			spellChecker(m_summery);
+		}
 	};
 	string subString(string _str, size_t column);
 }
