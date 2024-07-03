@@ -29,6 +29,15 @@ namespace seneca {
 		}
 	}
 
+	void SpellChecker::operator()(std::string& text) {
+		for (int i = 0; i < 6; i++) {
+			auto str = std::find(text.begin(), text.end(), m_badWords[i]);
+			if (str != text.end()) {
+				std::replace(text.begin(), text.end(), m_badWords[i], m_goodWords[i]);
+			}
+		}
+	}
+
 	void setWords(const string& str, string& badWord, string& goodWord) {
 		int alph1 = 0, alph2 = 0, i = 0, k = 0, l = 0;
 		bool first = true, last = false;

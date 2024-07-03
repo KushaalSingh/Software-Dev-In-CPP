@@ -4,6 +4,7 @@
 #include "Book.h"
 #include <exception>
 #include <fstream>
+#include <algorithm>
 
 namespace seneca {
 
