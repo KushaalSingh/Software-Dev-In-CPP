@@ -34,7 +34,7 @@ namespace seneca {
 			spellChecker(m_summery);
 		}
 	};
-	string subString(string _str, size_t column);
+	string subString(string _str, size_t column, size_t size);
 }
 
 #endif

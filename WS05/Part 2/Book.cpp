@@ -5,14 +5,14 @@ namespace seneca {
 	Book::Book() : m_author(""), m_title(""), m_countryOfPub(""), m_yearOfPub(0), m_price(0), m_summery("") {}
 
 	Book::Book(const string& strBook) : m_author(""), m_title(""), m_countryOfPub(""), m_yearOfPub(0), m_price(0), m_summery("") {
-		m_author = subString(strBook, 1);
-		m_title = subString(strBook, 2);
-		m_countryOfPub = subString(strBook, 3);
-		auto price = subString(strBook, 4);
+		m_author = subString(strBook, 1, 6);
+		m_title = subString(strBook, 2, 6);
+		m_countryOfPub = subString(strBook, 3, 6);
+		auto price = subString(strBook, 4, 6);
 		m_price = std::stod(price);
-		auto year = subString(strBook, 5);
+		auto year = subString(strBook, 5, 6);
 		m_yearOfPub = std::stoull(year);
-		m_summery = subString(strBook, 6);
+		m_summery = subString(strBook, 6, 6);
 	}
 
 	const string& Book::title() const {
@@ -38,7 +38,7 @@ namespace seneca {
 		return os;
 	}
 
-	string subString(string _str, size_t column) {
+	string subString(string _str, size_t column, size_t size) {
 		string str;
 		size_t firstChar, lastChar, count = 0, c1 = 0, c2 = 0;
 		for (size_t i = 0; i < _str.length(); i++) {
@@ -48,7 +48,7 @@ namespace seneca {
 				if (c2) ++c1;
 				c2 = i;
 			}
-			if (column == 6 && count >= 5) {
+			if (column == size && count >= size - 1) {
 				str = _str.substr(c2 + 1, _str.length());
 				break;
 			}
