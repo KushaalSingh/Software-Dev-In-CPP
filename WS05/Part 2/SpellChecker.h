@@ -8,10 +8,14 @@
 
 namespace seneca {
 
+	const int SIZE = 6;
+
 	class SpellChecker {
 	private:
-		string m_badWords[6];
-		string m_goodWords[6];
+		string m_badWords[SIZE];
+		string m_goodWords[SIZE];
+		int m_replacements[SIZE];
+
 		void setDefault();
 	public:
 		SpellChecker();

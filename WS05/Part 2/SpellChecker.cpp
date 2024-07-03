@@ -30,10 +30,12 @@ namespace seneca {
 	}
 
 	void SpellChecker::operator()(std::string& text) {
-		for (int i = 0; i < 6; i++) {
-			auto str = std::find(text.begin(), text.end(), m_badWords[i]);
-			if (str != text.end()) {
-				std::replace(text.begin(), text.end(), m_badWords[i], m_goodWords[i]);
+		for (int i = 0; i < SIZE; i++) {
+			size_t pos = text.find(m_badWords[i]);
+			if (pos != std::string::npos) {
+				text.replace(pos, m_badWords[i].length(), m_goodWords[i]);
+				++m_replacements[i];
+				pos = text.find(m_badWords[i], pos + m_goodWords[i].length());
 			}
 		}
 	}
