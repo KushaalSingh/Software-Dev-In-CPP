@@ -21,6 +21,7 @@ namespace seneca {
 		SpellChecker();
 		SpellChecker(const char* filename);
 		void operator()(std::string& text);
+		void showStatistics(std::ostream& out) const;
 	};
 	void setWords(const string& str, string& badWord, string& goodWord);
 }

@@ -40,6 +40,13 @@ namespace seneca {
 		}
 	}
 
+	void SpellChecker::showStatistics(std::ostream& out) const {
+		for (size_t i = 0; i < SIZE; ++i) {
+			out << std::setw(15) << std::right << m_badWords[i] << ": "
+				<< m_replacements[i] << " replacements" << std::endl;
+		}
+	}
+
 	void setWords(const string& str, string& badWord, string& goodWord) {
 		int alph1 = 0, alph2 = 0, i = 0, k = 0, l = 0;
 		bool first = true, last = false;
