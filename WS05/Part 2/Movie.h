@@ -12,6 +12,7 @@ namespace seneca {
 		string m_description;
 
 	public:
+		Movie();
 		Movie(const std::string& strMovie);
 		const string& title() const;
 
