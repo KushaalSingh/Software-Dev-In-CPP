@@ -48,7 +48,7 @@ namespace seneca {
 	}
 
 	void setWords(const string& str, string& badWord, string& goodWord) {
-		int alph1 = 0, alph2 = 0, i = 0, k = 0, l = 0;
+		size_t alph1 = 0, alph2 = 0, i = 0, k = 0, l = 0;
 		bool first = true, last = false;
 		for (i = 0; i < str.length() && !last; i++) {
 			if (str[i] != ' ') {
