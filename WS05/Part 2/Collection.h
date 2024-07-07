@@ -15,7 +15,7 @@ namespace seneca {
 
 	public:
 		Collection(const Collection&) = delete;
-		Collectoin& operator = (const Collection&) = delete;
+		Collection& operator = (const Collection&) = delete;
 
 		Collection() : m_collectionName(""), m_items(nullptr), m_size(0), m_observer(nullptr) {};
 
@@ -60,7 +60,7 @@ namespace seneca {
 			return nullptr;
 		}
 
-		friend std::ostream& operator << (std::ostream& out, Collection<T>& src) const {
+		friend std::ostream& operator << (std::ostream& out, Collection<T>& src) {
 			for (size_t i = 0; i < src.m_size; i++) out << src.m_items[i];
 			return out;
 		}

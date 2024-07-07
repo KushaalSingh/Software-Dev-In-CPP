@@ -12,5 +12,6 @@ namespace seneca {
 
 	std::ostream& operator << (std::ostream& out, const Movie& src) {
 		out << std::setw(40) << src.m_title << " | " << std::setw(4) << src.m_releaseYear << " | " << src.m_description;
+		return out;
 	}
 }
