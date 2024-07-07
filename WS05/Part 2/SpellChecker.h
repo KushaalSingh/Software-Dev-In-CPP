@@ -15,8 +15,8 @@ namespace seneca {
 		string m_badWords[SIZE];
 		string m_goodWords[SIZE];
 		int m_replacements[SIZE];
-
 		void setDefault();
+
 	public:
 		SpellChecker();
 		SpellChecker(const char* filename);
@@ -25,5 +25,4 @@ namespace seneca {
 	};
 	void setWords(const string& str, string& badWord, string& goodWord);
 }
-
 #endif

@@ -5,6 +5,7 @@ namespace seneca {
 	void SpellChecker::setDefault() {
 		m_badWords[0] = '\0';
 		m_goodWords[0] = '\0';
+		for (int i = 0; i < SIZE; i++) m_replacements[i] = 0;
 	}
 
 	SpellChecker::SpellChecker() {
@@ -14,8 +15,6 @@ namespace seneca {
 	SpellChecker::SpellChecker(const char* filename) {
 		setDefault();
 		int i = 0;
-		for (i = 0; i < SIZE; i++) m_replacements[i] = 0;
-		i = 0;
 		try {
 			std::ifstream file(filename);
 			if (!file.is_open()) throw std::runtime_error("Bad file name!");
