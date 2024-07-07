@@ -14,9 +14,11 @@ namespace seneca {
 	SpellChecker::SpellChecker(const char* filename) {
 		setDefault();
 		int i = 0;
+		for (i = 0; i < SIZE; i++) m_replacements[i] = 0;
+		i = 0;
 		try {
 			std::ifstream file(filename);
-			if (file.is_open()) throw "Bad file name!";
+			if (!file.is_open()) throw std::runtime_error("Bad file name!");
 			while (file && i < 6) {
 				string wordsString = "";
 				std::getline(file, wordsString);
@@ -41,6 +43,7 @@ namespace seneca {
 	}
 
 	void SpellChecker::showStatistics(std::ostream& out) const {
+		std::cout << "Spellchecker Statistics" << std::endl;
 		for (size_t i = 0; i < SIZE; ++i) {
 			out << std::setw(15) << std::right << m_badWords[i] << ": "
 				<< m_replacements[i] << " replacements" << std::endl;
