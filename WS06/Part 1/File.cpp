@@ -2,12 +2,12 @@
 
 namespace seneca {
 
-	File::File(const std::string& fileName, const std::string& contents = std::string()) : m_contents(contents) {
+	File::File(const std::string& fileName, const std::string& contents) : m_contents(contents) {
 		m_name = fileName;
 	}
 
 	void File::update_parent_path(const std::string& path) {
-		m_parent_path += path;
+		m_parent_path = path;
 	}
 	
 	NodeType File::type() const {
@@ -15,7 +15,7 @@ namespace seneca {
 	}
 
 	std::string File::path() const {
-		return (m_parent_path + "/" + m_name);
+		return (m_parent_path + m_name);
 	}
 
 	std::string File::name() const {

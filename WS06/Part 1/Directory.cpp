@@ -24,7 +24,7 @@ namespace seneca {
 	}
 
 	int Directory::count() const {
-		return m_contents.size();
+		return static_cast<int>(m_contents.size());
 	}
 
 	size_t Directory::size() const {
