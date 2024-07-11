@@ -2,6 +2,10 @@
 #include <iomanip>
 #include <exception>
 #include <string>
+#include <type_traits>
+#include <forward_list>
+#include "Filesystem.h"
+#include "Filesystem.h" // intentional
 #include "Directory.h"
 #include "Directory.h" // intentional
 #include "File.h"
@@ -23,12 +27,6 @@ void printHeader(std::string label) {
     printLine();
 }
 
-void printRInfo(int count, size_t bytes, std::string path) {
-    std::cout << std::left << std::setw(2) << (count >= 0 ? std::to_string(count) : "")
-        << std::right << std::setw(12) << std::to_string(bytes) + " bytes "
-        << std::left << path << std::right << std::endl;
-}
-
 int main(int argc, char** argv) {
     std::cout << "Command Line:\n";
     std::cout << "--------------------------\n";
@@ -37,43 +35,53 @@ int main(int argc, char** argv) {
     std::cout << "--------------------------\n\n";
 
     /*************************************************
-     * Creating a directory structure
+     * Creating the Filesystem
      **************************************************/
-    printHeader("DIRECTORY STRUCTURE");
-
-    seneca::Directory* root = new seneca::Directory("");
-    seneca::File* scene_img = new seneca::File("scene.jpg", "This is an image of a beautiful landscape.");
-    seneca::File* flag_img = new seneca::File("flag.jpg", "A Canadian flag.");
-    seneca::File* flag_img_test = new seneca::File("flag.jpg", "A Canadian flag.");
-    seneca::Directory* videos = new seneca::Directory("videos/");
-    seneca::File* harry_potter = new seneca::File("harry-potter.webm", "Compilation of the best moments from all 8 Harry Potter movies.");
-
-    *root += scene_img;
-    *root += flag_img;
-    *videos += harry_potter;
-    *root += videos;
+    ::printHeader("FILESYSTEM");
 
     try {
-        *root += flag_img_test;
+        seneca::Filesystem failedFs("non-existentfile");
     }
     catch (...) {
-        std::cout << "**EXPECTED EXCEPTION: flag.jpg image already exists in the root\n" << std::endl;
-        delete flag_img_test;
+        std::cout << "**EXPECTED EXCEPTION: Filesystem not created with invalid filename.\n" << std::endl;
     }
 
-    std::cout << "Directory structure created successfully" << std::endl;
+    if (std::is_copy_constructible<seneca::Filesystem>::value || std::is_copy_assignable<seneca::Filesystem>::value) {
+        std::cout << "**EXCEPTION: Filesystem should not support copy operations.\n" << std::endl;
+    }
+
+    if ((!std::is_move_constructible<seneca::Filesystem>::value) || (!std::is_move_assignable<seneca::Filesystem>::value)) {
+        std::cout << "**EXCEPTION: Filesystem should support move operations.\n" << std::endl;
+    }
+
+    seneca::Filesystem fs(argv[1]);
+
+    std::vector<seneca::FormatFlags> fflags;
+
+    std::vector<seneca::OpFlags> oflags;
+    oflags.push_back(seneca::OpFlags::RECURSIVE);
+
+    seneca::Directory* working_dir = fs.get_current_directory();
+    working_dir->display(std::cout);
 
     ::printLine();
 
     /*************************************************
-     * Directory & file information
+     * Changing directories
      **************************************************/
-    ::printHeader("RESOURCE INFO");
-    ::printRInfo(root->count(), root->size(), root->path());
-    ::printRInfo(scene_img->count(), scene_img->size(), scene_img->path());
-    ::printRInfo(flag_img->count(), flag_img->size(), flag_img->path());
-    ::printRInfo(videos->count(), videos->size(), videos->path());
-    ::printRInfo(harry_potter->count(), harry_potter->size(), harry_potter->path());
+    ::printHeader("CHANGE DIR");
+    fflags.push_back(seneca::FormatFlags::LONG);
+
+    try {
+        working_dir = fs.change_directory("pics");
+    }
+    catch (std::invalid_argument&) {
+        std::cout << "**EXPECTED EXCEPTION: Couldn't change directory to invalid directory.\n" << std::endl;
+    }
+
+    working_dir = fs.change_directory("images/");
+    working_dir->display(std::cout, fflags);
+
     ::printLine();
 
     /*************************************************
@@ -81,29 +89,66 @@ int main(int argc, char** argv) {
      **************************************************/
     ::printHeader("FIND");
 
-    std::vector<seneca::OpFlags> oflags;
-
-    if (!root->find(".flag.jpg")) {
-        std::cout << "**EXPECTED ERROR: File .flag.jpg not found in " << root->path() << "\n" << std::endl;
+    seneca::File* elephant_image = dynamic_cast<seneca::File*>(working_dir->find("elephant", oflags));
+    if (!elephant_image) {
+        std::cout << "**EXPECTED ERROR: File elephant not found in " << working_dir->path() << " recursively\n" << std::endl;
     }
 
-    if (root->find("flag.jpg")) {
-        std::cout << "Found " << flag_img->name() << " in " << root->path() << " with the ALL flag\n" << std::endl;
+    elephant_image = dynamic_cast<seneca::File*>(working_dir->find("elephant.png"));
+    if (!elephant_image) {
+        std::cout << "**EXPECTED ERROR: File elephant.png not found in " << working_dir->path() << " non-recursively\n" << std::endl;
     }
 
-    if (!root->find("harry-potter.webm")) {
-        std::cout << "**EXPECTED ERROR: File harry-potter.webm not found in " << root->path() << " non-recursively\n" << std::endl;
-    }
+    elephant_image = dynamic_cast<seneca::File*>(working_dir->find("elephant.png", oflags));
 
-    oflags.push_back(seneca::OpFlags::RECURSIVE);
-    if (root->find("harry-potter.webm", oflags)) {
-        std::cout << "Found " << harry_potter->name() << " in " << root->path() << " recursively\n"
-            << std::endl;
-    }
+    std::cout << elephant_image->path() << " was found in fileystem" << std::endl;
 
     ::printLine();
 
-    delete root;
+
+    /*************************************************
+     * Adding a directory to another directory
+     **************************************************/
+    ::printHeader("ADD TO DIRECTORY");
+    seneca::Directory* classified = new seneca::Directory("classified/");
+    *classified += new seneca::File(".aliens.txt", "Are aliens real? Go to Area 51 and find out!");
+    *classified += new seneca::File(".polls.txt", "Polling results for the current election are in here.");
+
+    std::cout << "Created directory " << classified->name() << std::endl;
+    classified->display(std::cout, fflags);
+
+    working_dir = fs.change_directory();
+    working_dir = fs.change_directory("documents/");
+    std::cout << "\nAdding " << classified->name() << " to " << working_dir->path() << std::endl;
+
+    *working_dir += classified;
+
+    working_dir->display(std::cout, fflags);
+
+    ::printLine();
+
+    /*************************************************
+     * Removing a directory
+     **************************************************/
+    ::printHeader("REMOVE");
+
+    working_dir = fs.change_directory();
+    std::cout << "Current size of filesystem is " << working_dir->size() << " bytes\n";
+    std::cout << "Current size of documents/ is " << working_dir->find("documents/")->size() << " bytes\n\n";
+
+    try {
+        working_dir->remove("documents/");
+    }
+    catch (...) {
+        std::cout << "**EXPECTED EXCEPTION: Trying to remove a directory without passing the recursive flag.\n\n";
+    }
+
+    working_dir->remove("documents/", oflags);
+
+    std::cout << "After removing documents/\n";
+    working_dir->display(std::cout, fflags);
+
+    ::printLine();
 
     return cout;
 }
