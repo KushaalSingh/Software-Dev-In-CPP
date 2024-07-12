@@ -65,7 +65,7 @@ namespace seneca {
 		return str.substr(first, last - first + 1);
 	}
 
-	NodeType resourceType(const std::string& res) {
+	NodeType Filesystem::resourceType(const std::string& res) {
 		if (res[res.length() - 1] == '/' && std::count(res.begin(), res.end(), '/') == 1) return NodeType::DIR;
 		else if (res.find('/') == std::string::npos) return NodeType::FILE;
 		else return NodeType::PATH;
