@@ -6,6 +6,10 @@ namespace seneca {
 		m_name = fileName;
 	}
 
+	void File::updateContents(const std::string& contents) {
+		m_contents = contents;
+	}
+
 	void File::update_parent_path(const std::string& path) {
 		m_parent_path = path;
 	}
@@ -15,7 +19,7 @@ namespace seneca {
 	}
 
 	std::string File::path() const {
-		return (m_parent_path + m_name);
+		return (m_parent_path + '/' + m_name);
 	}
 
 	std::string File::name() const {

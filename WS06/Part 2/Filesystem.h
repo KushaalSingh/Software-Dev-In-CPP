@@ -17,6 +17,14 @@ namespace seneca {
 		NodeType resourceType(const std::string& res);
 	public:
 		Filesystem(const std::string& file_name, const std::string& root_dirName = "");
+		Filesystem(const Filesystem&) = delete;
+		Filesystem& operator=(const Filesystem&) = delete;
+		Filesystem(Filesystem&& src) noexcept;
+		Filesystem& operator=(Filesystem&& src) noexcept;
+		Filesystem& operator+=(Resource* src);
+		Directory* change_directory(const std::string& dir = "");
+		Directory* get_current_directory() const;
+		~Filesystem();
 	};
 
 	std::string trim(const std::string& str);
