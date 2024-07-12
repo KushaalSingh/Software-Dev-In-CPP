@@ -11,7 +11,8 @@ namespace seneca
     // Determine the type of filesystem resource
     enum class NodeType {
         DIR,   // Directory
-        FILE   // Regular File
+        FILE,   // Regular File
+        PATH
     };
 
     // Options for performing a filesystem operation

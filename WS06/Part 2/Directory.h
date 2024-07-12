@@ -4,6 +4,7 @@
 #include "Resource.h"
 #include "Flags.h"
 #include <vector>
+#include <algorithm>
 
 namespace seneca {
 
