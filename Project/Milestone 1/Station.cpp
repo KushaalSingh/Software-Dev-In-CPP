@@ -2,7 +2,7 @@
 
 namespace seneca {
 
-	uint Station::m_widthField { 0 }; // Static variables initalized
+	size_t Station::m_widthField { 0 }; // Static variables initalized
 	uint Station::id_generator { 0 };
 
 	Station::Station(const std::string& record) : m_ID(0), m_itemName(""), m_description(""), m_serialNumber(0), m_stockQunatity(0) {
