@@ -16,7 +16,7 @@ namespace seneca {
 		uint m_serialNumber;
 		uint m_stockQunatity;
 
-		static uint m_widthField;
+		static size_t m_widthField;
 		static uint id_generator;
 
 	public:
