@@ -2,6 +2,7 @@
 #define SENECA_STATION_H
 
 #include "Utilities.h"
+#include <iomanip>
 
 namespace seneca {
 
@@ -9,10 +10,10 @@ namespace seneca {
 
 	class Station {
 	private:
-		int m_stationID;
+		int m_ID;
 		std::string m_itemName;
 		std::string m_description;
-		uint m_nextSerialNumber;
+		uint m_serialNumber;
 		uint m_stockQunatity;
 
 		static uint m_widthField;
@@ -20,6 +21,11 @@ namespace seneca {
 
 	public:
 		Station(const std::string& record);
+		const std::string& getItemName() const;
+		size_t getNextSerialNumber();
+		size_t getQuantity() const;
+		void updateQuantity();
+		void display(std::ostream& os, bool full) const;
 	};
 
 }
