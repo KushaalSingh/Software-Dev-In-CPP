@@ -1,3 +1,11 @@
+// Name: Kushaal Singh
+// Seneca Student ID: 115320228
+// Seneca email: kna28@myseneca.ca
+// Date of completion: 13/7/2024
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
+
 #include "Station.h"
 
 namespace seneca {
@@ -7,7 +15,7 @@ namespace seneca {
 
 	Station::Station(const std::string& record) : m_ID(0), m_itemName(""), m_description(""), m_serialNumber(0), m_stockQunatity(0) {
 		Utilities U;
-		bool more;
+		bool more = true;
 		size_t pos = 0;
 
 		m_ID = ++id_generator;

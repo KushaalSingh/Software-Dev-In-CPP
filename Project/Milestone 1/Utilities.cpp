@@ -1,8 +1,16 @@
+// Name: Kushaal Singh
+// Seneca Student ID: 115320228
+// Seneca email: kna28@myseneca.ca
+// Date of completion: 13/7/2024
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
+
 #include "Utilities.h"
 
 namespace seneca {
 
-	char Utilities::m_delimiter = '\0';
+	char Utilities::m_delimiter { ' ' };
 	
 	void Utilities::setFieldWidth(size_t newWidth) {
 		m_widthField = newWidth;
@@ -21,7 +29,10 @@ namespace seneca {
 
 		size_t delim = str.find(m_delimiter, next_pos);
 		if (delim == std::string::npos) delim = str.length();
-		else if (delim == next_pos) throw std::runtime_error("Delimiter found at next_pos");
+		else if (delim == next_pos) {
+			more = false;
+			throw std::runtime_error("Delimiter found at next_pos");
+		}
 
 		std::string token = str.substr(next_pos, delim - next_pos);
 		next_pos = delim + 1;
@@ -29,7 +40,7 @@ namespace seneca {
 		token = trim(token);
 
 		if (m_widthField < token.length()) m_widthField = token.length();
-		more = next_pos < str.length();
+		more = (next_pos < str.length());
 
 		return token;
 	}
