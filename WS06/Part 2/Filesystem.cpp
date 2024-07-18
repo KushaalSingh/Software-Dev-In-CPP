@@ -68,7 +68,7 @@ namespace seneca {
 			for (size_t i = 0; i < path.length() && !path.empty(); i++) {
 				if (path[i] == '/') {
 					p2 = i;
-					Resource* curr = base->find(path.substr(p1, p2 - p1));
+					Resource* curr = base->find(path.substr(p1, p2 - p1 + 1));
 					if (curr) {
 						p1 = p2 + 1;
 						return createResource(path.substr(p1), dynamic_cast<Directory*>(curr));
@@ -85,13 +85,12 @@ namespace seneca {
 		}
 		else if (resourceType(path) == NodeType::DIR) {
 			Resource* temp = new Directory(path);
-			dynamic_cast<Directory*>(temp)->update_parent_path(temp->path() + '/' + path + '/');
 			*base += temp;
+			std::cout << temp->path() << std::endl;
 		}
 		else if (resourceType(path) == NodeType::FILE) {
 			Resource* temp = new File(path);
 			*base += temp;
-			//dynamic_cast<File*>(temp)->update_parent_path(temp->path() + '/' + path);
 			std::cout << temp->path() << std::endl;
 			return temp;
 		}
