@@ -41,11 +41,7 @@ namespace seneca {
 	}
 
 	Resource* Directory::find(const std::string& src, const std::vector<OpFlags>& flag) {
-		for (Resource* resource : m_contents) {
-			auto _name = resource->name();
-			if (_name == src) return resource;
-			if (resource->name() == src) return resource;
-		}
+		for (Resource* resource : m_contents) if (resource->name() == src) return resource;
 
 		if (std::find(flag.begin(), flag.end(), OpFlags::RECURSIVE) != flag.end()) {
 			for (Resource* resource : m_contents) {
@@ -66,14 +62,23 @@ namespace seneca {
 	}
 
 	void Directory::remove(const std::string& name, const std::vector<OpFlags>& flags = {}) {
-		if (resourceType(name) == NodeType::DIR && std::find(flags.begin(), flags.end(), OpFlags::RECURSIVE) == flags.end()) 
-			throw std::invalid_argument(name + " is a directory. Pass the recursive flag to delete directories.");
+		auto it = std::find_if(m_contents.begin(), m_contents.end(), [&](Resource* resource) {
+			return resource->name() == name;
+		});
 
-		auto found = find(name, flags);
-		if (!found) throw std::string(name + " does not exist in " + m_name);
-		
-		delete found;
+		if (it == m_contents.end()) {
+			throw std::string(name + " does not exist in " + m_name);
+		}
 
+		Resource* resource = *it;
+		if (resource->type() == NodeType::DIR) {
+			if (std::find(flags.begin(), flags.end(), OpFlags::RECURSIVE) == flags.end()) {
+				throw std::invalid_argument(name + " is a directory. Pass the recursive flag to delete directories.");
+			}
+		}
+
+		delete resource;
+		m_contents.erase(it);
 	}
 
 	NodeType resourceType(const std::string& res) {

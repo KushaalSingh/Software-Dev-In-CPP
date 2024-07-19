@@ -31,25 +31,7 @@ namespace seneca {
 		Directory(Directory&&) = delete;
 		Directory& operator=(Directory&&) = delete;
 
-		void remove(const std::string& name, const std::vector<OpFlags>& flags = {}) {
-			auto it = std::find_if(m_contents.begin(), m_contents.end(), [&](Resource* resource) {
-				return resource->name() == name;
-				});
-
-			if (it == m_contents.end()) {
-				throw std::string(name + " does not exist in " + m_name);
-			}
-
-			Resource* resource = *it;
-			if (resource->type() == NodeType::DIR) {
-				if (std::find(flags.begin(), flags.end(), OpFlags::RECURSIVE) == flags.end()) {
-					throw std::invalid_argument(name + " is a directory. Pass the recursive flag to delete directories.");
-				}
-			}
-
-			delete resource;
-			m_contents.erase(it);
-		}
+		void remove(const std::string& name, const std::vector<OpFlags>& flags = {});
 
 		void display(std::ostream& os, const std::vector<FormatFlags>& flags = {}) const {
 			os << "Total size: " << size() << " bytes\n";
