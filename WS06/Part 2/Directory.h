@@ -5,6 +5,7 @@
 #include "Flags.h"
 #include <vector>
 #include <algorithm>
+#include <exception>
 #include <iomanip>
 
 namespace seneca {
@@ -17,7 +18,6 @@ namespace seneca {
 		Directory(const std::string& name);
 		~Directory();
 		void update_parent_path(const std::string& path) override;
-		void constructPath(const std::string& path);
 		NodeType type() const override;
 		std::string path() const override;
 		std::string name() const override;
@@ -71,7 +71,11 @@ namespace seneca {
 			}
 		}
 
+
+
 	};
+
+	NodeType resourceType(const std::string& res);
 
 }
 

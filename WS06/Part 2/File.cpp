@@ -11,7 +11,8 @@ namespace seneca {
 	}
 
 	void File::update_parent_path(const std::string& path) {
-		m_parent_path = path;
+		if (std::count(path.begin(), path.end(), '/') == 1) m_parent_path = path.substr(1);
+		else m_parent_path = path;
 	}
 	
 	NodeType File::type() const {

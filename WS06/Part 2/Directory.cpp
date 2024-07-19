@@ -6,10 +6,6 @@ namespace seneca {
 		m_name = name;
 	}
 
-	void Directory::constructPath(const std::string& path) {
-		update_parent_path(m_parent_path + m_name + (path.back() == '/' ? "" : "/"));
-	}
-
 	void Directory::update_parent_path(const std::string& path) {
 		m_parent_path = path;
 		for (auto& resource : m_contents) resource->update_parent_path(m_parent_path + m_name);
@@ -20,11 +16,11 @@ namespace seneca {
 	}
 
 	std::string Directory::path() const {
-		return m_parent_path + '/' + m_name;
+		return m_parent_path;
 	}
 
 	std::string Directory::name() const {
-		return m_name + '/';
+		return m_name;
 	}
 
 	int Directory::count() const {
@@ -40,7 +36,7 @@ namespace seneca {
 	Directory& Directory::operator+=(Resource* src) {
 		for (auto& resources : m_contents) if (resources->name() == src->name()) throw std::runtime_error("Resource with same name found");
 		m_contents.push_back(src);
-		src->update_parent_path(m_parent_path + src->name() + (src->name().back() == '/' ? "" : "/"));
+		src->update_parent_path(m_parent_path + src->name());
 		return *this;
 	}
 
@@ -48,6 +44,7 @@ namespace seneca {
 		for (Resource* resource : m_contents) {
 			auto _name = resource->name();
 			if (_name == src) return resource;
+			if (resource->name() == src) return resource;
 		}
 
 		if (std::find(flag.begin(), flag.end(), OpFlags::RECURSIVE) != flag.end()) {
@@ -66,5 +63,22 @@ namespace seneca {
 
 	Directory::~Directory() {
 		for (Resource* resource : m_contents) delete resource;
+	}
+
+	void Directory::remove(const std::string& name, const std::vector<OpFlags>& flags = {}) {
+		if (resourceType(name) == NodeType::DIR && std::find(flags.begin(), flags.end(), OpFlags::RECURSIVE) == flags.end()) 
+			throw std::invalid_argument(name + " is a directory. Pass the recursive flag to delete directories.");
+
+		auto found = find(name, flags);
+		if (!found) throw std::string(name + " does not exist in " + m_name);
+		
+		delete found;
+
+	}
+
+	NodeType resourceType(const std::string& res) {
+		if (res[res.length() - 1] == '/' && std::count(res.begin(), res.end(), '/') == 1) return NodeType::DIR;
+		else if (res.find('/') == std::string::npos) return NodeType::FILE;
+		else return NodeType::PATH;
 	}
 }

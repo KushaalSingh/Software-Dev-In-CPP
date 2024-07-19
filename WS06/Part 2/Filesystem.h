@@ -14,7 +14,6 @@ namespace seneca {
 		Directory* m_current;
 
 		Resource* createResource(const std::string& path, Directory* base);
-		NodeType resourceType(const std::string& res);
 	public:
 		Filesystem(const std::string& file_name, const std::string& root_dirName = "");
 		Filesystem(const Filesystem&) = delete;

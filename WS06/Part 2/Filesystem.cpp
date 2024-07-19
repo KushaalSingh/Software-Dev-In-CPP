@@ -74,7 +74,7 @@ namespace seneca {
 						return createResource(path.substr(p1), dynamic_cast<Directory*>(curr));
 					}
 					else {
-						Resource* temp = new Directory(path.substr(p1, p2));
+						Resource* temp = new Directory(path.substr(p1, p2 + 1));
 						*base += temp;
 						p1 = p2 + 1;
 						return createResource(path.substr(p1), dynamic_cast<Directory*>(temp));
@@ -101,11 +101,5 @@ namespace seneca {
 		size_t first = str.find_first_not_of(' ');
 		size_t last = str.find_last_not_of(' ');
 		return str.substr(first, last - first + 1);
-	}
-
-	NodeType Filesystem::resourceType(const std::string& res) {
-		if (res[res.length() - 1] == '/' && std::count(res.begin(), res.end(), '/') == 1) return NodeType::DIR;
-		else if (res.find('/') == std::string::npos) return NodeType::FILE;
-		else return NodeType::PATH;
 	}
 }
