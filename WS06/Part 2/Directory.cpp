@@ -61,7 +61,7 @@ namespace seneca {
 		for (Resource* resource : m_contents) delete resource;
 	}
 
-	void Directory::remove(const std::string& name, const std::vector<OpFlags>& flags = {}) {
+	void Directory::remove(const std::string& name, const std::vector<OpFlags>& flags) {
 		auto it = std::find_if(m_contents.begin(), m_contents.end(), [&](Resource* resource) {
 			return resource->name() == name;
 		});
@@ -79,6 +79,26 @@ namespace seneca {
 
 		delete resource;
 		m_contents.erase(it);
+	}
+
+	void Directory::display(std::ostream& os, const std::vector<FormatFlags>& flags) const {
+		os << "Total size: " << size() << " bytes" << std::endl;
+
+		for (const Resource* resource : m_contents) {
+			os << (resource->type() == NodeType::DIR ? "D | " : "F | ")
+			   << std::left << std::setw(15) << resource->name() << " | ";
+			if (std::find(flags.begin(), flags.end(), FormatFlags::LONG) != flags.end()) {
+				if (resource->type() == NodeType::DIR) {
+					os << std::right << std::setw(2) << resource->count() << " | "
+						<< std::right << std::setw(3) << resource->size() << " bytes |";
+				}
+				else {
+					os << "   | " << std::right << std::setw(3) << resource->size() << " bytes |";
+				}
+			}
+			os << std::endl;
+		}
+
 	}
 
 	NodeType resourceType(const std::string& res) {

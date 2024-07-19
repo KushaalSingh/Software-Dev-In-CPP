@@ -2,7 +2,7 @@
 #define SENECA_FILE_H
 
 #include "Resource.h"
-
+#include <algorithm>
 
 namespace seneca {
 	

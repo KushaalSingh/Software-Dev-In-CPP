@@ -32,33 +32,10 @@ namespace seneca {
 		Directory& operator=(Directory&&) = delete;
 
 		void remove(const std::string& name, const std::vector<OpFlags>& flags = {});
-
-		void display(std::ostream& os, const std::vector<FormatFlags>& flags = {}) const {
-			os << "Total size: " << size() << " bytes\n";
-
-			for (const Resource* resource : m_contents) {
-				os << (resource->type() == NodeType::DIR ? "D | " : "F | ")
-					<< std::left << std::setw(15) << resource->name() << " | ";
-
-				if (std::find(flags.begin(), flags.end(), FormatFlags::LONG) != flags.end()) {
-					if (resource->type() == NodeType::DIR) {
-						os << std::right << std::setw(2) << resource->count() << " | "
-							<< std::right << std::setw(10) << resource->size() << " bytes |";
-					}
-					else {
-						os << std::right << std::setw(10) << resource->size() << " bytes |";
-					}
-				}
-				os << "\n";
-			}
-		}
-
-
-
+		void display(std::ostream& os, const std::vector<FormatFlags>& flags = {}) const;
 	};
 
 	NodeType resourceType(const std::string& res);
-
 }
 
 #endif
