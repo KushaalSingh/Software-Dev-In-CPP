@@ -3,12 +3,19 @@
 
 #include "Station.h"
 
-struct Item {
-	std::string m_itemName;
-	size_t m_serialNumber { 0 };
-	bool m_isFilled { false };
+namespace seneca {
 
-	Item(const std::string& src) : m_itemName(src) {};
-};
+	struct Item {
+		std::string m_itemName;
+		size_t m_serialNumber{ 0 };
+		bool m_isFilled{ false };
+
+		Item(const std::string& src);
+	};
+
+	class CustomerOrder {
+
+	}
+}
 
 #endif
