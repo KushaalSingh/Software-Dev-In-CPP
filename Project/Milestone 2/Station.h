@@ -35,7 +35,6 @@ namespace seneca {
 		void updateQuantity();
 		void display(std::ostream& os, bool full) const;
 	};
-
 }
 
 #endif
