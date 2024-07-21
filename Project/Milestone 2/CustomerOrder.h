@@ -33,16 +33,16 @@ namespace seneca {
 	public:
 		CustomerOrder();
 		CustomerOrder(const std::string line);
+		CustomerOrder(const CustomerOrder& src);
+		CustomerOrder& operator = (const CustomerOrder& src) = delete;
 		CustomerOrder(CustomerOrder&& src) noexcept;
-		~CustomerOrder();
 		CustomerOrder& operator = (CustomerOrder&& src) noexcept;
+		~CustomerOrder();
 		bool isOrderFilled() const;
 		bool isItemFilled(const std::string& itemName) const;
 		void fillItem(Station& station, std::ostream& os);
 		void display(std::ostream& os) const;
-		CustomerOrder(const CustomerOrder& src);
-		CustomerOrder& operator = (const CustomerOrder& src) = delete;
+	
 	};
 }
-
 #endif
