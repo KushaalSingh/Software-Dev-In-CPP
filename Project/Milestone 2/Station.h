@@ -1,6 +1,3 @@
-#ifndef SENECA_STATION_H
-#define SENECA_STATION_H
-
 // Name: Kushaal Singh
 // Seneca Student ID: 115320228
 // Seneca email: kna28@myseneca.ca
@@ -8,6 +5,9 @@
 //
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
+
+#ifndef SENECA_STATION_H
+#define SENECA_STATION_H
 
 #include "Utilities.h"
 #include <iomanip>

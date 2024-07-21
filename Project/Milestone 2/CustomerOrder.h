@@ -1,3 +1,11 @@
+// Name: Kushaal Singh
+// Seneca Student ID: 115320228
+// Seneca email: kna28@myseneca.ca
+// Date of completion: 20/7/2024
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
+
 #ifndef SENECA_CUSTOMERORDER_H
 #define SENECA_CUSTOMERORDER_H
 
