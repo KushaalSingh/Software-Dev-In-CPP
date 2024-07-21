@@ -25,7 +25,7 @@ namespace seneca {
 		m_cntItem = i;
 
 		more = true;
-		for (int i = 0; i < m_cntItem; i++) m_lstItem[i] = new Item(U.extractToken(line, pos, more));
+		for (size_t i = 0; i < m_cntItem; i++) m_lstItem[i] = new Item(U.extractToken(line, pos, more));
 
 		if (m_widthField < U.getFieldWidth()) m_widthField = U.getFieldWidth();
 	}
