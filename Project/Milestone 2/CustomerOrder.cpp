@@ -91,7 +91,7 @@ namespace seneca {
 		
 		for (size_t i = 0; i < m_cntItem; i++) {
 			os << std::setw(6) << " [" << m_lstItem[i]->m_serialNumber << "] " << std::setw(m_widthField) << m_lstItem[i]->m_itemName << " - ";
-			os << (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED");
+			os << (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED") << std::endl;
 		}
 	}
 }
