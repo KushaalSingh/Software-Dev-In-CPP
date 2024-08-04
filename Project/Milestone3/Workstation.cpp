@@ -6,7 +6,7 @@ namespace seneca {
 	std::deque<CustomerOrder> g_completed;
 	std::deque<CustomerOrder> g_incomplete;
 
-	Workstation::Workstation(const std::string& record) : Station(record), m_pNextStation(nullptr) {}
+	Workstation::Workstation(const std::string& record) : Station(record) {}
 
 	void Workstation::fill(std::ostream& os) {
 		if (!m_orders.empty()) m_orders.front().fillItem(*this, os);
@@ -17,7 +17,7 @@ namespace seneca {
 
 		if (m_orders.front().isItemFilled(getItemName()) || !getQuantity()) {
 
-			if (m_pNextStation) m_pNextStation->m_orders.push_back(std::move(m_orders.front()));
+			if (m_pNextStation) *m_pNextStation += std::move(m_orders.front());
 
 			else {
 				if (m_orders.front().isOrderFilled()) g_completed.push_back(std::move(m_orders.front()));
@@ -28,5 +28,25 @@ namespace seneca {
 		}
 		
 		return false;
+	}
+
+	void Workstation::setNextStation(Workstation* station) {
+		m_pNextStation = station;
+	}
+
+	Workstation* Workstation::getNextStation() const {
+		return m_pNextStation;
+	}
+
+	void Workstation::display(std::ostream& os) const {
+		os << getItemName() << " --> ";
+		if (m_pNextStation) os << m_pNextStation->getItemName();
+		else os << "End of Line";
+		os << std::endl;
+	}
+
+	Workstation& Workstation::operator += (CustomerOrder&& newOrder) {
+		m_orders.push_back(std::move(newOrder));
+		return *this;
 	}
 }

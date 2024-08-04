@@ -1,7 +1,6 @@
 #ifndef SENECA_WORKSTATION_H
 #define SENECA_WORKSTATION_H
-#include "Station.h"
-#include "Utilities.h"
+
 #include "CustomerOrder.h"
 #include <deque>
 
@@ -14,12 +13,16 @@ namespace seneca {
 	class Workstation : public Station {
 	private:
 		std::deque<CustomerOrder> m_orders;
-		Workstation* m_pNextStation;
+		Workstation* m_pNextStation { nullptr };
 
 	public:
 		Workstation(const std::string& record);
 		void fill(std::ostream& os);
 		bool attemptToMoveOrder();
+		void setNextStation(Workstation* station);
+		Workstation* getNextStation() const;
+		void display(std::ostream& os) const;
+		Workstation& operator += (CustomerOrder&& newOrder);
 
 		Workstation(const Workstation& src) = delete;
 		Workstation& operator = (const Workstation& src) = delete;
