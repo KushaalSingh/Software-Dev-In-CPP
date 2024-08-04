@@ -3,6 +3,7 @@
 
 #include "Workstation.h"
 #include <vector>
+#include <fstream>
 
 namespace seneca {
 	
@@ -14,6 +15,9 @@ namespace seneca {
 
 	public:
 		LineManager(const std::string& file, const std::vector<Workstation*>& stations);
+		void reorderStations();
+		bool run(std::ostream& os);
+		void display(std::ostream& os) const;
 	};
 }
 

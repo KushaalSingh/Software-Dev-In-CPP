@@ -73,7 +73,7 @@ namespace seneca {
 	}
 
 	bool CustomerOrder::isOrderFilled() const {
-		for (size_t i = 0; i < m_cntItem; i++) if (m_lstItem[i]->m_isFilled == false) return false;
+		for (size_t i = 0; i < m_cntItem; i++) if (!m_lstItem[i]->m_isFilled) return false;
 		return true;
 	}
 
@@ -93,7 +93,7 @@ namespace seneca {
 				fill = false;
 			}
 			else if (!station.getQuantity()) {
-				os << "Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+				os << "    Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
 				fill = false;
 			}
 		}
