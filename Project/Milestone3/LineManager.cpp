@@ -3,38 +3,42 @@
 namespace seneca {
 
 	LineManager::LineManager(const std::string& file, const std::vector<Workstation*>& stations) : m_cntCustomerOrder(0), m_firstStation(nullptr) {
-		std::ifstream fs(file);
-		std::string line = "";
+        
+        try {
+            std::ifstream fs(file);
+            std::string line = "";
 
-        while (std::getline(fs, line)) {
-            size_t pos = line.find('|');
-            std::string currStation = line.substr(0, pos);
-            std::string nextStation = (pos == std::string::npos) ? "" : line.substr(pos + 1);
+            while (std::getline(fs, line)) {
+                size_t pos = line.find('|');
+                std::string currStation = line.substr(0, pos);
+                std::string nextStation = (pos == std::string::npos) ? "" : line.substr(pos + 1);
 
-            auto curr = std::find_if(stations.begin(), stations.end(), [&](Workstation* ws) { return ws->getItemName() == currStation; });
+                auto curr = std::find_if(stations.begin(), stations.end(), [&](Workstation* ws) { return ws->getItemName() == currStation; });
 
-            if (curr != stations.end()) {
-                if (std::find(m_activeLine.begin(), m_activeLine.end(), *curr) == m_activeLine.end()) m_activeLine.push_back(*curr);
+                if (curr != stations.end()) {
+                    if (std::find(m_activeLine.begin(), m_activeLine.end(), *curr) == m_activeLine.end()) m_activeLine.push_back(*curr);
 
-                if (!nextStation.empty()) {
-                    auto next = std::find_if(stations.begin(), stations.end(), [&](Workstation* ws) { return ws->getItemName() == nextStation; });
-                    if (next != stations.end()) (*curr)->setNextStation(*next);
+                    if (!nextStation.empty()) {
+                        auto next = std::find_if(stations.begin(), stations.end(), [&](Workstation* ws) { return ws->getItemName() == nextStation; });
+                        if (next != stations.end()) (*curr)->setNextStation(*next);
+                    }
+
                 }
-                
-            }
 
-            m_firstStation = *std::find_if(stations.begin(), stations.end(), [&](Workstation* ws) {
-                return std::none_of(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* active) {
+                m_firstStation = *std::find_if(stations.begin(), stations.end(), [&](Workstation* ws) {
+                    return std::none_of(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* active) {
                         return active->getNextStation() == ws;
-                });
-            });
+                        });
+                    });
 
-            m_cntCustomerOrder = g_pending.size();
+                m_cntCustomerOrder = g_pending.size();
+            }
         }
 
-        /*for (auto& x : m_activeLine) {
-            std::cout << x->getItemName() << std::endl;
-        }*/
+        catch (const std::exception& e) {
+            std::cerr << "Error initializing LineManager: " << e.what() << std::endl;
+            throw;
+        }
 	}
 
     void LineManager::reorderStations() {
