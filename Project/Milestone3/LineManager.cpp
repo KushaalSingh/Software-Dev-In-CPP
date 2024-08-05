@@ -1,3 +1,11 @@
+// Name: Kushaal Singh
+// Seneca Student ID: 115320228
+// Seneca email: kna28@myseneca.ca
+// Date of completion: 5/8/2024
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
+
 #include "LineManager.h"
 
 namespace seneca {
@@ -28,8 +36,8 @@ namespace seneca {
                 m_firstStation = *std::find_if(stations.begin(), stations.end(), [&](Workstation* ws) {
                     return std::none_of(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* active) {
                         return active->getNextStation() == ws;
-                        });
                     });
+                });
 
                 m_cntCustomerOrder = g_pending.size();
             }
@@ -53,12 +61,7 @@ namespace seneca {
 
     bool LineManager::run(std::ostream& os) {
         static size_t currItr = 0;
-        bool end = false;
         os << "Line Manager Iteration: " << ++currItr << std::endl;
-
-        /*if (currItr == 7) {
-            os << "#################################################################" << std::endl;
-        }*/
 
         if (!g_pending.empty()) {
             *m_firstStation += std::move(g_pending.front());
@@ -68,7 +71,9 @@ namespace seneca {
         for (auto& station : m_activeLine) station->fill(os);
         for (auto& station : m_activeLine) station->attemptToMoveOrder();
 
-        return g_completed.size() + g_incomplete.size() == m_cntCustomerOrder;
+        auto completed = g_completed.size();
+        auto incomplete = g_incomplete.size();
+        return completed + incomplete == m_cntCustomerOrder;
     }
 
     void LineManager::display(std::ostream& os) const {

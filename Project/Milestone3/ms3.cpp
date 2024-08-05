@@ -22,23 +22,23 @@ static void loadFromFile(const char*, std::vector<T*>&);
 
 int main(int argc, char** argv)
 {
-	/*std::cout << "Command Line: " << argv[0];
+	std::cout << "Command Line: " << argv[0];
 	for (int i = 1; i < argc; ++i)
 		std::cout << " " << argv[i];
 	std::cout << std::endl << std::endl;
 	if (argc != 5) {
 		std::cerr << "ERROR: Incorrect number of arguments\n";
 		std::exit(1);
-	}*/
+	}
 
 	std::vector<seneca::Workstation*> theStations;
 	std::vector<seneca::CustomerOrder> theOrders;
 
 	try {
 		seneca::Utilities::setDelimiter(',');
-		::loadFromFile("Stations1.txt", theStations);
+		::loadFromFile(argv[1], theStations);
 		seneca::Utilities::setDelimiter('|');
-		::loadFromFile("Stations2.txt", theStations);
+		::loadFromFile(argv[2], theStations);
 
 		std::cout << "========================================" << std::endl;
 		std::cout << "=         Stations (summary)           =" << std::endl;
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 		std::cout << std::endl << std::endl;
 
 
-		::loadFromFile<seneca::CustomerOrder>("CustomerOrders.txt", theOrders);
+		::loadFromFile<seneca::CustomerOrder>(argv[3], theOrders);
 
 		std::cout << "========================================" << std::endl;
 		std::cout << "=                Orders                =" << std::endl;
@@ -81,7 +81,7 @@ int main(int argc, char** argv)
 		std::cout << "========================================" << std::endl;
 		std::cout << "=       Display Stations (loaded)      =" << std::endl;
 		std::cout << "========================================" << std::endl;
-		seneca::LineManager lm("AssemblyLine.txt", theStations);
+		seneca::LineManager lm(argv[4], theStations);
 		lm.display(std::cout);
 		std::cout << std::endl << std::endl;
 
