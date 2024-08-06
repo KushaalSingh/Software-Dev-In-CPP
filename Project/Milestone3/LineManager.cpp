@@ -63,9 +63,6 @@ namespace seneca {
         static size_t currItr = 0;
         os << "Line Manager Iteration: " << ++currItr << std::endl;
 
-        if (currItr == 12) {
-            std::cout << "********************************************************" << std::endl;
-        }
         if (!g_pending.empty()) {
             *m_firstStation += std::move(g_pending.front());
             g_pending.pop_front();
