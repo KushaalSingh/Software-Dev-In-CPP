@@ -94,7 +94,7 @@ namespace seneca {
 			}
 			else if (station.getItemName() == m_lstItem[i]->m_itemName && !station.getQuantity()) {
 				os << "    Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
-				fill = false;
+				
 			}
 		}
 	}
