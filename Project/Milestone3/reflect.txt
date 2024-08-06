@@ -1,3 +1,15 @@
 OOP345-NFF Project Reflect
 ==========================
 
+This project was a comprehensive and challenging experience for me. Working through the 
+different modules – Utilities, Station, CustomerOrder, Workstation, and LineManager – 
+pushed my understanding of object-oriented programming, file parsing, and the intricacies 
+of managing dynamic memory. Each step presented new obstacles, from handling exceptions 
+and ensuring robust error checking to correctly implementing class relationships and 
+inheritance. The biggest hurdle was grasping how the different components interacted with 
+each other and maintaining a clear, organized codebase. This project helped me improve my 
+debugging skills and deepen my understanding of C++ features like STL containers, exception 
+handling. It was gratifying to see the assembly line simulation come together, knowing I 
+built it from the ground up. Overall, this project has boosted my confidence in tackling 
+complex problems and enhanced my ability to think critically and logically about programming 
+challenges.
