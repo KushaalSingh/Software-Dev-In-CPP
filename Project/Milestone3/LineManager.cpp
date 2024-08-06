@@ -71,9 +71,7 @@ namespace seneca {
         for (auto& station : m_activeLine) station->fill(os);
         for (auto& station : m_activeLine) station->attemptToMoveOrder();
 
-        auto completed = g_completed.size();
-        auto incomplete = g_incomplete.size();
-        return completed + incomplete == m_cntCustomerOrder;
+        return g_completed.size() + g_incomplete.size() == m_cntCustomerOrder;
     }
 
     void LineManager::display(std::ostream& os) const {
