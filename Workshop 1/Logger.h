@@ -9,17 +9,19 @@ namespace seneca {
 
 	class Logger {
 		Event* m_events;
-		uint m_numEvents;
+		uint m_count;
 
 	public:
 		Logger(Logger& src) = delete;
-		Logger(Logger&& src) = delete;
+		Logger& operator = (Logger& src) = delete;
 		
 		Logger();
 		~Logger();
-		Logger& operator = (Logger& src);
-		Logger& operator = (Logger&& src);
+		Logger(Logger&& src) noexcept;
+		Logger& operator = (Logger&& src) noexcept;
 		void addEvent(const Event& event);
+
+		uint size() const;
 
 		friend std::ostream& operator << (std::ostream& out, const Logger& src);
 	};
