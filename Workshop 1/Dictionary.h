@@ -34,6 +34,7 @@ namespace seneca {
 	};
 
 	PartOfSpeech mapPOS(std::string pos);
+	std::string returnPOS(PartOfSpeech pos);
 }
 
 #endif

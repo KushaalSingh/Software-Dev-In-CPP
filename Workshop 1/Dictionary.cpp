@@ -25,17 +25,27 @@ namespace seneca {
 
 			std::getline(sstr, word, ',');
 			std::getline(sstr, pos, ',');
-			std::getline(sstr, def, ',');
+			sstr.ignore();
+			std::getline(sstr, def, '\"');
 
 			m_words[i].m_word = word;
 			m_words[i].m_pos = mapPOS(pos);
-			m_words[i].m_definition = def;
+			m_words[i].m_definition = ("\"" + def + "\"");
 			++i;
 		}
 	}
 
 	void Dictionary::searchWord(const char* word) {
+		bool cont = true, found = false;
 
+		for (int i = 0; i < m_wordCount && cont; i++) {
+			if (word == m_words[i].m_word) {
+				found = true;
+				cont = g_settings.m_show_all ? true : false;
+				std::cout << word << " - " << "(" << returnPOS(m_words[i].m_pos) << ") " <<
+			}
+		}
+		if (!found) std::cout << "Word '" << word << "' was not found in the dictionary." << std::endl;
 	}
 
 	PartOfSpeech mapPOS(std::string pos) {
@@ -48,5 +58,30 @@ namespace seneca {
 		else if (pos == "conj.") return PartOfSpeech::Conjunction;
 		else if (pos == "interj.") return PartOfSpeech::Interjection;
 		else return PartOfSpeech::Unknown;
+	}
+
+	std::string returnPOS(PartOfSpeech pos) {
+		switch (pos) {
+		case seneca::PartOfSpeech::Unknown:
+			return "Unknown";
+		case seneca::PartOfSpeech::Noun:
+			return "Noun";
+		case seneca::PartOfSpeech::Pronoun:
+			return "Pronoun";
+		case seneca::PartOfSpeech::Adjective:
+			return "Adjective";
+		case seneca::PartOfSpeech::Adverb:
+			return "Adverb";
+		case seneca::PartOfSpeech::Verb:
+			return "Verb";
+		case seneca::PartOfSpeech::Preposition:
+			return "Preposition";
+		case seneca::PartOfSpeech::Conjunction:
+			return "Conjuncation";
+		case seneca::PartOfSpeech::Interjection:
+			return "Interjection";
+		default:
+			return "Unknown";
+		}
 	}
 }
