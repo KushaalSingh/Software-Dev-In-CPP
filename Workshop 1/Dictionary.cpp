@@ -12,6 +12,7 @@ namespace seneca {
 		size_t count = 0;
 
 		while (std::getline(file, line)) count++;
+		m_wordCount = count;
 		m_words = new Word[m_wordCount];
 
 		file.clear();
@@ -29,7 +30,12 @@ namespace seneca {
 			m_words[i].m_word = word;
 			m_words[i].m_pos = mapPOS(pos);
 			m_words[i].m_definition = def;
+			++i;
 		}
+	}
+
+	void Dictionary::searchWord(const char* word) {
+
 	}
 
 	PartOfSpeech mapPOS(std::string pos) {
