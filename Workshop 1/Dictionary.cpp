@@ -38,11 +38,16 @@ namespace seneca {
 	void Dictionary::searchWord(const char* word) {
 		bool cont = true, found = false;
 
-		for (int i = 0; i < m_wordCount && cont; i++) {
+		for (int i = 0; i < m_wordCount; i++) {
 			if (word == m_words[i].m_word) {
+				if (!found) std::cout << m_words[i].m_word;
+
+				std::cout << std::right << std::setw(m_words[i].m_word.length()) << " - "
+					<< (!g_settings.m_verbose || m_words[i].m_pos == PartOfSpeech::Unknown ? "" : ("(" + returnPOS(m_words[i].m_pos) + ") "))
+					<< m_words[i].m_definition << std::endl;
+
+				if (!g_settings.m_show_all) return;
 				found = true;
-				cont = g_settings.m_show_all ? true : false;
-				std::cout << word << " - " << "(" << returnPOS(m_words[i].m_pos) << ") " <<
 			}
 		}
 		if (!found) std::cout << "Word '" << word << "' was not found in the dictionary." << std::endl;
