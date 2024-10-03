@@ -1,5 +1,5 @@
-#ifndef SENECA_TIME_MONITOR_H
-#define SENECA_TIME_MONITOR_H
+#ifndef SENECA_TIMEMONITOR_H
+#define SENECA_TIMEMONITOR_H
 
 #include "Event.h"
 
