@@ -22,6 +22,7 @@ namespace seneca {
 			src.m_events = nullptr;
 			src.m_count = 0;
 		}
+		return *this;
 	}
 
 	void Logger::addEvent(const Event& event) {
