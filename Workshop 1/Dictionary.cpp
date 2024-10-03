@@ -36,9 +36,9 @@ namespace seneca {
 	}
 
 	void Dictionary::searchWord(const char* word) {
-		bool cont = true, found = false;
+		bool found = false;
 
-		for (int i = 0; i < m_wordCount; i++) {
+		for (size_t i = 0; i < m_wordCount; i++) {
 			if (word == m_words[i].m_word) {
 				if (!found) std::cout << m_words[i].m_word;
 

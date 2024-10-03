@@ -15,5 +15,7 @@ namespace seneca {
 		else if (g_settings.m_time_units == "nanoseconds") out << std::setw(11);
 		
 		out << std::right << src.m_duration.count() << "g_settings.m_time_units" << std::endl;
+
+		return out;
 	}
 }
