@@ -1,5 +1,5 @@
-#ifndef SENECA_EVENT_MODULE
-#define SENECA_EVENT_MODULE
+#ifndef SENECA_EVENT_H
+#define SENECA_EVENT_H
 
 #include <iomanip>
 #include <chrono>
