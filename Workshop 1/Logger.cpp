@@ -27,7 +27,7 @@ namespace seneca {
 
 	void Logger::addEvent(const Event& event) {
 		Event* temp = new Event[m_count + 1];
-		for (int i = 0; i < m_count; i++) temp[i] = m_events[i];
+		for (uint i = 0; i < m_count; i++) temp[i] = m_events[i];
 		temp[m_count] = event;
 		delete[] m_events;
 		m_events = temp;
@@ -35,7 +35,7 @@ namespace seneca {
 	}
 
 	std::ostream& operator << (std::ostream& out, const Logger& src) {
-		for (int i = 0; i < src.m_count; i++) out << src.m_events[i];
+		for (uint i = 0; i < src.m_count; i++) out << src.m_events[i];
 		return out;
 	}
 
