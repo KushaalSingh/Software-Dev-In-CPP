@@ -25,12 +25,11 @@ namespace seneca {
 
 			std::getline(sstr, word, ',');
 			std::getline(sstr, pos, ',');
-			sstr.ignore();
-			std::getline(sstr, def, '\"');
+			std::getline(sstr, def);
 
 			m_words[i].m_word = word;
 			m_words[i].m_pos = mapPOS(pos);
-			m_words[i].m_definition = ("\"" + def + "\"");
+			m_words[i].m_definition = def;
 			++i;
 		}
 	}
@@ -42,7 +41,7 @@ namespace seneca {
 			if (word == m_words[i].m_word) {
 				if (!found) std::cout << m_words[i].m_word;
 
-				std::cout << std::right << std::setw(m_words[i].m_word.length()) << " - "
+				std::cout << (found ? std::setw(m_words[i].m_word.length() + 3) : std::setw(0)) << " - "
 					<< (!g_settings.m_verbose || m_words[i].m_pos == PartOfSpeech::Unknown ? "" : ("(" + returnPOS(m_words[i].m_pos) + ") "))
 					<< m_words[i].m_definition << std::endl;
 
@@ -54,10 +53,10 @@ namespace seneca {
 	}
 
 	PartOfSpeech mapPOS(std::string pos) {
-		if (pos == "n." || "n. pl.") return PartOfSpeech::Noun;
+		if (pos == "n." || pos == "n. pl.") return PartOfSpeech::Noun;
 		else if (pos == "adv.") return PartOfSpeech::Adverb;
 		else if (pos == "a.") return PartOfSpeech::Adjective;
-		else if (pos == "v." || "v. i." || "v. t." || "v. t. & i.") return PartOfSpeech::Verb;
+		else if (pos == "v." || pos == "v. i." || pos == "v. t." || pos == "v. t. & i.") return PartOfSpeech::Verb;
 		else if (pos == "prep.") return PartOfSpeech::Preposition;
 		else if (pos == "pron.") return PartOfSpeech::Pronoun;
 		else if (pos == "conj.") return PartOfSpeech::Conjunction;
@@ -68,25 +67,25 @@ namespace seneca {
 	std::string returnPOS(PartOfSpeech pos) {
 		switch (pos) {
 		case seneca::PartOfSpeech::Unknown:
-			return "Unknown";
+			return "unknown";
 		case seneca::PartOfSpeech::Noun:
-			return "Noun";
+			return "noun";
 		case seneca::PartOfSpeech::Pronoun:
-			return "Pronoun";
+			return "pronoun";
 		case seneca::PartOfSpeech::Adjective:
-			return "Adjective";
+			return "adjective";
 		case seneca::PartOfSpeech::Adverb:
-			return "Adverb";
+			return "adverb";
 		case seneca::PartOfSpeech::Verb:
-			return "Verb";
+			return "verb";
 		case seneca::PartOfSpeech::Preposition:
-			return "Preposition";
+			return "preposition";
 		case seneca::PartOfSpeech::Conjunction:
-			return "Conjuncation";
+			return "conjuncation";
 		case seneca::PartOfSpeech::Interjection:
-			return "Interjection";
+			return "interjection";
 		default:
-			return "Unknown";
+			return "unknown";
 		}
 	}
 }
