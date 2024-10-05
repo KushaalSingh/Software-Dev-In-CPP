@@ -1,7 +1,7 @@
 #ifndef SENECA_TIMEMONITOR_H
 #define SENECA_TIMEMONITOR_H
 
-#include "Event.h"
+#include "event.h"
 
 namespace seneca {
 

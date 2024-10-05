@@ -1,7 +1,7 @@
 #ifndef SENECA_LOGGER_H
 #define SENECA_LOGGER_H
 
-#include "Event.h"
+#include "event.h"
 
 namespace seneca {
 

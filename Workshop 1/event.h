@@ -3,7 +3,7 @@
 
 #include <iomanip>
 #include <chrono>
-#include "Settings.h"
+#include "settings.h"
 
 namespace seneca {
 	

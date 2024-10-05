@@ -1,7 +1,7 @@
 #ifndef SENECA_DICTIONARY_H
 #define SENECA_DICTIONARY_H
 
-#include "Event.h"
+#include "event.h"
 
 namespace seneca {
 	
