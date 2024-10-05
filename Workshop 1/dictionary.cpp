@@ -5,6 +5,11 @@ namespace seneca {
 	
 	Dictionary::Dictionary() : m_words(nullptr), m_wordCount(0) {}
 
+	Dictionary::~Dictionary() {
+		delete[] m_words;
+		m_words = nullptr;
+	}
+
 	Dictionary::Dictionary(const char* filename) : m_words(nullptr), m_wordCount(0) {
 		std::ifstream file(filename);
 		if (!file.is_open()) return;

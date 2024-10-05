@@ -29,6 +29,7 @@ namespace seneca {
 
 	public:
 		Dictionary();
+		~Dictionary();
 		Dictionary(const Dictionary& src);
 		Dictionary(Dictionary&& src) noexcept;
 		Dictionary& operator = (const Dictionary& src);
