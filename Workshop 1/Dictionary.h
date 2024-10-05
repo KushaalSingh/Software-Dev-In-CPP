@@ -29,8 +29,13 @@ namespace seneca {
 
 	public:
 		Dictionary();
+		Dictionary(const Dictionary& src);
+		Dictionary(Dictionary&& src) noexcept;
+		Dictionary& operator = (const Dictionary& src);
+		Dictionary& operator = (Dictionary&& src) noexcept;
 		Dictionary(const char* filename);
 		void searchWord(const char* word);
+		size_t count() const;
 	};
 
 	PartOfSpeech mapPOS(std::string pos);

@@ -34,6 +34,36 @@ namespace seneca {
 		}
 	}
 
+	Dictionary::Dictionary(const Dictionary& src) : m_words(nullptr), m_wordCount(0) {
+		*this = src;
+	}
+
+	Dictionary::Dictionary(Dictionary&& src) noexcept : m_words(src.m_words), m_wordCount(src.m_wordCount) {
+		src.m_words = nullptr;
+		src.m_wordCount = 0;
+	}
+
+	Dictionary& Dictionary::operator = (const Dictionary& src) {
+		if (this != &src) {
+			delete[] m_words;
+			m_words = new Word[src.count()];
+			m_wordCount = src.count();
+			for (size_t i = 0; i < m_wordCount; i++) m_words[i] = src.m_words[i];
+		}
+		return *this;
+	}
+
+	Dictionary& Dictionary::operator = (Dictionary&& src) noexcept {
+		if (this != &src) {
+			delete[] m_words;
+			m_words = src.m_words;
+			m_wordCount = src.m_wordCount;
+			src.m_words = nullptr;
+			src.m_wordCount = 0;
+		}
+		return *this;
+	}
+
 	void Dictionary::searchWord(const char* word) {
 		bool found = false;
 
@@ -50,6 +80,10 @@ namespace seneca {
 			}
 		}
 		if (!found) std::cout << "Word '" << word << "' was not found in the dictionary." << std::endl;
+	}
+
+	size_t Dictionary::count() const {
+		return m_wordCount;
 	}
 
 	PartOfSpeech mapPOS(std::string pos) {
