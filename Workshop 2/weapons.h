@@ -1,8 +1,7 @@
 #ifndef SENECA_WEAPONS_H
 #define SENECA_WEAPONS_H
 
-namespace seneca
-{
+namespace seneca {
 	// for simplicity, the logic associated with the weapons is kept trivial.
 
 	struct BareHands {
