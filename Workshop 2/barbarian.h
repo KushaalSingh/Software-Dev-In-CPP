@@ -7,7 +7,6 @@ namespace seneca {
 
 	template <typename T, typename Ability_t, typename Weapon_t>
 	class Barbarian : public CharacterTpl<T> {
-		//using Character::getName;
 		int m_baseDefense;
 		int m_baseAttack;
 		Ability_t m_ability;
@@ -45,7 +44,7 @@ namespace seneca {
 
 	template <typename T, typename Ability_t, typename Weapon_t> 
 	void Barbarian<T, Ability_t, Weapon_t>::attack(Character* enemy) {
-		std::cout << getName() << " is attacking " << enemy->getName() << "." << std::endl;
+		std::cout << this->getName() << " is attacking " << enemy->getName() << "." << std::endl;
 
 		m_ability.useAbility(*this);
 		auto damage = getAttackAmnt();
