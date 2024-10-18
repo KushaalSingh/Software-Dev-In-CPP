@@ -68,9 +68,6 @@ namespace seneca {
 	}
 
 	void Team::removeMember(const std::string& c) {
-		size_t index = 0;
-		for (size_t i = 0; i < m_size; i++) if (m_characters[i]->getName() == c) index = i;
-
 		size_t index = m_size;
 		for (size_t i = 0; i < m_size; ++i) {
 			if (m_characters[i]->getName() == c) {
