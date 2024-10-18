@@ -56,7 +56,7 @@ namespace seneca {
 
 	template <typename T, typename Ability_t, typename Weapon_t>
 	void Barbarian<T, Ability_t, Weapon_t>::takeDamage(int dmg) {
-		std::cout << getName() << " is attacked for " << dmg << " damage." << std::endl;
+		std::cout << this->getName() << " is attacked for " << dmg << " damage." << std::endl;
 		std::cout << "    Barbarian has a defense of " << m_baseDefense << ". Reducing damage received." << std::endl;
 
 		dmg -= m_baseDefense;
