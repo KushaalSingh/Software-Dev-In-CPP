@@ -72,6 +72,31 @@ namespace seneca {
 	}
 
 	void Guild::removeMember(const std::string& c) {
+		size_t index = m_size;
+		for (size_t i = 0; i < m_size; ++i) {
+			if (m_characters[i]->getName() == c) {
+				index = i;
+				break;
+			}
+		}
 
+		m_characters[index]->setHealthMax(m_characters[index]->getHealthMax() - 300);
+		Character** temp = new Character * [m_size - 1];
+
+		for (size_t i = 0, k = 0; i < m_size; i++) if (i != index) temp[k++] = m_characters[i];
+
+		delete[] m_characters;
+		m_characters = temp;
+		--m_size;
+	}
+
+	Character* Guild::operator[](size_t idx) const {
+		if (idx < m_size) return m_characters[idx];
+		return nullptr;
+	}
+
+	void Guild::showMembers() const {
+		std::cout << "[Guild] " << m_name << std::endl;
+		for (size_t i = 0; i < m_size; i++) std::cout << std::right << std::setw(5) << i << ": " << *m_characters[i] << std::endl;
 	}
 }

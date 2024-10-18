@@ -20,6 +20,8 @@ namespace seneca {
 		~Guild();
 		void addMember(Character* c);
 		void removeMember(const std::string& c);
+		Character* operator[](size_t idx) const;
+		void showMembers() const;
 	};
 
 

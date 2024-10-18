@@ -7,7 +7,7 @@
 namespace seneca {
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
-	class Rouge : public CharacterTpl <T> {
+	class Rogue : public CharacterTpl <T> {
 		int m_baseDefense;
 		int m_baseAttack;
 		FirstAbility_t m_firstAbility;
@@ -15,7 +15,7 @@ namespace seneca {
 		Dagger m_weapon;
 
 	public:
-		Rouge(const char* name, int healthMax, int baseAttack, int baseDefense);
+		Rogue(const char* name, int healthMax, int baseAttack, int baseDefense);
 		int getAttackAmnt() const override;
 		int getDefenseAmnt() const override;
 		Character* clone() const override;
@@ -24,25 +24,25 @@ namespace seneca {
 	};
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
-	Rouge<T, FirstAbility_t, SecondAbility_t>::Rouge(const char* name, int healthMax, int baseAttack, int baseDefense) : CharacterTpl<T>(name, healthMax), m_baseAttack(baseAttack), m_baseDefense(baseDefense) {}
+	Rogue<T, FirstAbility_t, SecondAbility_t>::Rogue(const char* name, int healthMax, int baseAttack, int baseDefense) : CharacterTpl<T>(name, healthMax), m_baseAttack(baseAttack), m_baseDefense(baseDefense) {}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
-	int Rouge<T, FirstAbility_t, SecondAbility_t>::getAttackAmnt() const {
+	int Rogue<T, FirstAbility_t, SecondAbility_t>::getAttackAmnt() const {
 		return static_cast<int>(m_baseAttack + 2 * static_cast<int>(m_damage));
 	}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
-	int Rouge<T, FirstAbility_t, SecondAbility_t>::getDefenseAmnt() const {
+	int Rogue<T, FirstAbility_t, SecondAbility_t>::getDefenseAmnt() const {
 		return m_baseDefense;
 	}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
-	Character* Rouge<T, FirstAbility_t, SecondAbility_t>::clone() const {
-		return new Rouge(*this);
+	Character* Rogue<T, FirstAbility_t, SecondAbility_t>::clone() const {
+		return new Rogue(*this);
 	}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
-	void Rouge<T, FirstAbility_t, SecondAbility_t>::attack(Character* enemy) {
+	void Rogue<T, FirstAbility_t, SecondAbility_t>::attack(Character* enemy) {
 		std::cout << this->getName() << " is attacking " << enemy->getName() << "." << std::endl;
 
 		m_firstAbility.useAbility(this);
@@ -59,7 +59,7 @@ namespace seneca {
 	}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
-	void Rouge<T, FirstAbility_t, SecondAbility_t>::takeDamage(int dmg) {
+	void Rogue<T, FirstAbility_t, SecondAbility_t>::takeDamage(int dmg) {
 		std::cout << this->getName() << " is attacked for " << dmg << " damage." << std::endl;
 		std::cout << "    Rouge has a defense of " << m_baseDefense << ". Reducing damage received." << std::endl;
 

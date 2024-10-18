@@ -17,7 +17,6 @@ namespace seneca {
 		int getHealthMax() const override;
 		void setHealth(int health) override;
 		void setHealthMax(int health) override;
-		const std::string& getName() const override;
 	};
 
 	template <typename T>
@@ -49,11 +48,6 @@ namespace seneca {
 	void CharacterTpl<T>::setHealthMax(int health) {
 		m_healthMax = health;
 		m_health = health;
-	}
-
-	template <typename T>
-	const std::string& CharacterTpl<T>::getName() const {
-		return Character::getName();
 	}
 }
 
