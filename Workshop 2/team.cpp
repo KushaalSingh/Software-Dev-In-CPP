@@ -78,7 +78,7 @@ namespace seneca {
 
 		delete m_characters[index];
 
-		Character** temp = new Character * [m_size - 1];
+		Character** temp = new Character * [m_size];
 		for (size_t i = 0, k = 0; i < m_size; ++i) {
 			if (i != index) {
 				temp[k++] = m_characters[i];

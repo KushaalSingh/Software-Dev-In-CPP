@@ -80,6 +80,8 @@ namespace seneca {
 			}
 		}
 
+		if (index == m_size) return;
+
 		m_characters[index]->setHealthMax(m_characters[index]->getHealthMax() - 300);
 		Character** temp = new Character * [m_size - 1];
 

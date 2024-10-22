@@ -28,7 +28,7 @@ namespace seneca {
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
 	int Rogue<T, FirstAbility_t, SecondAbility_t>::getAttackAmnt() const {
-		return static_cast<int>(m_baseAttack + 2 * static_cast<int>(m_damage));
+		return static_cast<int>(m_baseAttack + 2 * static_cast<int>(m_weapon));
 	}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
@@ -55,7 +55,7 @@ namespace seneca {
 
 		std::cout << "Rouge deals " << damage << " melee damage!" << std::endl;
 
-		enemy->takeDamage(dmg);
+		enemy->takeDamage(damage);
 	}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>

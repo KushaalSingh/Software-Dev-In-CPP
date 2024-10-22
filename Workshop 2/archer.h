@@ -54,7 +54,7 @@ namespace seneca {
 		dmg -= getDefenseAmnt();
 		if (dmg < 0) dmg = 0;
 
-		CharacterTpl<T>::takeDamage(reducedDmg);
+		CharacterTpl<SuperHealth>::takeDamage(dmg);
 	}
 }
 

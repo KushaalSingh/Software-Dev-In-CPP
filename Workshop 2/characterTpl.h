@@ -20,7 +20,9 @@ namespace seneca {
 	};
 
 	template <typename T>
-	CharacterTpl<T>::CharacterTpl(std::string name, int maxHealth) : Character(name), m_healthMax(maxHealth), m_health(maxHealth) {}
+	CharacterTpl<T>::CharacterTpl(std::string name, int maxHealth) : Character(name.c_str()), m_healthMax(maxHealth) {
+		m_health = maxHealth;
+	}
 
 	template <typename T>
 	void CharacterTpl<T>::takeDamage(int dmg) {

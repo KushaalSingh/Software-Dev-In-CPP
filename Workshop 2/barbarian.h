@@ -29,7 +29,7 @@ namespace seneca {
 
 	template <typename T, typename Ability_t, typename Weapon_t>
 	int Barbarian<T, Ability_t, Weapon_t>::getAttackAmnt() const {
-		return (m_baseAttack + (static_cast<double>(m_weapon[0]) / 2) + (static_cast<double>(m_weapon[1]) / 2));
+		return (m_baseAttack + (static_cast<int>(m_weapon[0]) / 2) + (static_cast<int>(m_weapon[1]) / 2));
 	}
 
 	template <typename T, typename Ability_t, typename Weapon_t>
@@ -46,7 +46,7 @@ namespace seneca {
 	void Barbarian<T, Ability_t, Weapon_t>::attack(Character* enemy) {
 		std::cout << this->getName() << " is attacking " << enemy->getName() << "." << std::endl;
 
-		m_ability.useAbility(*this);
+		m_ability.useAbility(this);
 		auto damage = getAttackAmnt();
 		m_ability.transformDamageDealt(damage);
 
@@ -63,7 +63,7 @@ namespace seneca {
 		if (dmg < 0) dmg = 0;
 
 		m_ability.transformDamageReceived(dmg);
-		CharacterTpl<T>::takeDamage(reducedDmg);
+		CharacterTpl<T>::takeDamage(dmg);
 	}
 
 
