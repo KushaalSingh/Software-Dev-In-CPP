@@ -28,7 +28,7 @@ namespace seneca {
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
 	int Rogue<T, FirstAbility_t, SecondAbility_t>::getAttackAmnt() const {
-		return static_cast<int>(m_baseAttack + 2 * static_cast<int>(m_weapon));
+		return static_cast<int>(m_baseAttack + 2 * m_weapon);
 	}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>

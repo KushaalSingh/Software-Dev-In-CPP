@@ -9,6 +9,7 @@ namespace seneca {
 	Team::Team(const Team& src) : m_characters(nullptr), m_name(src.m_name), m_size(src.m_size) {
 		m_characters = new Character * [m_size];
 		for (size_t i = 0; i < m_size; i++) m_characters[i] = src.m_characters[i]->clone();
+		std::cout << "<----- CC CALLED ----->" << std::endl;
 	}
 
 	Team& Team::operator = (const Team& src) {
@@ -22,6 +23,7 @@ namespace seneca {
 			m_characters = new Character * [m_size];
 			for (size_t i = 0; i < m_size; i++) m_characters[i] = src.m_characters[i]->clone();
 		}
+		std::cout << "<----- CAO CALLED ----->" << std::endl;
 		return *this;
 	}
 
@@ -29,6 +31,7 @@ namespace seneca {
 		src.m_characters = nullptr;
 		src.m_name = "";
 		src.m_size = 0;
+		std::cout << "<----- MCC CALLED ----->" << std::endl;
 	}
 
 	Team& Team::operator = (Team&& src) noexcept {
@@ -44,6 +47,7 @@ namespace seneca {
 			src.m_name = "";
 			src.m_size = 0;
 		}
+		std::cout << "<----- MAO CALLED ----->" << std::endl;
 		return *this;
 	}
 
@@ -97,6 +101,6 @@ namespace seneca {
 
 	void Team::showMembers() const {
 		std::cout << "[Team] " << m_name << std::endl;
-		for (size_t i = 0; i < m_size; i++) std::cout << std::right << std::setw(5) << i << ": " << *m_characters[i] << std::endl;
+		for (size_t i = 0; i < m_size; i++) std::cout << std::setw(5) << (i + 1) << ": " << *m_characters[i] << std::endl;
 	}
 }

@@ -57,9 +57,8 @@ namespace seneca {
 		bool found = false;
 		for (size_t i = 0; i < m_size; i++) if (m_characters[i]->getName() == c->getName()) found = true;
 
-		c->setHealthMax(c->getHealthMax() + 300);
-
 		if (!found) {
+			c->setHealthMax(c->getHealthMax() + 300);
 			Character** temp = new Character * [m_size + 1];
 			for (size_t i = 0; i < m_size; i++) temp[i] = m_characters[i];
 			temp[m_size] = c;
@@ -99,6 +98,6 @@ namespace seneca {
 
 	void Guild::showMembers() const {
 		std::cout << "[Guild] " << m_name << std::endl;
-		for (size_t i = 0; i < m_size; i++) std::cout << std::right << std::setw(5) << i << ": " << *m_characters[i] << std::endl;
+		for (size_t i = 0; i < m_size; i++) std::cout << std::setw(5) << (i + 1) << ": " << *m_characters[i] << std::endl;
 	}
 }
