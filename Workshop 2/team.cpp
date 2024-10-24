@@ -59,7 +59,7 @@ namespace seneca {
 
 		if (!found) {
 			Character** temp = new Character * [m_size + 1];
-			for (size_t i = 0; i < m_size; i++) temp[i] = m_characters[i]->clone();
+			for (size_t i = 0; i < m_size; i++) temp[i] = m_characters[i];
 			temp[m_size] = c->clone();
 			delete[] m_characters;
 			m_characters = temp;
