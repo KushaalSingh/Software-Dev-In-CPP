@@ -48,7 +48,7 @@ namespace seneca {
 	}
 
 	Team::~Team() {
-		for (size_t i = 0; i < m_size; i++) delete m_characters[i];
+		for (size_t i = 0; i < m_size; i++) delete[] m_characters[i];
 		delete[] m_characters;
 		m_characters = nullptr;
 	}
