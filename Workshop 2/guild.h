@@ -23,9 +23,5 @@ namespace seneca {
 		Character* operator[](size_t idx) const;
 		void showMembers() const;
 	};
-
-
 }
-
-
 #endif

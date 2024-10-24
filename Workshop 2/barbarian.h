@@ -66,6 +66,4 @@ namespace seneca {
 		CharacterTpl<T>::takeDamage(dmg);
 	}
 }
-
-
 #endif
