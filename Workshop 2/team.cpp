@@ -100,7 +100,8 @@ namespace seneca {
 	}
 
 	void Team::showMembers() const {
-		std::cout << "[Team] " << m_name << std::endl;
+		if (m_size) std::cout << "[Team] " << m_name << std::endl;
+		else std::cout << "No team." << std::endl;
 		for (size_t i = 0; i < m_size; i++) std::cout << std::setw(5) << (i + 1) << ": " << *m_characters[i] << std::endl;
 	}
 }
