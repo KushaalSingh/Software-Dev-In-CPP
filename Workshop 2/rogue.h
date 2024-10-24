@@ -24,7 +24,7 @@ namespace seneca {
 	};
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
-	Rogue<T, FirstAbility_t, SecondAbility_t>::Rogue(const char* name, int healthMax, int baseAttack, int baseDefense) : CharacterTpl<T>(name, healthMax), m_baseAttack(baseAttack), m_baseDefense(baseDefense) {}
+	Rogue<T, FirstAbility_t, SecondAbility_t>::Rogue(const char* name, int healthMax, int baseAttack, int baseDefense) : CharacterTpl<T>(name, healthMax), m_baseDefense(baseDefense), m_baseAttack(baseAttack) {}
 
 	template <typename T, typename FirstAbility_t, typename SecondAbility_t>
 	int Rogue<T, FirstAbility_t, SecondAbility_t>::getAttackAmnt() const {
