@@ -65,8 +65,6 @@ namespace seneca {
 		m_ability.transformDamageReceived(dmg);
 		CharacterTpl<T>::takeDamage(dmg);
 	}
-
-	sdf
 }
 
 
