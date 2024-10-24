@@ -42,7 +42,7 @@ namespace seneca {
 	void Archer<Weapon_t>::attack(Character* enemy) {
 		std::cout << this->getName() << " is attacking " << enemy->getName() << "." << std::endl;
 		auto damage = getAttackAmnt();
-		std::cout << "Archer deals " << damage << "range damage!" << std::endl;
+		std::cout << "    Archer deals " << damage << "range damage!" << std::endl;
 		enemy->takeDamage(damage);
 	}
 
