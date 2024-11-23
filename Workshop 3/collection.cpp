@@ -1,4 +1,4 @@
-#include "Collection.h"
+#include "collection.h"
 #include <iostream>
 #include <iomanip>
 

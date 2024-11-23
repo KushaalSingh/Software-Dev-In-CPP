@@ -69,13 +69,10 @@ namespace seneca {
 		unsigned short episodeInSeason = static_cast<unsigned short>(std::stoi(episodeInSeasonStr));
 		unsigned int length = static_cast<unsigned int>(std::stoi(lengthStr));
 
-		bool found = false;
-
 		for (unsigned int i = 0; i < col.size(); ++i) {
-			auto* tvShow = dynamic_cast<TvShow*>(col[i]); // Access element using col[i]
+			auto* tvShow = dynamic_cast<TvShow*>(col[i]);
 
 			if (tvShow && tvShow->m_id == id) {
-				// Add the episode to the TvShow
 				tvShow->m_episodes.push_back({ tvShow, episode, season, episodeInSeason, airDate, length, title, summary });
 				return;
 			}
