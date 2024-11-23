@@ -10,8 +10,6 @@
 
 namespace seneca {
 
-	static const size_t ARRAY_SIZE = 6;
-	
 	class SpellChecker {
 		static const size_t ARRAY_SIZE = 6;
 		std::array<std::string, ARRAY_SIZE> m_badWords; 
@@ -23,9 +21,5 @@ namespace seneca {
 		void operator()(std::string& text);
 		void showStatistics(std::ostream& out) const;
 	};
-
-
 }
-
-
 #endif

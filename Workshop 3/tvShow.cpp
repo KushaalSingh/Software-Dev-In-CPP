@@ -81,20 +81,6 @@ namespace seneca {
         return totalLength / static_cast<double>(m_episodes.size());
     }
 
-    /*double TvShow::getEpisodeAverageLength() const {
-        if (m_episodes.empty()) return 0.0;
-
-        double totalLength = 0.0;
-
-        std::for_each(m_episodes.begin(), m_episodes.end(), [&totalLength](const TvEpisode& episode) {
-            std::cout << episode.m_title << "  " << episode.m_length << std::endl;
-            totalLength += episode.m_length;
-            });
-
-        return totalLength / static_cast<double>(m_episodes.size());
-    }*/
-
-
     std::list<std::string> TvShow::getLongEpisodes() const {
         std::list<std::string> longEpisodes;
         std::for_each(m_episodes.begin(), m_episodes.end(), [&](const TvEpisode& episode) { if (episode.m_length >= 3600) longEpisodes.push_back(episode.m_title); });

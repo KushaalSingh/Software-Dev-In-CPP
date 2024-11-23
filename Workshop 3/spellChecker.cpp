@@ -30,7 +30,6 @@ namespace seneca {
         }
     }
 
-
     void SpellChecker::operator()(std::string& text) {
         for (size_t i = 0; i < ARRAY_SIZE; ++i) {
             size_t pos = 0;
@@ -44,7 +43,6 @@ namespace seneca {
         }
     }
 
-
     void SpellChecker::showStatistics(std::ostream& out) const {
         out << "Spellchecker Statistics\n";
         for (size_t i = 0; i < ARRAY_SIZE; ++i) {
@@ -52,5 +50,4 @@ namespace seneca {
                 << m_replacements[i] << " replacements" << std::endl;
         }
     }
-
 }
