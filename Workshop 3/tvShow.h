@@ -41,7 +41,7 @@ namespace seneca {
 
 	template<typename Collection_t>
 	void TvShow::addEpisode(Collection_t& col, const std::string& strEpisode) {
-		if (strEpisode.empty() || strEpisode[0] == '#') throw "Not a valid show.";
+		if (strEpisode.empty() || strEpisode[0] == '#') throw "Not a valid episode.";
 
 		std::stringstream ss(strEpisode);
 		std::string id, episodeStr, seasonStr, episodeInSeasonStr, airDate, lengthStr, title, summary;
