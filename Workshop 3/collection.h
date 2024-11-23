@@ -33,7 +33,5 @@ namespace seneca {
         void sort(const std::string& field);
         friend std::ostream& operator<<(std::ostream& os, const Collection& collection);
     };
-
 } 
-
 #endif

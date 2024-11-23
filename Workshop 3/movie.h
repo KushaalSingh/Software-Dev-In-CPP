@@ -15,7 +15,6 @@ namespace seneca {
         void display(std::ostream& out) const override;
         static Movie* createItem(const std::string& strMovie);
     };
-
 }
 
 #endif 

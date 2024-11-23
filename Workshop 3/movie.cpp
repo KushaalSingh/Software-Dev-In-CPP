@@ -5,11 +5,9 @@
 
 namespace seneca {
 
-    // Private constructor
     Movie::Movie(const std::string& title, unsigned short year, const std::string& summary)
-        : MediaItem(title, summary, year) {}
+    : MediaItem(title, summary, year) {}
 
-    // Display method
     void Movie::display(std::ostream& out) const {
         if (g_settings.m_tableView) {
             out << "M | ";
@@ -19,14 +17,10 @@ namespace seneca {
             out << std::setw(9) << this->getYear() << " | ";
             out << std::left;
             if (g_settings.m_maxSummaryWidth > -1) {
-                if (static_cast<short>(this->getSummary().size()) <= g_settings.m_maxSummaryWidth)
-                    out << this->getSummary();
-                else
-                    out << this->getSummary().substr(0, g_settings.m_maxSummaryWidth - 3) << "...";
+                if (static_cast<short>(this->getSummary().size()) <= g_settings.m_maxSummaryWidth) out << this->getSummary();
+                else out << this->getSummary().substr(0, g_settings.m_maxSummaryWidth - 3) << "...";
             }
-            else {
-                out << this->getSummary();
-            }
+            else out << this->getSummary();
             out << std::endl;
         }
         else {
@@ -41,14 +35,11 @@ namespace seneca {
         }
     }
 
-    // Static factory method to create a Movie object
     Movie* Movie::createItem(const std::string& strMovie) {
-        // Validate input
         if (strMovie.empty() || strMovie[0] == '#') {
             throw "Not a valid movie.";
         }
 
-        // Tokenize input string
         std::stringstream ss(strMovie);
         std::string title, yearStr, summary;
 
@@ -56,21 +47,18 @@ namespace seneca {
         std::getline(ss, yearStr, ',');
         std::getline(ss, summary);
 
-        // Trim all tokens
         auto trim = [](std::string& str) {
-            str.erase(0, str.find_first_not_of(" \t\r\n")); // Trim leading spaces
-            str.erase(str.find_last_not_of(" \t\r\n") + 1); // Trim trailing spaces
+            str.erase(0, str.find_first_not_of(" \t\r\n"));
+            str.erase(str.find_last_not_of(" \t\r\n") + 1);
         };
 
         trim(title);
         trim(yearStr);
         trim(summary);
 
-        // Convert year to unsigned short
         unsigned short year = static_cast<unsigned short>(std::stoi(yearStr));
 
-        // Create and return a new Movie object
         return new Movie(title, year, summary);
     }
 
-} // namespace seneca
+}
