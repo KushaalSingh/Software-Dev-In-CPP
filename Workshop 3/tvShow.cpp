@@ -71,7 +71,20 @@ namespace seneca {
 
         unsigned short year = static_cast<unsigned short>(std::stoi(yearStr));
 
-        return std::make_shared<TvShow>(id, title, year, summary);
-
+        return new TvShow(id, title, year, summary);
     }
+
+    double TvShow::getEpisodeAverageLength() const {
+        if (m_episodes.empty()) return 0.0;
+        
+        double totalLength = std::accumulate(m_episodes.begin(), m_episodes.end(), 0.0, [](double sum, const TvEpisode& episode) { return sum + episode.m_length; });
+        return totalLength / static_cast<double>(m_episodes.size());
+    }
+
+    std::list<std::string> TvShow::getLongEpisodes() const {
+        std::list<std::string> longEpisodes;
+        std::for_each(m_episodes.begin(), m_episodes.end(), [&](const TvEpisode& episode) { if (episode.m_length >= 3600) longEpisodes.push_back(episode.m_title); });
+        return longEpisodes;
+    }
+
 }

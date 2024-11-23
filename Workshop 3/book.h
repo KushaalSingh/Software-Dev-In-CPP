@@ -17,7 +17,7 @@ namespace seneca {
 
 	public:
 		void display(std::ostream& out) const override;
-		Book* createItem(const std::string& strBook);
+		static Book* createItem(const std::string& strBook);
 	};
 
 }
