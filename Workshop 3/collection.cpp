@@ -97,7 +97,7 @@ namespace seneca {
     // Overload the insertion operator
     std::ostream& operator<<(std::ostream& os, const Collection& collection) {
         for (const auto* item : collection.m_items) {
-            os << *item << '\n'; // Insert each MediaItem into the stream
+            os << *item; // Insert each MediaItem into the stream
         }
         return os;
     }
