@@ -37,6 +37,10 @@ namespace seneca {
 		static void addEpisode(Collection_t& col, const std::string& strEpisode);
 		double getEpisodeAverageLength() const;
 		std::list<std::string> getLongEpisodes() const;
+
+		void displayLength() {
+			for (auto& i : m_episodes) std::cout << i.m_title << "   " << i.m_length << std::endl;
+		}
 	};
 
 	template<typename Collection_t>
@@ -67,7 +71,19 @@ namespace seneca {
 		unsigned short episode = static_cast<unsigned short>(std::stoi(episodeStr));
 		unsigned short season = seasonStr.empty() ? 1 : static_cast<unsigned short>(std::stoi(seasonStr));
 		unsigned short episodeInSeason = static_cast<unsigned short>(std::stoi(episodeInSeasonStr));
-		unsigned int length = static_cast<unsigned int>(std::stoi(lengthStr));
+		unsigned int length = 0;
+
+		std::stringstream timeStream(lengthStr);
+		std::string hoursStr, minutesStr, secondsStr;
+		std::getline(timeStream, hoursStr, ':');
+		std::getline(timeStream, minutesStr, ':');
+		std::getline(timeStream, secondsStr);
+
+		unsigned int hours = hoursStr.empty() ? 0 : static_cast<unsigned int>(std::stoi(hoursStr));
+		unsigned int minutes = minutesStr.empty() ? 0 : static_cast<unsigned int>(std::stoi(minutesStr));
+		unsigned int seconds = secondsStr.empty() ? 0 : static_cast<unsigned int>(std::stoi(secondsStr));
+
+		length = hours * 3600 + minutes * 60 + seconds;
 
 		for (unsigned int i = 0; i < col.size(); ++i) {
 			auto* tvShow = dynamic_cast<TvShow*>(col[i]);
