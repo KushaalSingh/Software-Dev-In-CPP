@@ -67,7 +67,7 @@ namespace seneca {
     }
 
     // Remove quotes from titles and summaries
-    void Collection::removeQuotes() {
+    /*void Collection::removeQuotes() {
         std::for_each(m_items.begin(), m_items.end(), [](MediaItem* item) {
             std::string title = item->getTitle();
         std::string summary = item->getSummary();
@@ -78,8 +78,35 @@ namespace seneca {
         if (!summary.empty() && summary.front() == '"' && summary.back() == '"') {
             item->setSummary(summary.substr(1, summary.size() - 2));
         }
+        });
+    }*/
+
+    void Collection::removeQuotes() {
+        std::for_each(m_items.begin(), m_items.end(), [](MediaItem* item) {
+            std::string title = item->getTitle();
+        std::string summary = item->getSummary();
+
+        // Remove quotes from the title
+        if (!title.empty() && title.front() == '"') {
+            title.erase(0, 1); // Remove the leading quote
+        }
+        if (!title.empty() && title.back() == '"') {
+            title.pop_back(); // Remove the trailing quote
+        }
+        item->setTitle(title);
+
+        // Remove quotes from the summary
+        if (!summary.empty() && summary.front() == '"') {
+            summary.erase(0, 1); // Remove the leading quote
+        }
+        if (!summary.empty() && summary.back() == '"') {
+            summary.pop_back(); // Remove the trailing quote
+        }
+        item->setSummary(summary);
             });
     }
+
+
 
     // Sort the collection based on a given field
     void Collection::sort(const std::string& field) {
