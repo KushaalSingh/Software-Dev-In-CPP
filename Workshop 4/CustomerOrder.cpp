@@ -1,0 +1,104 @@
+// I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+
+#include "CustomerOrder.h"
+
+namespace seneca {
+
+	size_t CustomerOrder::m_widthField{ 0 };
+
+	Item::Item(const std::string& src) : m_itemName(src) {}
+
+	CustomerOrder::CustomerOrder() : m_name(""), m_product(""), m_cntItem(0), m_lstItem(nullptr) {}
+
+	CustomerOrder::CustomerOrder(const std::string line) : m_name(""), m_product(""), m_cntItem(0), m_lstItem(nullptr) {
+		Utilities U;
+		bool more = true;
+		size_t pos = 0;
+
+		m_name = U.extractToken(line, pos, more);
+		m_product = U.extractToken(line, pos, more);
+
+		size_t i = 0, temp_pos = pos;
+		while (more) {
+			U.extractToken(line, temp_pos, more);
+			++i;
+		}
+		m_lstItem = new Item * [i];
+		m_cntItem = i;
+
+		more = true;
+		for (size_t i = 0; i < m_cntItem; i++) m_lstItem[i] = new Item(U.extractToken(line, pos, more));
+
+		if (m_widthField < U.getFieldWidth()) m_widthField = U.getFieldWidth();
+	}
+
+	CustomerOrder::CustomerOrder(const CustomerOrder& src) {
+		throw std::runtime_error("Copy constructor called");
+	}
+
+	CustomerOrder::CustomerOrder(CustomerOrder&& src) noexcept : m_name(""), m_product(""), m_cntItem(0), m_lstItem(nullptr) {
+		*this = std::move(src);
+	}
+
+	CustomerOrder& CustomerOrder::operator = (CustomerOrder&& src) noexcept {
+		if (this != &src) {
+			if (m_lstItem) {
+				for (size_t i = 0; i < m_cntItem; i++) delete m_lstItem[i];
+				delete[] m_lstItem;
+			}
+
+			m_name = src.m_name;
+			m_product = src.m_product;
+			m_cntItem = src.m_cntItem;
+			m_lstItem = src.m_lstItem;
+
+			src.m_name = "";
+			src.m_product = "";
+			src.m_cntItem = 0;
+			src.m_lstItem = nullptr;
+		}
+		return *this;
+	}
+
+	CustomerOrder::~CustomerOrder() {
+		for (size_t i = 0; i < m_cntItem; i++) delete m_lstItem[i];
+		delete[] m_lstItem;
+		m_lstItem = nullptr;
+	}
+
+	bool CustomerOrder::isOrderFilled() const {
+		for (size_t i = 0; i < m_cntItem; i++) if (!m_lstItem[i]->m_isFilled) return false;
+		return true;
+	}
+
+	bool CustomerOrder::isItemFilled(const std::string& itemName) const {
+		for (size_t i = 0; i < m_cntItem; i++) if (m_lstItem[i]->m_itemName == itemName && !m_lstItem[i]->m_isFilled) return false;
+		return true;
+	}
+
+	void CustomerOrder::fillItem(Station& station, std::ostream& os) {
+		bool fill = true;
+		for (size_t i = 0; i < m_cntItem && fill; i++) {
+			if (station.getItemName() == m_lstItem[i]->m_itemName && station.getQuantity() && !m_lstItem[i]->m_isFilled) {
+				m_lstItem[i]->m_isFilled = true;
+				m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
+				station.updateQuantity();
+				os << "    Filled " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+				fill = false;
+			}
+			else if (station.getItemName() == m_lstItem[i]->m_itemName && !station.getQuantity()) {
+				os << "    Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+			}
+		}
+	}
+
+	void CustomerOrder::display(std::ostream& os) const {
+		os << m_name << " - " << m_product << std::endl;
+
+		for (size_t i = 0; i < m_cntItem; i++) {
+			os << "[" << std::setw(6) << std::setfill('0') << std::right << m_lstItem[i]->m_serialNumber << "] "
+				<< std::setfill(' ') << std::setw(m_widthField) << std::left << m_lstItem[i]->m_itemName << " - ";
+			os << (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED") << std::endl;
+		}
+	}
+}
