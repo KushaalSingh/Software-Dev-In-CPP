@@ -1,0 +1,12 @@
+OOP345NFF Workshop 4 Reflect
+============================
+
+This project was both a valuable and challenging experience for me. Working through modules such as Utility, 
+Station, CustomerOrder, Workstation, and LineManager challenged my understanding of object-oriented programming. 
+File management and dynamic memory management Each step presents unique challenges, from implementing efficient 
+error handling and exception handling to creating appropriate classes. Relationships and Inheritance Structure 
+We are clean. The biggest challenge is understanding how the components How are they related? while maintaining 
+the organization and codebase. This trip helped improve my debugging skills. and gain familiarity with C++ features 
+such as exception handling for STL containers, seeing production line simulations come to life. And know that 
+it was created from scratch. It is an incredible award. In the end This project has strengthened my confidence 
+in solving complex problems. and improve your ability to think critically and logically in programming.
