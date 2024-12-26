@@ -23,10 +23,21 @@ namespace seneca {
 		m_name = name;
 		m_numToys = std::stoi(num);
 		m_grossPrice = std::stod(price);
+		m_netPrice = m_grossPrice * 0.13;
 	}
 
 	void Toy::update(int numItems) {
 		m_numToys = numItems;
+	}
+
+	std::ostream& operator << (std::ostream& os, const Toy& toy) {
+		os << std::right << std::setw(8) << std::setfill('0') << toy.m_id << ": ";
+		os << std::right << std::setw(24) << std::setfill('.') << toy.m_name;
+		os << std::right << std::setw(2) << std::setfill(' ') << toy.m_numToys << " items @ ";
+		os << std::right << std::setw(6) << std::setfill(' ') << toy.m_grossPrice << "/item subtotal: ";
+		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_grossPrice * toy.m_numToys << " tax: ";
+		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_netPrice - toy.m_grossPrice << " total: ";
+		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_netPrice << std::endl;
 	}
 
 	void trim(std::string& str) {

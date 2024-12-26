@@ -2,6 +2,7 @@
 #define TOY_H
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <sstream>
 
@@ -21,6 +22,8 @@ namespace seneca {
 		Toy();
 		Toy(const std::string& toy);
 		void update(int numItems);
+
+		friend std::ostream& operator << (std::ostream& os, const Toy& toy);
 	};
 
 	void trim(std::string& str);
