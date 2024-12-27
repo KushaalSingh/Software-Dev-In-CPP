@@ -17,7 +17,7 @@ namespace seneca {
 		uint m_numToys;
 		double m_grossPrice;
 		double m_netPrice;
-
+		static constexpr double HST = 0.13;
 	public:
 		Toy();
 		Toy(const std::string& toy);
