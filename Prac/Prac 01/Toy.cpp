@@ -2,9 +2,9 @@
 
 namespace seneca {
 
-	Toy::Toy() : m_id(0), m_name(""), m_numToys(0), m_grossPrice(0.00), m_netPrice(0.00) {}
+	Toy::Toy() : m_id(0), m_name(""), m_quantity(0), m_grossPrice(0.00) {}
 
-	Toy::Toy(const std::string& toy) : m_id(0), m_name(""), m_numToys(0), m_grossPrice(0.00), m_netPrice(0.00) {
+	Toy::Toy(const std::string& toy) : m_id(0), m_name(""), m_quantity(0), m_grossPrice(0.00) {
 		if (toy[0] == '#') return;
 		std::stringstream ss(toy);
 		std::string id, name, num, price;
@@ -21,23 +21,38 @@ namespace seneca {
 
 		m_id = std::stoi(id);
 		m_name = name;
-		m_numToys = std::stoi(num);
+		m_quantity = std::stoi(num);
 		m_grossPrice = std::stod(price);
-		m_netPrice = m_grossPrice * 0.13;
 	}
 
 	void Toy::update(int numItems) {
-		m_numToys = numItems;
+		m_quantity = numItems;
 	}
 
 	std::ostream& operator << (std::ostream& os, const Toy& toy) {
-		os << std::right << std::setw(8) << std::setfill('0') << toy.m_id << ": ";
+
+		double subTotal = toy.m_grossPrice * toy.m_quantity;
+		double tax = subTotal * toy.HST;
+		double total = subTotal + tax;
+
+		/*os << std::right << std::setw(8) << std::setfill('0') << toy.m_id << ": ";
 		os << std::right << std::setw(24) << std::setfill('.') << toy.m_name;
-		os << std::right << std::setw(2) << std::setfill(' ') << toy.m_numToys << " items @ ";
+		os << std::right << std::setw(2) << std::setfill(' ') << toy.m_quantity << " items @ ";
 		os << std::right << std::setw(6) << std::setfill(' ') << toy.m_grossPrice << "/item subtotal: ";
-		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_grossPrice * toy.m_numToys << " tax: ";
+		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_grossPrice * toy.m_quantity << " tax: ";
 		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_netPrice - toy.m_grossPrice << " total: ";
-		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_netPrice << std::endl;
+		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_netPrice << std::endl;*/
+
+		printAttribute<uint>(toy.m_id, 8, ": ", '0');
+		printAttribute<std::string>(toy.m_name, 24, "", '.');
+		printAttribute<uint>(toy.m_quantity, 2, " items @ ");
+		printAttribute<double>(toy.m_grossPrice, 6, "/item subtotal: ");
+		printAttribute<double>(subTotal, 7, " tax: ");
+		printAttribute<double>(tax, 7, " total: ");
+		printAttribute<double>(total, 7);
+		os << std::endl;
+
+		return os;
 	}
 
 	void trim(std::string& str) {
@@ -45,5 +60,10 @@ namespace seneca {
 		int last = str.find_last_not_of(" ");
 
 		str = str.substr(first, last - first + 1);
+	}
+
+	template<typename T>
+	inline void printAttribute(T attribute, int size, std::string postCom = "", char fill = ' ') {
+		std::cout << std::right << std::setw(8) << std::setfill(fill) << attribute << postCom;
 	}
 }
