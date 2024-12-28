@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
+#include <exception>
 
 
 typedef unsigned uint;
@@ -14,7 +15,7 @@ namespace seneca {
 	class Toy {
 		uint m_id;
 		std::string m_name;
-		uint m_numToys;
+		uint m_quantity;
 		double m_grossPrice;
 		double m_netPrice;
 		static constexpr double HST = 0.13;
