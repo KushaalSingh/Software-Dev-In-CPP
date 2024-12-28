@@ -7,10 +7,9 @@
 #include <sstream>
 #include <exception>
 
-
-typedef unsigned uint;
-
 namespace seneca {
+
+	typedef unsigned uint;
 
 	class Toy {
 		uint m_id;
