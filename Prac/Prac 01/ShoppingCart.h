@@ -11,14 +11,14 @@ namespace seneca {
 		std::string m_name;
 		int m_age;
 
-		//std::vector<Toy> toys;
-
 	public:
 		ShoppingCart(const std::string& name, int age, const Toy* toys[], size_t count);
+		~ShoppingCart();
 
 		friend std::ostream& operator << (std::ostream& os, ShoppingCart& sc);
 	};
 
+	inline void prln();
 }
 
 
