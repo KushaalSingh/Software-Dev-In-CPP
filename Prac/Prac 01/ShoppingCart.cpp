@@ -4,9 +4,10 @@ namespace seneca {
 
 	ShoppingCart::ShoppingCart(const std::string& name, int age, const Toy* toys[], size_t count) : m_toys(nullptr), m_count(count), m_name(name), m_age(age) {
 		if (count > 0 && toys != nullptr) {
-			m_toys = new Toy * [count];
+			m_toys = new const Toy * [count];
 			for (int i = 0; i < m_count; i++) m_toys[i] = new Toy(*toys[i]);
 		}
+		else m_count = 0;
 	}
 
 	ShoppingCart::~ShoppingCart() {
