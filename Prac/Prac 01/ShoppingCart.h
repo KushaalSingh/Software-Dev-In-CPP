@@ -16,7 +16,7 @@ namespace seneca {
 		ShoppingCart(const ShoppingCart& src);
 		ShoppingCart& operator = (const ShoppingCart& src);
 		~ShoppingCart();
-		void clearMem();
+		void clear();
 
 		friend std::ostream& operator << (std::ostream& os, ShoppingCart& sc);
 	};
