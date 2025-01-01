@@ -13,7 +13,10 @@ namespace seneca {
 
 	public:
 		ShoppingCart(const std::string& name, int age, const Toy* toys[], size_t count);
+		ShoppingCart(const ShoppingCart& src);
+		ShoppingCart& operator = (const ShoppingCart& src);
 		~ShoppingCart();
+		void clearMem();
 
 		friend std::ostream& operator << (std::ostream& os, ShoppingCart& sc);
 	};

@@ -11,6 +11,29 @@ namespace seneca {
 	}
 
 	ShoppingCart::~ShoppingCart() {
+		clear();
+	}
+
+	ShoppingCart::ShoppingCart(const ShoppingCart& src) : m_toys(nullptr), m_count(0), m_name(src.m_name), m_age(src.m_age) {
+		if (src.m_count > 0 && src.m_toys != nullptr) {
+			m_count = src.m_count;
+			m_toys = new const Toy * [m_count];
+			for (int i = 0; i < m_count; i++) m_toys[i] = new Toy(*src.m_toys[i]);
+		}
+	}
+
+	ShoppingCart& ShoppingCart::operator = (const ShoppingCart& src) {
+		if (src.m_count > 0 && src.m_toys != nullptr) {
+			clear();
+			m_count = src.m_count;
+			m_name = src.m_name;
+			m_age = src.m_age;
+			m_toys = new const Toy * [m_count];
+			for (int i = 0; i < m_count; i++) m_toys[i] = new Toy(*src.m_toys[i]);
+		}
+	}
+
+	void ShoppingCart::clear() {
 		for (int i = 0; i < m_count; i++) delete m_toys[i];
 		delete[] m_toys;
 	}
