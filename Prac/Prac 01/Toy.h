@@ -22,6 +22,8 @@ namespace seneca {
 	public:
 		Toy();
 		Toy(const std::string& toy);
+		Toy(const Toy& toy);
+		Toy& operator = (const Toy& toy);
 		void update(int numItems);
 
 		friend std::ostream& operator << (std::ostream& os, const Toy& toy);
