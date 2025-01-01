@@ -42,14 +42,6 @@ namespace seneca {
 		double tax = subTotal * toy.HST;
 		double total = subTotal + tax;
 
-		/*os << std::right << std::setw(8) << std::setfill('0') << toy.m_id << ": ";
-		os << std::right << std::setw(24) << std::setfill('.') << toy.m_name;
-		os << std::right << std::setw(2) << std::setfill(' ') << toy.m_quantity << " items @ ";
-		os << std::right << std::setw(6) << std::setfill(' ') << toy.m_grossPrice << "/item subtotal: ";
-		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_grossPrice * toy.m_quantity << " tax: ";
-		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_netPrice - toy.m_grossPrice << " total: ";
-		os << std::right << std::setw(7) << std::setfill(' ') << toy.m_netPrice << std::endl;*/
-
 		printAttribute<uint>(toy.m_id, 8, ": ", '0');
 		printAttribute<std::string>(toy.m_name, 24, "", '.');
 		printAttribute<uint>(toy.m_quantity, 2, " items @ ");
