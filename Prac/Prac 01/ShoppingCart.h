@@ -9,7 +9,7 @@ namespace seneca {
 		const Toy** m_toys;
 		size_t m_count;
 		std::string m_name;
-		int m_age;
+		uint m_age;
 
 	public:
 		ShoppingCart(const std::string& name, int age, const Toy* toys[], size_t count);
