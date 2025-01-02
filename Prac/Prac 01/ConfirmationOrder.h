@@ -6,10 +6,10 @@ namespace seneca {
 
 	class ConfirmationOrder {
 		const Toy** m_toys;
-		size_t count;
+		size_t m_count;
 
 	public:
-		ConfirmationOrder(const Toy& toy);
+		ConfirmationOrder(const ConfirmationOrder* toys[], size_t count);
 	};
 }
 
