@@ -11,7 +11,7 @@ namespace seneca {
 	}
 
 	ConfirmationOrder::ConfirmationOrder(const ConfirmationOrder& src) : m_toys(nullptr), m_count(0) {
-		if (this != &src && src.m_toys != nullptr && src.m_count > 0) {
+		if (src.m_toys != nullptr && src.m_count > 0) {
 			m_count = src.m_count;
 			m_toys = new const Toy * [m_count];
 			for (size_t i = 0; i < m_count; i++) m_toys[i] = src.m_toys[i];
@@ -28,7 +28,7 @@ namespace seneca {
 	}
 
 	ConfirmationOrder& ConfirmationOrder::operator = (const ConfirmationOrder& src) {
-		if (src.m_toys != nullptr && src.m_count > 0) {
+		if (this != &src && src.m_toys != nullptr && src.m_count > 0) {
 			delete[] m_toys;
 			m_count = src.m_count;
 			m_toys = new const Toy * [m_count];
