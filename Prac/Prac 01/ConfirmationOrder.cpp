@@ -28,7 +28,7 @@ namespace seneca {
 	}
 
 	ConfirmationOrder& ConfirmationOrder::operator = (const ConfirmationOrder& src) {
-		if (this != &src && src.m_toys != nullptr && src.m_count > 0) {
+		if (src.m_toys != nullptr && src.m_count > 0) {
 			delete[] m_toys;
 			m_count = src.m_count;
 			m_toys = new const Toy * [m_count];
