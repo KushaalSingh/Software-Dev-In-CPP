@@ -6,7 +6,7 @@ namespace seneca {
 		if (toys != nullptr && count > 0) {
 			m_count = count;
 			m_toys = new const Toy * [m_count];
-			for (int i = 0; i < m_count; i++) m_toys[i] = toys[i];
+			for (size_t i = 0; i < m_count; i++) m_toys[i] = toys[i];
 		}
 	}
 
@@ -14,7 +14,7 @@ namespace seneca {
 		if (this != &src && src.m_toys != nullptr && src.m_count > 0) {
 			m_count = src.m_count;
 			m_toys = new const Toy * [m_count];
-			for (int i = 0; i < m_count; i++) m_toys[i] = src.m_toys[i];
+			for (size_t i = 0; i < m_count; i++) m_toys[i] = src.m_toys[i];
 		}
 	}
 
@@ -32,7 +32,7 @@ namespace seneca {
 			delete[] m_toys;
 			m_count = src.m_count;
 			m_toys = new const Toy * [m_count];
-			for (int i = 0; i < m_count; i++) m_toys[i] = src.m_toys[i];
+			for (size_t i = 0; i < m_count; i++) m_toys[i] = src.m_toys[i];
 		}
 		return *this;
 	}
