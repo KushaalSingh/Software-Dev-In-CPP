@@ -22,4 +22,8 @@ namespace seneca {
 		src.m_toys = nullptr;
 		src.m_count = 0;
 	}
+
+	ConfirmationOrder::~ConfirmationOrder() {
+
+	}
 }

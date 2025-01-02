@@ -12,6 +12,7 @@ namespace seneca {
 		ConfirmationOrder(const Toy* toys[], size_t count);
 		ConfirmationOrder(const ConfirmationOrder& src);
 		ConfirmationOrder(ConfirmationOrder&& src) noexcept;
+		~ConfirmationOrder();
 	};
 }
 
