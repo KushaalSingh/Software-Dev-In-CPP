@@ -9,4 +9,8 @@ namespace seneca {
 			for (int i = 0; i < m_count; i++) m_toys[i] = toys[i];
 		}
 	}
+
+	ConfirmationOrder::ConfirmationOrder(const ConfirmationOrder& src) {
+
+	}
 }

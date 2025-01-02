@@ -9,7 +9,8 @@ namespace seneca {
 		size_t m_count;
 
 	public:
-		ConfirmationOrder(const ConfirmationOrder* toys[], size_t count);
+		ConfirmationOrder(const Toy* toys[], size_t count);
+		ConfirmationOrder(const ConfirmationOrder& src);
 	};
 }
 
