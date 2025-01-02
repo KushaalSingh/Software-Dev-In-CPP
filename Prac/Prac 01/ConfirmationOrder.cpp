@@ -34,6 +34,7 @@ namespace seneca {
 			m_toys = new const Toy * [m_count];
 			for (int i = 0; i < m_count; i++) m_toys[i] = src.m_toys[i];
 		}
+		return *this;
 	}
 
 	ConfirmationOrder& ConfirmationOrder::operator = (ConfirmationOrder&& src) noexcept {
@@ -45,5 +46,6 @@ namespace seneca {
 			src.m_toys = nullptr;
 			src.m_count = 0;
 		}
+		return *this;
 	}
 }
