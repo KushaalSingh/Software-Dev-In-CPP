@@ -11,6 +11,7 @@ namespace seneca {
 	public:
 		ConfirmationOrder(const Toy* toys[], size_t count);
 		ConfirmationOrder(const ConfirmationOrder& src);
+		ConfirmationOrder(const ConfirmationOrder&& src);
 	};
 }
 

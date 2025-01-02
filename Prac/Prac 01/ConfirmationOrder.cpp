@@ -18,5 +18,7 @@ namespace seneca {
 		}
 	}
 
+	ConfirmationOrder::ConfirmationOrder(const ConfirmationOrder&& src) {
 
+	}
 }
