@@ -18,6 +18,8 @@ namespace seneca {
 		}
 	}
 
-	ConfirmationOrder::ConfirmationOrder(const ConfirmationOrder&& src) noexcept : m_toys(src.m_toys), m_count(src.m_count) {
+	ConfirmationOrder::ConfirmationOrder(ConfirmationOrder&& src) noexcept : m_toys(src.m_toys), m_count(src.m_count) {
+		src.m_toys = nullptr;
+		src.m_count = 0;
 	}
 }
