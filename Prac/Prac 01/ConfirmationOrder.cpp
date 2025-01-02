@@ -24,6 +24,10 @@ namespace seneca {
 	}
 
 	ConfirmationOrder::~ConfirmationOrder() {
+		delete[] m_toys;
+	}
+
+	ConfirmationOrder& ConfirmationOrder::operator = (const ConfirmationOrder& src) {
 
 	}
 }

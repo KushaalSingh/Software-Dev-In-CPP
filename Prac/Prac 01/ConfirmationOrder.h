@@ -13,6 +13,7 @@ namespace seneca {
 		ConfirmationOrder(const ConfirmationOrder& src);
 		ConfirmationOrder(ConfirmationOrder&& src) noexcept;
 		~ConfirmationOrder();
+		ConfirmationOrder& operator = (const ConfirmationOrder& src);
 	};
 }
 
