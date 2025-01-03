@@ -48,4 +48,8 @@ namespace seneca {
 		}
 		return *this;
 	}
+
+	bool ConfirmationOrder::valid(bool selfcheck, const ConfirmationOrder* src = nullptr) {
+		return (src->m_toys != nullptr && src->m_count > 0 && (selfcheck ? this != src : true));
+	}
 }
