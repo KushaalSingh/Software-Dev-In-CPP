@@ -8,7 +8,7 @@ namespace seneca {
 		const Toy** m_toys;
 		size_t m_count;
 
-		bool valid(bool selfcheck, const ConfirmationOrder* src = nullptr);
+		bool valid(bool selfcheck, const ConfirmationOrder* src);
 	public:
 		ConfirmationOrder(const Toy* toys[], size_t count);
 		ConfirmationOrder(const ConfirmationOrder& src);
