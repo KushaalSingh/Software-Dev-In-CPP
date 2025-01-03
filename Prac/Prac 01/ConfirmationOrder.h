@@ -9,6 +9,7 @@ namespace seneca {
 		size_t m_count;
 
 		bool valid(bool selfcheck, const ConfirmationOrder* src);
+		bool findToy(const Toy* toy);
 	public:
 		ConfirmationOrder(const Toy* toys[], size_t count);
 		ConfirmationOrder(const ConfirmationOrder& src);
@@ -16,6 +17,7 @@ namespace seneca {
 		~ConfirmationOrder();
 		ConfirmationOrder& operator = (const ConfirmationOrder& src);
 		ConfirmationOrder& operator = (ConfirmationOrder&& src) noexcept;
+		ConfirmationOrder& operator += (const Toy& toy);
 	};
 }
 

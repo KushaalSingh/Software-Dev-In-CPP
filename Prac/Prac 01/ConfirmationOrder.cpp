@@ -3,7 +3,12 @@
 namespace seneca {
 
 	bool ConfirmationOrder::valid(bool selfcheck, const ConfirmationOrder* src) {
+		if (src == this) return (src != nullptr && src->m_toys != nullptr);
 		return (src != nullptr && src->m_toys != nullptr && src->m_count > 0 && (selfcheck ? this != src : true));
+	}
+
+	bool ConfirmationOrder::findToy(const Toy* toy) {
+		for (size_t i = 0; i < m_count; i++) if (m_toys[i] == toy) return true;
 	}
 
 	ConfirmationOrder::ConfirmationOrder(const Toy* toys[], size_t count) : m_toys(nullptr), m_count(0) {
@@ -51,5 +56,12 @@ namespace seneca {
 			src.m_count = 0;
 		}
 		return *this;
+	}
+
+	ConfirmationOrder& ConfirmationOrder::operator += (const Toy& toy) {
+		if (valid(false, this) && findToy(&toy)) {
+			++m_count;
+			const Toy** temp = new Toy * [m_count];
+		}
 	}
 }
