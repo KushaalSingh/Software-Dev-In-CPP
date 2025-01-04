@@ -70,4 +70,15 @@ namespace seneca {
 		}
 		return *this;
 	}
+
+	ConfirmationOrder& ConfirmationOrder::operator -= (const Toy& toy) {
+		if (findToy(&toy)) {
+			const Toy** temp = new const Toy * [m_count - 1];
+			for (size_t i = 0, j = 0; i < m_count; i++) if (m_toys[i] != &toy) temp[j++] = m_toys[i];
+			delete[] m_toys;
+			m_toys = temp;
+			--m_count;
+		}
+		return *this;
+	}
 }

@@ -19,6 +19,7 @@ namespace seneca {
 		ConfirmationOrder& operator = (const ConfirmationOrder& src);
 		ConfirmationOrder& operator = (ConfirmationOrder&& src) noexcept;
 		ConfirmationOrder& operator += (const Toy& toy);
+		ConfirmationOrder& operator -= (const Toy& toy);
 	};
 }
 
