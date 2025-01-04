@@ -55,7 +55,12 @@ namespace seneca {
 	}
 
 	ConfirmationOrder& ConfirmationOrder::operator += (const Toy& toy) {
-		if (!findToy(&toy)) {
+		if (m_toys == nullptr) {
+			m_toys = new const Toy * [1];
+			m_toys[0] = &toy;
+			m_count = 1;
+		}
+		else if (!findToy(&toy)) {
 			const Toy** temp = new const Toy * [m_count + 1];
 			for (size_t i = 0; i < m_count; i++) temp[i] = m_toys[i];
 			temp[m_count] = &toy;
