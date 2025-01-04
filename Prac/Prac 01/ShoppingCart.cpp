@@ -43,23 +43,24 @@ namespace seneca {
 
 		if (sc.m_toys == nullptr) {
 			prln();
-			std::cout << "Order " << ++CALL_CNT << ": This shopping cart is invalid." << std::endl;
+			os << "Order " << ++CALL_CNT << ": This shopping cart is invalid." << std::endl;
 			prln();
 		}
 		else if (sc.m_count < 1) {
 			prln();
-			std::cout << "Order " << ++CALL_CNT << ": Shopping for " << sc.m_name << " " << sc.m_age << " years old (" << sc.m_count << ") toys" << std::endl;
+			os << "Order " << ++CALL_CNT << ": Shopping for " << sc.m_name << " " << sc.m_age << " years old (" << sc.m_count << ") toys" << std::endl;
 			prln();
-			std::cout << "Empty shopping cart!" << std::endl;
+			os << "Empty shopping cart!" << std::endl;
 			prln();
 		}
 		else {
 			prln();
-			std::cout << "Order " << ++CALL_CNT << ": Shopping for " << sc.m_name << " " << sc.m_age << " years old (" << sc.m_count << ") toys" << std::endl;
+			os << "Order " << ++CALL_CNT << ": Shopping for " << sc.m_name << " " << sc.m_age << " years old (" << sc.m_count << ") toys" << std::endl;
 			prln();
-			for (int i = 0; i < sc.m_count; i++) std::cout << sc.m_toys[i];
+			for (int i = 0; i < sc.m_count; i++) os << sc.m_toys[i];
 			prln();
 		}
+		return os;
 	}
 
 

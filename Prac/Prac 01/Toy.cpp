@@ -62,7 +62,7 @@ namespace seneca {
 	}
 
 	template<typename T>
-	inline void printAttribute(T attribute, int size, std::string postCom = "", char fill = ' ') {
+	inline void printAttribute(T attribute, int size, std::string postCom, char fill) {
 		std::cout << std::right << std::setw(8) << std::setfill(fill) << attribute << postCom;
 	}
 }

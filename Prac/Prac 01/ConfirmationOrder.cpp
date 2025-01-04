@@ -87,23 +87,24 @@ namespace seneca {
 
 		if (src.m_toys == nullptr) {
 			prln();
-			std::cout << "Order " << ++CALL_CNT << ": This order is empty." << std::endl;
+			os << "Order " << ++CALL_CNT << ": This order is empty." << std::endl;
 			prln();
 		}
 		else if (src.m_count < 1) {
 			prln();
-			std::cout << "Order " << ++CALL_CNT << std::endl;
+			os << "Order " << ++CALL_CNT << std::endl;
 			prln();
-			std::cout << "Empty shopping cart!" << std::endl;
+			os << "Empty shopping cart!" << std::endl;
 			prln();
 		}
 		else {
 			prln();
-			std::cout << "Order " << ++CALL_CNT << std::endl;
+			os << "Order " << ++CALL_CNT << std::endl;
 			prln();
 			for (int i = 0; i < src.m_count; i++) std::cout << src.m_toys[i];
 			prln();
 		}
+		return os;
 	}
 
 	inline void prln() {
