@@ -31,6 +31,7 @@ namespace seneca {
 			m_toys = new const Toy * [m_count];
 			for (int i = 0; i < m_count; i++) m_toys[i] = new Toy(*src.m_toys[i]);
 		}
+		return *this;
 	}
 
 	void ShoppingCart::clear() {
