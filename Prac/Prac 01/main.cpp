@@ -15,13 +15,13 @@
 #include "toy.h" // intentional
 
 // Cheching if header guards exists and follow convention.
-#ifndef SENECA_TOY_H
+#ifndef TOY_H
 #error "The header guard for 'toy.h' doesn't follow the convention!"
 #endif
-#ifndef SENECA_SHOPPINGCART_H
+#ifndef SHOPPING_CART_H
 #error "The header guard for 'shoppingCart.h' doesn't follow the convention!"
 #endif
-#ifndef SENECA_CONFIRMATIONORDER_H
+#ifndef CONFIRMATION_ORDER_H
 #error "The header guard for 'confirmationOrder.h' doesn't follow the convention!"
 #endif
 
