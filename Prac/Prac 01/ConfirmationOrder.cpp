@@ -21,16 +21,11 @@ namespace seneca {
 	}
 
 	ConfirmationOrder::ConfirmationOrder(const ConfirmationOrder& src) : m_toys(nullptr), m_count(0) {
-		if (valid(false, &src)) {
-			m_count = src.m_count;
-			m_toys = new const Toy * [m_count];
-			for (size_t i = 0; i < m_count; i++) m_toys[i] = src.m_toys[i];
-		}
+		*this = src;
 	}
 
-	ConfirmationOrder::ConfirmationOrder(ConfirmationOrder&& src) noexcept : m_toys(src.m_toys), m_count(src.m_count) {
-		src.m_toys = nullptr;
-		src.m_count = 0;
+	ConfirmationOrder::ConfirmationOrder(ConfirmationOrder&& src) noexcept : m_toys(nullptr), m_count(0) {
+		*this = std::move(src);
 	}
 
 	ConfirmationOrder::~ConfirmationOrder() {
@@ -60,18 +55,13 @@ namespace seneca {
 	}
 
 	ConfirmationOrder& ConfirmationOrder::operator += (const Toy& toy) {
-		if (valid(false, this) && !findToy(&toy)) {
+		if (!findToy(&toy)) {
 			const Toy** temp = new const Toy * [m_count + 1];
 			for (size_t i = 0; i < m_count; i++) temp[i] = m_toys[i];
 			temp[m_count] = &toy;
 			delete[] m_toys;
 			m_toys = temp;
 			++m_count;
-		}
-		else if (m_toys == nullptr) {
-			m_toys = new const Toy*;
-			*m_toys = &toy;
-			m_count = 1;
 		}
 		return *this;
 	}
