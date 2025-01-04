@@ -10,6 +10,8 @@ namespace seneca {
 		for (size_t i = 0; i < m_count; i++) if (m_toys[i] == toy) return true;
 	}
 
+	ConfirmationOrder::ConfirmationOrder() : m_toys(nullptr), m_count(0) {}
+
 	ConfirmationOrder::ConfirmationOrder(const Toy* toys[], size_t count) : m_toys(nullptr), m_count(0) {
 		if (toys != nullptr && count > 0) {
 			m_count = count;
@@ -65,6 +67,11 @@ namespace seneca {
 			delete[] m_toys;
 			m_toys = temp;
 			++m_count;
+		}
+		else if (m_toys == nullptr) {
+			m_toys = new const Toy*;
+			*m_toys = &toy;
+			m_count = 1;
 		}
 		return *this;
 	}
