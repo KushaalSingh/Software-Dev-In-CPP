@@ -20,7 +20,11 @@ namespace seneca {
 		ConfirmationOrder& operator = (ConfirmationOrder&& src) noexcept;
 		ConfirmationOrder& operator += (const Toy& toy);
 		ConfirmationOrder& operator -= (const Toy& toy);
+
+		friend std::ostream& operator << (std::ostream& os, ConfirmationOrder& src);
 	};
+
+	inline void prln();
 }
 
 #endif
