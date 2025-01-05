@@ -29,4 +29,10 @@ namespace seneca {
 	int Directory::count() const {
 		return static_cast<int>(m_contents.size());
 	}
+
+	size_t Directory::size() const {
+		size_t total_size = 0;
+		for (auto& resource : m_contents) total_size += resource->size();
+		return total_size;
+	}
 }

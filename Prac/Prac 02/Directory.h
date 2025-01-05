@@ -15,6 +15,7 @@ namespace seneca {
 		std::string path() const override;
 		std::string name() const override;
 		int count() const override;
+		size_t size() const override;
 	};
 
 }
