@@ -35,4 +35,12 @@ namespace seneca {
 		for (auto& resource : m_contents) total_size += resource->size();
 		return total_size;
 	}
+
+	Directory& Directory::operator += (Resource* res) {
+		if (!res) throw std::invalid_argument("Cannot add a null resource.");
+		for (auto& resource : m_contents) if (resource->name() == res->name()) throw std::runtime_error("A resource with the same name already exists.");
+		res->update_parent_path(path());
+		m_contents.push_back(res);
+		return *this;
+	}
 }

@@ -2,6 +2,7 @@
 #define SENECA_DIRECTORY_H
 #include "File.h"
 #include <vector>
+#include <exception>
 
 
 namespace seneca {
@@ -16,6 +17,7 @@ namespace seneca {
 		std::string name() const override;
 		int count() const override;
 		size_t size() const override;
+		Directory& operator+=(Resource*);
 	};
 
 }
