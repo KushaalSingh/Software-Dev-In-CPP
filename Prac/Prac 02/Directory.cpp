@@ -43,4 +43,18 @@ namespace seneca {
 		m_contents.push_back(res);
 		return *this;
 	}
+
+	Resource* Directory::find(const std::string& name, const std::vector<OpFlags>& flag) {
+		for (auto* res : m_contents) if (res->name() == name) return res;
+
+		if (std::find(flag.begin(), flag.end(), OpFlags::RECURSIVE) != flag.end()) {
+			for (auto* res : m_contents) {
+				if (res->type() == NodeType::DIR) {
+					Resource* found = dynamic_cast<Directory*>(res)->find(name, flag);
+					if (found) return found;
+				}
+			}
+		}
+		return nullptr;
+	}
 }

@@ -18,6 +18,7 @@ namespace seneca {
 		int count() const override;
 		size_t size() const override;
 		Directory& operator+=(Resource*);
+		Resource* find(const std::string&, const std::vector<OpFlags>&);
 	};
 
 }
