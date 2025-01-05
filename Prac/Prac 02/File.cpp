@@ -15,6 +15,8 @@ namespace seneca {
 	}
 
 	std::string File::path() const {
-
+		return (m_parent_path + m_name);
 	}
+
+
 }
