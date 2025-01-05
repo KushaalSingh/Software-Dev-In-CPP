@@ -9,4 +9,12 @@ namespace seneca {
 	void File::update_parent_path(const std::string& path) {
 		m_parent_path = path;
 	}
+
+	NodeType File::type() const {
+		return NodeType::FILE;
+	}
+
+	std::string File::path() const {
+
+	}
 }
