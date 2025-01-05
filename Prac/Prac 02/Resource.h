@@ -8,7 +8,7 @@
 namespace seneca {
     class Resource {
     protected:
-        std::string m_name {};
+        std::string m_name { "" };
         std::string m_parent_path = "/";
 
     public:
