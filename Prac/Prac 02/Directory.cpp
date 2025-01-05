@@ -14,9 +14,19 @@ namespace seneca {
 		}
 	}
 
+	NodeType Directory::type() const {
+		return NodeType::DIR;
+	}
 
 	std::string Directory::path() const {
 		return (m_parent_path + m_name);
 	}
 	
+	std::string Directory::name() const {
+		return m_name;
+	}
+
+	int Directory::count() const {
+
+	}
 }
