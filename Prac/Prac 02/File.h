@@ -9,6 +9,7 @@ namespace seneca {
 
 	public:
 		File(const std::string& name, const std::string& contents = "");
+		void update_parent_path(const std::string&);
 	};
 
 
