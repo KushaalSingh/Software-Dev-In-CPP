@@ -10,12 +10,12 @@ namespace seneca {
 	public:
 		File(const std::string& name, const std::string& contents = "");
 		~File() override = default;
-		void update_parent_path(const std::string&);
-		NodeType type() const;
-		std::string path() const;
-		std::string name() const;
-		int count() const;
-		size_t size() const;
+		void update_parent_path(const std::string&) override;
+		NodeType type() const override;
+		std::string path() const override;
+		std::string name() const override;
+		int count() const override;
+		size_t size() const override;
 	};
 
 
