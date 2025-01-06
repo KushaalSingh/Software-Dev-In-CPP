@@ -61,20 +61,22 @@ namespace seneca {
 	void Directory::remove(const std::string& res_name, const std::vector<OpFlags>& flag) {
 		bool recursive = std::find(flag.begin(), flag.end(), OpFlags::RECURSIVE) != flag.end();
 		
-		for (auto it = m_contents.begin(); it != m_contents.end(); ++it) {
-			if ((*it)->name() == res_name) {
-				if ((*it)->type() == NodeType::DIR) {
-					if (!recursive) throw std::invalid_argument("NAME is a directory. Pass the recursive flag to delete directories.");
-					else {
-						//dynamic_cast<Directory*>(*it)->m_contents.size() ? delete *it : remove
-					}
-				}
+		Resource* resource = find(res_name, flag);
+		if (!resource) throw std::invalid_argument("Resource does not exist");
+		if (resource->type() == NodeType::DIR) {
+			if (!recursive) throw std::invalid_argument("NAME is a directory. Pass the recursive flag to delete directories.");
+			else {
+				dynamic_cast<Directory*>(resource)->clear_directory();
+				delete resource;
 			}
+		}
+		else {
+			delete resource;
 		}
 	}
 
 	void Directory::clear_directory() {
-		for (auto& resource : m_contents) {
+		for (auto* resource : m_contents) {
 			if (resource->type() == NodeType::DIR) dynamic_cast<Directory*>(resource)->clear_directory();
 			delete resource;
 		}
