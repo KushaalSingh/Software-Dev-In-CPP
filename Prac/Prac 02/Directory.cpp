@@ -69,9 +69,13 @@ namespace seneca {
 		}
 
 		Directory* parent = parent_directory(res_name);
+		if (parent) {
+			auto it = std::find_if(parent->m_contents.begin(), parent->m_contents.end(), [&res_name](Resource* r) {
+				return r->name() == res_name;
+			});
+			if (it != parent->m_contents.end()) parent->m_contents.erase(it);
+		}
 		delete resource;
-		for (auto it = parent->m_contents.begin(); it != parent->m_contents.end(); ++it)
-			if ((*it)->name() == res_name) parent->m_contents.erase(it);
 	}
 
 	void Directory::clear_directory() {
