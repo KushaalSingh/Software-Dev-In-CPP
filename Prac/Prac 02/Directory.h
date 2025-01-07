@@ -22,7 +22,7 @@ namespace seneca {
 		void remove(const std::string&, const std::vector<OpFlags>&);
 
 		void clear_directory();
-		Directory* parent_directory(std::string&);
+		Directory* parent_directory(const std::string&);
 	};
 }
 
