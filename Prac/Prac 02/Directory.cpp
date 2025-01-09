@@ -7,7 +7,7 @@ namespace seneca {
 	}
 
 	Directory::~Directory() {
-
+		for (auto* resource : m_contents) delete resource;
 	}
 
 	void Directory::update_parent_path(const std::string& newpath) {
