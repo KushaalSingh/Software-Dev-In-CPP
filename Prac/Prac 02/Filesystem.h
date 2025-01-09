@@ -10,7 +10,7 @@ namespace seneca {
 		Directory* m_current;
 
 		Resource* create_resource(const std::string&);
-		Directory* create_directory(const std::string&);
+		Directory* create_directory(const std::string&, Directory*);
 	public:
 		Filesystem(const std::string&, const std::string& = "");
 	};

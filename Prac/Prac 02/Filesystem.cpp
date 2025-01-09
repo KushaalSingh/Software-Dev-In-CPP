@@ -20,12 +20,26 @@ namespace seneca {
 	Resource* Filesystem::create_resource(const std::string& line) {
 		auto separator = line.find('|');
 		if (separator == std::string::npos) {
-			
+			create_directory(trim(line), m_root);
 		}
 	}
 
-	Directory* Filesystem::create_directory(const std::string& path) {
-
+	Directory* Filesystem::create_directory(const std::string& path, Directory* base) {
+		size_t lchar = 0;
+		for (size_t i = 0; i < path.size(); i++) {
+			if (path[i] == '/') {
+				std::string dirName = path.substr(lchar, i - lchar + 1);
+				Resource* found = base->find(dirName, { });
+				lchar = i + 1;
+				if (!found) {
+					Directory* newDir = new Directory(dirName);
+					*base += newDir;
+				}
+				else if (path.size() >= lchar){
+					create_directory(path.substr(lchar), dynamic_cast<Directory*>(found));
+				}
+			}
+		}
 	}
 
 	std::string& trim(const std::string& str) {
