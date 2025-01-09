@@ -6,6 +6,10 @@ namespace seneca {
 		m_name = name;
 	}
 
+	Directory::~Directory() {
+
+	}
+
 	void Directory::update_parent_path(const std::string& newpath) {
 		m_parent_path = newpath;
 
@@ -77,6 +81,20 @@ namespace seneca {
 		}
 		delete resource;
 	}
+
+	void Directory::display(std::ostream& os, const std::vector<FormatFlags>& flag) const {
+		os << "Total size: " << size() << " bytes" << std::endl;
+
+		for (auto* resource : m_contents) {
+			os << (resource->type() == NodeType::DIR ? "D | " : "F | ");
+			os << std::left << std::setw(15) << resource->name() << " | ";
+			os << std::setw(2);
+			if (resource->type() == NodeType::DIR && flag.back() == FormatFlags::LONG)
+				os << std::right << resource->count();
+			os << " | " << std::right << std::setw(10) << resource->size() << " bytes |" << std::endl;
+		}
+	}
+
 
 	void Directory::clear_directory() {
 		for (auto* resource : m_contents) {

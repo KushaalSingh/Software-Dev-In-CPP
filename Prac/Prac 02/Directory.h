@@ -3,6 +3,7 @@
 #include "File.h"
 #include <vector>
 #include <exception>
+#include <iomanip>
 
 
 namespace seneca {
@@ -11,6 +12,7 @@ namespace seneca {
 		std::vector<Resource*> m_contents;
 	public:
 		Directory(const std::string& name);
+		~Directory() override;
 		void update_parent_path(const std::string& path) override;
 		NodeType type() const override;
 		std::string path() const override;
@@ -20,6 +22,7 @@ namespace seneca {
 		Directory& operator+=(Resource*);
 		Resource* find(const std::string&, const std::vector<OpFlags>&);
 		void remove(const std::string&, const std::vector<OpFlags>&);
+		void display(std::ostream&, const std::vector<FormatFlags>&) const;
 
 		void clear_directory();
 		Directory* parent_directory(const std::string&);
