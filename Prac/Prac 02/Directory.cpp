@@ -12,10 +12,7 @@ namespace seneca {
 
 	void Directory::update_parent_path(const std::string& newpath) {
 		m_parent_path = newpath;
-
-		for (auto& resource : m_contents) {
-			resource->update_parent_path(path());
-		}
+		for (auto& resource : m_contents) resource->update_parent_path(path());
 	}
 
 	NodeType Directory::type() const {
@@ -89,8 +86,7 @@ namespace seneca {
 			os << (resource->type() == NodeType::DIR ? "D | " : "F | ");
 			os << std::left << std::setw(15) << resource->name() << " | ";
 			os << std::setw(2);
-			if (resource->type() == NodeType::DIR && flag.back() == FormatFlags::LONG)
-				os << std::right << resource->count();
+			if (resource->type() == NodeType::DIR && flag.back() == FormatFlags::LONG) os << std::right << resource->count();
 			os << " | " << std::right << std::setw(10) << resource->size() << " bytes |" << std::endl;
 		}
 	}

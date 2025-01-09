@@ -10,6 +10,7 @@ namespace seneca {
 
 	class Directory : public Resource {
 		std::vector<Resource*> m_contents;
+
 	public:
 		Directory(const std::string& name);
 		~Directory() override;
@@ -26,6 +27,11 @@ namespace seneca {
 
 		void clear_directory();
 		Directory* parent_directory(const std::string&);
+
+		Directory(const Directory&) = delete;
+		Directory(Directory&&) = delete;
+		Directory& operator = (const Directory&) = delete;
+		Directory& operator = (Directory&&) = delete;
 	};
 }
 
