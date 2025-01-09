@@ -31,6 +31,7 @@ namespace seneca {
 				std::string dirName = path.substr(lchar, i - lchar + 1);
 				Resource* found = base->find(dirName, { });
 				lchar = i + 1;
+
 				if (!found) {
 					Directory* newDir = new Directory(dirName);
 					*base += newDir;
