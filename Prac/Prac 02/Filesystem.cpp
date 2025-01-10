@@ -54,6 +54,8 @@ namespace seneca {
 		if (found) return dynamic_cast<File*>(found);
 
 		File* file = new File(name, contents);
+		*base += file;
+		return file;
 	}
 
 	std::string& trim(const std::string& str) {
