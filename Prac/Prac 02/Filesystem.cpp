@@ -19,11 +19,11 @@ namespace seneca {
 
 	Resource* Filesystem::create_resource(const std::string& line) {
 		size_t separator = line.find('|');
+		size_t lchar = 0;
+		Directory* base = m_root;
 
 		if (separator == std::string::npos) {	// if line has only directory(s).
 			auto trim_str = trim(line);
-			size_t lchar = 0;
-			Directory* base = m_root;
 
 			for (size_t i = 0; i < trim_str.size(); i++) {
 				if (trim_str[i] == '/') {
@@ -35,8 +35,18 @@ namespace seneca {
 		else {	// if line includes directory(s) and file(s).
 			auto trim_str = trim(line.substr(0, separator));
 			auto trim_cont = trim(line.substr(separator + 1));
-			size_t lchar = 0;
-			Directory* base = m_root;
+			size_t lslash = trim_str.find_last_of('/');
+
+			for (size_t i = 0; i < trim_str.size(); i++) {
+
+			}
+
+			for (size_t i = 0; i < trim_str.size(); i++) {
+				if (trim_str[i] == '/') {
+					base = create_directory(trim_str.substr(lchar, i - lchar + 1), base);
+					lchar = i + 1;
+				}
+			}
 		}
 	}
 
