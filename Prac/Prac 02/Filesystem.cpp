@@ -21,6 +21,11 @@ namespace seneca {
 		auto separator = line.find('|');
 		if (separator == std::string::npos) {
 			create_directory(trim(line), m_root);
+			for (size_t i = 0; i < line.size(); i++) {
+				if (line[i] == '/') {
+					Directory* nbase = create_directory(line.substr(0, i + 1), m_root);
+				}
+			}
 		}
 	}
 
@@ -35,9 +40,6 @@ namespace seneca {
 				if (!found) {
 					Directory* newDir = new Directory(dirName);
 					*base += newDir;
-				}
-				else if (path.size() >= lchar){
-					create_directory(path.substr(lchar), dynamic_cast<Directory*>(found));
 				}
 			}
 		}
