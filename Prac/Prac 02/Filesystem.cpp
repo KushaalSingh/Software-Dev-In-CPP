@@ -18,7 +18,7 @@ namespace seneca {
 	}
 
 	Resource* Filesystem::create_resource(const std::string& line) {
-		auto separator = line.find('|');
+		size_t separator = line.find('|');
 
 		if (separator == std::string::npos) {	// if line has only directory(s).
 			auto trim_str = trim(line);
@@ -32,18 +32,28 @@ namespace seneca {
 				}
 			}
 		}
-		else {
-
+		else {	// if line includes directory(s) and file(s).
+			auto trim_str = trim(line.substr(0, separator));
+			auto trim_cont = trim(line.substr(separator + 1));
+			size_t lchar = 0;
+			Directory* base = m_root;
 		}
 	}
 
 	Directory* Filesystem::create_directory(const std::string& name, Directory* base) {
 		Resource* found = base->find(name, { });
-		if (found) return nullptr;
+		if (found) return dynamic_cast<Directory*>(found);
 		
 		Directory* directory = new Directory(name);
 		*base += directory;
 		return directory;
+	}
+
+	File* Filesystem::create_file(const std::string& name,const std::string& contents, Directory* base) {
+		Resource* found = base->find(name, { });
+		if (found) return dynamic_cast<File*>(found);
+
+		File* file = new File(name, contents);
 	}
 
 	std::string& trim(const std::string& str) {
