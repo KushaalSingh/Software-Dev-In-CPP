@@ -8,7 +8,6 @@ namespace seneca {
 		std::string m_contents { "" };
 
 	public:
-		File(const std::string&);
 		File(const std::string& name, const std::string& contents = "");
 		~File() override = default;
 		void update_contents(const std::string&);
