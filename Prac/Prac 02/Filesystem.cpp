@@ -19,30 +19,31 @@ namespace seneca {
 
 	Resource* Filesystem::create_resource(const std::string& line) {
 		auto separator = line.find('|');
-		if (separator == std::string::npos) {
-			create_directory(trim(line), m_root);
-			for (size_t i = 0; i < line.size(); i++) {
-				if (line[i] == '/') {
-					Directory* nbase = create_directory(line.substr(0, i + 1), m_root);
+
+		if (separator == std::string::npos) {	// if line has only directory(s).
+			auto trim_str = trim(line);
+			size_t lchar = 0;
+			Directory* base = m_root;
+
+			for (size_t i = 0; i < trim_str.size(); i++) {
+				if (trim_str[i] == '/') {
+					base = create_directory(trim_str.substr(lchar, i - lchar + 1), base);
+					lchar = i + 1;
 				}
 			}
+		}
+		else {
+
 		}
 	}
 
-	Directory* Filesystem::create_directory(const std::string& path, Directory* base) {
-		size_t lchar = 0;
-		for (size_t i = 0; i < path.size(); i++) {
-			if (path[i] == '/') {
-				std::string dirName = path.substr(lchar, i - lchar + 1);
-				Resource* found = base->find(dirName, { });
-				lchar = i + 1;
-
-				if (!found) {
-					Directory* newDir = new Directory(dirName);
-					*base += newDir;
-				}
-			}
-		}
+	Directory* Filesystem::create_directory(const std::string& name, Directory* base) {
+		Resource* found = base->find(name, { });
+		if (found) return nullptr;
+		
+		Directory* directory = new Directory(name);
+		*base += directory;
+		return directory;
 	}
 
 	std::string& trim(const std::string& str) {
