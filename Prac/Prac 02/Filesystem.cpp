@@ -28,6 +28,12 @@ namespace seneca {
 		}
 	}
 
+	Filesystem& Filesystem::operator += (Resource* resource) {
+		if (!m_current) throw std::invalid_argument("m_current is in an invalid state.");
+		*m_current += resource;
+		return *this;
+	}
+
 	Resource* Filesystem::create_resource(const std::string& line) {
 		size_t separator = line.find('|');
 		size_t lchar = 0;

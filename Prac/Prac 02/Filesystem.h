@@ -15,7 +15,9 @@ namespace seneca {
 	public:
 		Filesystem(const std::string&, const std::string& = "");
 		Filesystem(Filesystem&&) noexcept;
-		Filesystem& operator = (Filesystem&& fs) noexcept;
+		Filesystem& operator = (Filesystem&&) noexcept;
+		Filesystem& operator += (Resource*);
+		Directory* get_current_directory() const;
 		Filesystem(const Filesystem&) = delete;
 		Filesystem& operator = (const Filesystem&) = delete;
 	};
