@@ -34,6 +34,19 @@ namespace seneca {
 		return *this;
 	}
 
+	Directory* Filesystem::change_directory(const std::string& dir_name) {
+		if (dir_name == "") {
+			m_current = m_root;
+			return m_current;
+		}
+
+		Resource* directory = m_root->find(dir_name, { OpFlags::RECURSIVE });
+		if (!directory) throw std::invalid_argument("Cannot change directory! DIR_NAME not found!");
+		m_current = dynamic_cast<Directory*>(directory);
+
+		return m_current;
+	}
+
 	Resource* Filesystem::create_resource(const std::string& line) {
 		size_t separator = line.find('|');
 		size_t lchar = 0;
