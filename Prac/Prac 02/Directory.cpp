@@ -60,7 +60,7 @@ namespace seneca {
 	}
 
 	void Directory::remove(const std::string& res_name, const std::vector<OpFlags>& flag) {
-		bool recursive = std::find(flag.begin(), flag.end(), OpFlags::RECURSIVE) != flag.end();
+		bool recursive = flag.back() == OpFlags::RECURSIVE;
 		Resource* resource = find(res_name, { OpFlags::RECURSIVE });
 
 		if (!resource) throw std::invalid_argument("Resource does not exist");
