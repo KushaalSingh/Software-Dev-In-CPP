@@ -8,12 +8,23 @@ namespace seneca {
 		if (!file.is_open()) throw std::invalid_argument("Invalid File name. File does not exist.");
 
 		std::string ln = "";
-		while (std::getline(file, ln)) {
-			create_resource(ln);
+		while (std::getline(file, ln)) create_resource(ln);
+	}
 
-			auto separator = ln.find('|');
-			if (separator == std::string::npos) create_resource(ln);
-			else create_resource(ln.substr(0, separator + 1));
+	Filesystem::Filesystem(Filesystem&& fs) noexcept : m_root(fs.m_root), m_current(fs.m_current) {
+		fs.m_root = nullptr;
+		fs.m_current = nullptr;
+	}
+
+	Filesystem& Filesystem::operator = (Filesystem&& fs) noexcept {
+		if (this != &fs) {
+			delete m_root;
+
+			m_root = fs.m_root;
+			m_current = fs.m_current;
+
+			fs.m_root = nullptr;
+			fs.m_current = nullptr;
 		}
 	}
 
@@ -26,12 +37,14 @@ namespace seneca {
 			auto trim_str = trim(line);
 
 			for (size_t i = 0; i < trim_str.size(); i++) {
+
 				if (trim_str[i] == '/') {
 					base = create_directory(trim_str.substr(lchar, i - lchar + 1), base);
 					lchar = i + 1;
 				}
 			}
 		}
+
 		else {	// if line includes directory(s) and file(s).
 			auto trim_str = trim(line.substr(0, separator));
 			auto trim_cont = trim(line.substr(separator + 1));
@@ -45,20 +58,15 @@ namespace seneca {
 			else {
 				for (size_t i = 0; i < trim_str.size(); i++) {
 
-					if (i == lslash) {
-
-					}
-
 					if (trim_str[i] == '/') {
-
+						base = create_directory(trim_str.substr(lchar, i - lchar + 1), base);
+						lchar = i + 1;
 					}
-				}
-			}
 
-			for (size_t i = 0; i < trim_str.size(); i++) {
-				if (trim_str[i] == '/') {
-					base = create_directory(trim_str.substr(lchar, i - lchar + 1), base);
-					lchar = i + 1;
+					if (i == lslash) {
+						File* file = create_file(trim_str.substr(lchar), base);
+						file->update_contents(trim_cont);
+					}
 				}
 			}
 		}

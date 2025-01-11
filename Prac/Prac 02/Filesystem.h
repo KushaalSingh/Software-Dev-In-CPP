@@ -14,6 +14,10 @@ namespace seneca {
 		File* create_file(const std::string&, Directory*);
 	public:
 		Filesystem(const std::string&, const std::string& = "");
+		Filesystem(Filesystem&&) noexcept;
+		Filesystem& operator = (Filesystem&& fs) noexcept;
+		Filesystem(const Filesystem&) = delete;
+		Filesystem& operator = (const Filesystem&) = delete;
 	};
 
 	std::string& trim(const std::string&);
