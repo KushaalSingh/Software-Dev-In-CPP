@@ -35,15 +35,15 @@ namespace seneca {
 	}
 
 	Directory* Filesystem::change_directory(const std::string& dir_name) {
-		if (dir_name == "") {
+		if (dir_name.empty()) {
 			m_current = m_root;
-			return m_current;
 		}
-
-		Resource* directory = m_root->find(dir_name, { OpFlags::RECURSIVE });
-		if (!directory) throw std::invalid_argument("Cannot change directory! DIR_NAME not found!");
-		m_current = dynamic_cast<Directory*>(directory);
-
+		else {
+			Resource* found = m_current->find(dir_name, {});
+			if (!found || found->type() != NodeType::DIR) 
+				throw std::invalid_argument("Cannot change directory! " + dir_name + " not found!");
+			m_current = static_cast<Directory*>(found);
+		}
 		return m_current;
 	}
 
