@@ -4,6 +4,7 @@
 #include <vector>
 #include <exception>
 #include <iomanip>
+#include <algorithm>
 
 
 namespace seneca {
@@ -21,9 +22,9 @@ namespace seneca {
 		int count() const override;
 		size_t size() const override;
 		Directory& operator+=(Resource*);
-		Resource* find(const std::string&, const std::vector<OpFlags>&);
-		void remove(const std::string&, const std::vector<OpFlags>&);
-		void display(std::ostream&, const std::vector<FormatFlags>&) const;
+		Resource* find(const std::string&, const std::vector<OpFlags>& = {});
+		void remove(const std::string&, const std::vector<OpFlags>& = {});
+		void display(std::ostream&, const std::vector<FormatFlags>& = {}) const;
 
 		void clear_directory();
 		Directory* parent_directory(const std::string&);
