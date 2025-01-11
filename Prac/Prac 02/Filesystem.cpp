@@ -16,6 +16,10 @@ namespace seneca {
 		fs.m_current = nullptr;
 	}
 
+	Filesystem::~Filesystem() {
+		delete m_root;
+	}
+
 	Filesystem& Filesystem::operator = (Filesystem&& fs) noexcept {
 		if (this != &fs) {
 			delete m_root;
@@ -44,6 +48,10 @@ namespace seneca {
 				throw std::invalid_argument("Cannot change directory! " + dir_name + " not found!");
 			m_current = static_cast<Directory*>(found);
 		}
+		return m_current;
+	}
+
+	Directory* Filesystem::get_current_directory() const {
 		return m_current;
 	}
 

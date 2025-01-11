@@ -15,6 +15,7 @@ namespace seneca {
 	public:
 		Filesystem(const std::string&, const std::string& = "");
 		Filesystem(Filesystem&&) noexcept;
+		~Filesystem();
 		Filesystem& operator = (Filesystem&&) noexcept;
 		Filesystem& operator += (Resource*);
 		Directory* change_directory(const std::string& = "");
