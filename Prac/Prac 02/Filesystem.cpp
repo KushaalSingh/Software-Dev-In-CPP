@@ -30,6 +30,7 @@ namespace seneca {
 			fs.m_root = nullptr;
 			fs.m_current = nullptr;
 		}
+		return *this;
 	}
 
 	Filesystem& Filesystem::operator += (Resource* resource) {
@@ -55,7 +56,7 @@ namespace seneca {
 		return m_current;
 	}
 
-	Resource* Filesystem::create_resource(const std::string& line) {
+	void Filesystem::create_resource(const std::string& line) {
 		size_t separator = line.find('|');
 		size_t lchar = 0;
 		Directory* base = m_root;
@@ -117,7 +118,7 @@ namespace seneca {
 		return file;
 	}
 
-	std::string& trim(const std::string& str) {
+	std::string trim(const std::string& str) {
 		size_t first = str.find_first_not_of(" ");
 		size_t last = str.find_last_not_of(" ");
 		
