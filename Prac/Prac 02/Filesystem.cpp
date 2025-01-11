@@ -37,8 +37,22 @@ namespace seneca {
 			auto trim_cont = trim(line.substr(separator + 1));
 			size_t lslash = trim_str.find_last_of('/');
 
-			for (size_t i = 0; i < trim_str.size(); i++) {
+			if (lslash == std::string::npos) {
+				File* file = create_file(trim_str, base);
+				file->update_contents(trim_cont);
+			}
 
+			else {
+				for (size_t i = 0; i < trim_str.size(); i++) {
+
+					if (i == lslash) {
+
+					}
+
+					if (trim_str[i] == '/') {
+
+					}
+				}
 			}
 
 			for (size_t i = 0; i < trim_str.size(); i++) {
@@ -59,11 +73,11 @@ namespace seneca {
 		return directory;
 	}
 
-	File* Filesystem::create_file(const std::string& name,const std::string& contents, Directory* base) {
+	File* Filesystem::create_file(const std::string& name, Directory* base) {
 		Resource* found = base->find(name, { });
 		if (found) return dynamic_cast<File*>(found);
 
-		File* file = new File(name, contents);
+		File* file = new File(name);
 		*base += file;
 		return file;
 	}

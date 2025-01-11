@@ -11,7 +11,7 @@ namespace seneca {
 
 		Resource* create_resource(const std::string&);
 		Directory* create_directory(const std::string&, Directory*);
-		File* create_file(const std::string&, const std::string&, Directory*);
+		File* create_file(const std::string&, Directory*);
 	public:
 		Filesystem(const std::string&, const std::string& = "");
 	};
