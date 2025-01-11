@@ -24,7 +24,7 @@ namespace seneca {
 		Filesystem& operator = (const Filesystem&) = delete;
 	};
 
-	std::string& trim(const std::string&);
+	std::string trim(const std::string&);
 }
 
 
