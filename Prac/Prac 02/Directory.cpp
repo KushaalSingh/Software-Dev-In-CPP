@@ -48,7 +48,7 @@ namespace seneca {
 	Resource* Directory::find(const std::string& res_name, const std::vector<OpFlags>& flag) {
 		for (auto* res : m_contents) if (res->name() == res_name) return res;
 
-		if (flag.back() == OpFlags::RECURSIVE) {
+		if (!flag.empty()) {
 			for (auto* res : m_contents) {
 				if (res->type() == NodeType::DIR) {
 					Resource* found = dynamic_cast<Directory*>(res)->find(res_name, flag);
@@ -60,12 +60,11 @@ namespace seneca {
 	}
 
 	void Directory::remove(const std::string& res_name, const std::vector<OpFlags>& flag) {
-		bool recursive = flag.back() == OpFlags::RECURSIVE;
 		Resource* resource = find(res_name, { OpFlags::RECURSIVE });
 
 		if (!resource) throw std::invalid_argument("Resource does not exist");
 		if (resource->type() == NodeType::DIR) {
-			if (!recursive) throw std::invalid_argument("NAME is a directory. Pass the recursive flag to delete directories.");
+			if (flag.empty()) throw std::invalid_argument("NAME is a directory. Pass the recursive flag to delete directories.");
 			else dynamic_cast<Directory*>(resource)->clear_directory();
 		}
 
@@ -85,9 +84,16 @@ namespace seneca {
 		for (auto* resource : m_contents) {
 			os << (resource->type() == NodeType::DIR ? "D | " : "F | ");
 			os << std::left << std::setw(15) << resource->name() << " | ";
-			os << std::setw(2);
-			if (resource->type() == NodeType::DIR && flag.back() == FormatFlags::LONG) os << std::right << resource->count();
-			os << " | " << std::right << std::setw(10) << resource->size() << " bytes |" << std::endl;
+
+			if (!flag.empty()) {
+				if (resource->type() == NodeType::DIR) os << " | " << std::setw(2) << std::right << resource->count();
+				else {
+					os << " |   ";
+				}
+				os << " | " << std::right << std::setw(4) << resource->size() << " bytes" << " |";
+			}
+
+			os << std::endl;
 		}
 	}
 

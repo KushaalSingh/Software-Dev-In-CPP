@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
         std::cout << "**EXCEPTION: Filesystem should support move operations.\n" << std::endl;
     }
 
-    seneca::Filesystem fs(argv[1]);
+    seneca::Filesystem fs("filesystem.txt");
 
     std::vector<seneca::FormatFlags> fflags;
 

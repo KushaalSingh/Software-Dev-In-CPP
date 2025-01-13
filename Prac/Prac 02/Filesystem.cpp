@@ -2,7 +2,7 @@
 
 namespace seneca {
 
-	Filesystem::Filesystem(const std::string& filename, const std::string& root) : m_root(new Directory (root.back() == '/' ? root : root + "/")), m_current(m_root) {
+	Filesystem::Filesystem(const std::string& filename, const std::string& root) : m_root(new Directory (root)), m_current(m_root) {
 		std::ifstream file(filename);
 
 		if (!file.is_open()) throw std::invalid_argument("Invalid File name. File does not exist.");
